@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HARBOR — The Commercial Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cg-green:       #1a3c34;
+    --cg-green-mid:   #2a5446;
+    --cg-green-light: #3d6e5e;
+    --cg-green-pale:  #c8ddd7;
+    --cg-green-tint:  #eef4f2;
+    --cg-gold:        #b8860b;
+    --cg-gold-light:  #d4a82a;
+    --white:          #ffffff;
+    --off-white:      #f8f6f1;
+    --paper:          #f4f1ea;
+    --ink:            #1a1a18;
+    --ink-mid:        #3d3d3a;
+    --ink-muted:      #7a7a74;
+    --rule:           rgba(26,60,52,0.18);
+    --rule-strong:    rgba(26,60,52,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  header {
+    background: var(--cg-green);
+    padding: 0 48px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    min-height: 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--cg-gold);
+  }
+
+  /* Subtle cross-hatch texture on header */
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+    pointer-events: none;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CG Monogram SVG logo */
+  .cg-logo {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .header-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .header-wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .header-firm {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .header-product {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-agent-block {
+    text-align: right;
+  }
+
+  .header-agent-name {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .header-agent-title {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    font-weight: 300;
+  }
+
+  .status-pip {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cg-gold-light);
+    animation: pip-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pip-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(212,168,42,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(212,168,42,0); }
+  }
+
+  /* ─── HERO BANNER ────────────────────────────── */
+  .hero {
+    background: var(--white);
+    border-bottom: 1px solid var(--rule-strong);
+    padding: 28px 48px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--cg-gold);
+    margin-bottom: 6px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--cg-green);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--rule-strong);
+    padding: 8px 16px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .hero-badge-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cg-green);
+    line-height: 1;
+  }
+
+  .hero-badge-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  /* ─── MAIN LAYOUT ─────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 40px 60px;
+  }
+
+  /* ─── SECTION HEADERS ─────────────────────────── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .section-rule-left {
+    height: 1px;
+    width: 32px;
+    background: var(--cg-green);
+    flex-shrink: 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--cg-green);
+    white-space: nowrap;
+  }
+
+  .section-rule-right {
+    height: 1px;
+    flex: 1;
+    background: var(--rule);
+  }
+
+  /* ─── PRIMARY CARD ─────────────────────────────── */
+  .primary-card {
+    background: var(--cg-green);
+    border-radius: 3px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(26,60,52,0.2);
+  }
+
+  .primary-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--cg-gold);
+  }
+
+  .primary-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+    pointer-events: none;
+  }
+
+  .primary-card:hover {
+    box-shadow: 0 8px 36px rgba(26,60,52,0.3);
+  }
+
+  .primary-left { flex: 1; position: relative; z-index: 1; }
+
+  .primary-eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--cg-gold-light);
+    margin-bottom: 6px;
+  }
+
+  .primary-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .primary-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.6;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  .launch-btn {
+    position: relative;
+    z-index: 1;
+    background: var(--cg-gold);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 13px 24px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .launch-btn:hover { background: #9a6f09; }
+
+  /* ─── SKILLS GRID ─────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .skill-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 20px 20px 18px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cg-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .skill-card:hover {
+    border-color: var(--cg-green-light);
+    box-shadow: 0 3px 18px rgba(26,60,52,0.09);
+    transform: translateY(-2px);
+  }
+
+  .skill-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .skill-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cg-green-pale);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .skill-name {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cg-green);
+    margin-bottom: 6px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+
+  .skill-desc {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+
+  .tag {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    background: var(--cg-green-tint);
+    color: var(--cg-green-mid);
+    border: 1px solid var(--cg-green-pale);
+    border-radius: 1px;
+  }
+
+  .skill-cta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cg-gold);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+
+  .skill-card:hover .skill-cta { color: var(--cg-green); }
+
+  .skill-cta-arrow { transition: transform 0.15s; }
+  .skill-card:hover .skill-cta-arrow { transform: translate(2px, -2px); }
+
+  /* ─── ROUTING TABLE ───────────────────────────── */
+  .routing-wrap {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+
+  .routing-inner { padding: 0; }
+
+  table.routing {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  table.routing thead tr {
+    background: var(--cg-green-tint);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  table.routing th {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cg-green);
+    padding: 10px 16px;
+    text-align: left;
+  }
+
+  table.routing td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-mid);
+    vertical-align: middle;
+  }
+
+  table.routing tr:last-child td { border-bottom: none; }
+  table.routing tr:hover td { background: var(--cg-green-tint); }
+
+  .rt-skill {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cg-green-mid);
+  }
+
+  .rt-format {
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+
+  /* ─── FOOTER ──────────────────────────────────── */
+  footer {
+    background: var(--cg-green);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cg-gold);
+  }
+
+  .footer-left {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .footer-contact {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-contact a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+  }
+
+  .footer-markets {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .market-tag {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 1px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ─── MODAL ───────────────────────────────────── */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,60,52,0.55);
+    backdrop-filter: blur(5px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border: 1px solid var(--rule-strong);
+    border-top: 3px solid var(--cg-gold);
+    border-radius: 3px;
+    width: 100%;
+    max-width: 660px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(26,60,52,0.3);
+    animation: modal-rise 0.22s ease;
+  }
+
+  @keyframes modal-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-head {
+    padding: 24px 28px 18px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--off-white);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .modal-num {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--cg-gold);
+    margin-bottom: 4px;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cg-green);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .modal-sub {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-weight: 300;
+  }
+
+  .modal-x {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .modal-x:hover { background: var(--cg-green-pale); }
+
+  .modal-body {
+    padding: 22px 28px 8px;
+  }
+
+  /* Form fields */
+  .field { margin-bottom: 16px; }
+
+  .field-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cg-green);
+    margin-bottom: 6px;
+  }
+
+  .field-label .opt {
+    font-weight: 400;
+    color: var(--ink-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 10px;
+    margin-left: 4px;
+  }
+
+  .f-input, .f-select, .f-textarea {
+    width: 100%;
+    background: var(--off-white);
+    border: 1px solid var(--rule-strong);
+    border-radius: 2px;
+    padding: 9px 12px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .f-input:focus, .f-select:focus, .f-textarea:focus {
+    border-color: var(--cg-green-light);
+    box-shadow: 0 0 0 3px rgba(26,60,52,0.08);
+  }
+
+  .f-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+  .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Results */
+  .results-area {
+    display: none;
+    background: var(--off-white);
+    border: 1px solid var(--rule-strong);
+    border-radius: 2px;
+    margin: 16px 28px 0;
+    overflow: hidden;
+  }
+
+  .results-area.show { display: block; }
+
+  .results-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 14px;
+    background: var(--cg-green-tint);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .results-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cg-green);
+  }
+
+  .copy-btn {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 3px 9px;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .copy-btn:hover { color: var(--cg-green); border-color: var(--cg-green-light); }
+
+  .results-body {
+    padding: 14px;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    white-space: pre-wrap;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .loading {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 11px;
+    color: var(--cg-green-light);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  .loading.show { display: flex; }
+
+  .dots span {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--cg-green-light);
+    animation: dot 1.2s ease-in-out infinite;
+    margin-right: 3px;
+  }
+
+  .dots span:nth-child(2) { animation-delay: .18s; }
+  .dots span:nth-child(3) { animation-delay: .36s; }
+
+  @keyframes dot {
+    0%,80%,100% { transform: translateY(0); opacity:.35; }
+    40% { transform: translateY(-5px); opacity:1; }
+  }
+
+  /* Modal footer */
+  .modal-foot {
+    padding: 16px 28px 22px;
+    border-top: 1px solid var(--rule);
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--cg-green);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--cg-green-mid); }
+
+  .btn-gold {
+    background: var(--cg-gold);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .btn-gold:hover { background: #9a6f09; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink-muted);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 11px 18px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-outline:hover { border-color: var(--cg-green-light); color: var(--cg-green); }
+
+  /* Responsive */
+  @media(max-width:900px) {
+    .skills-grid { grid-template-columns: repeat(2,1fr); }
+    header, .hero, main, footer { padding-left:20px; padding-right:20px; }
+  }
+
+  @media(max-width:540px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .primary-card { flex-direction:column; align-items:flex-start; }
+    .f-row { grid-template-columns:1fr; }
+    .hero { flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-left">
+    <!-- CG Monogram Logo (SVG recreation matching flyer) -->
+    <svg class="cg-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="21" cy="21" r="20" stroke="rgba(255,255,255,0.25)" stroke-width="0.75"/>
+      <text x="21" y="16" font-family="'Playfair Display', Georgia, serif" font-size="13" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">C</text>
+      <line x1="10" y1="22" x2="32" y2="22" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+      <text x="21" y="30" font-family="'Playfair Display', Georgia, serif" font-size="13" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">G</text>
+    </svg>
+    <div class="header-divider"></div>
+    <div class="header-wordmark">
+      <div class="header-firm">The Commercial Group</div>
+      <div class="header-product">HARBOR</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-agent-block">
+      <div class="header-agent-name">Joe Solana</div>
+      <div class="header-agent-title">Commercial Real Estate Specialist</div>
+    </div>
+    <div class="status-pip"></div>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Commercial Intelligence Platform</div>
+    <div class="hero-title">Deal Intelligence · Savannah's Logistics Market</div>
+    <div class="hero-subtitle">8 AI-powered skills for industrial and commercial brokerage — listings, LOIs, deal analysis, comps, leases, pitches, market intelligence, and due diligence.</div>
+  </div>
+  <div class="hero-badge">
+    <div class="hero-badge-count">8</div>
+    <div class="hero-badge-label">Skills<br>Active</div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════════════ -->
+<main>
+
+  <!-- PRIMARY SKILL -->
+  <div class="section-header">
+    <div class="section-rule-left"></div>
+    <div class="section-label">Primary Skill</div>
+    <div class="section-rule-right"></div>
+  </div>
+
+  <div class="primary-card" onclick="openModal('harbor')">
+    <div class="primary-left">
+      <div class="primary-eyebrow">All-In-One Session</div>
+      <div class="primary-name">HARBOR</div>
+      <div class="primary-desc">Full-service commercial intelligence. Sourcing, writing, underwriting, and deal management — start here for any task or kick off a complete deal session with all 8 skills available.</div>
+    </div>
+    <a class="launch-btn" href="https://claude.ai/new?q=Begin+HARBOR+session.+I+am+Joe+Solana+at+The+Commercial+Group+in+Savannah%2C+Georgia.+I+specialize+in+industrial+and+commercial+property+sales+and+leasing.+I+am+ready+to+work+on+a+deal." target="_blank" onclick="event.stopPropagation()">
+      ↗ Launch HARBOR
+    </a>
+  </div>
+
+  <!-- SUPPORT SKILLS -->
+  <div class="section-header" style="margin-top:32px;">
+    <div class="section-rule-left"></div>
+    <div class="section-label">Support Skills · 8 Active · Select any to run</div>
+    <div class="section-rule-right"></div>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-card" onclick="openModal('listing')">
+      <div class="skill-num">01</div>
+      <div class="skill-name">Listing Description Writer</div>
+      <div class="skill-desc">CoStar headline, full listing, and spec bullets — all three outputs from one set of property facts.</div>
+      <div class="skill-tags"><span class="tag">Industrial</span><span class="tag">Flex</span><span class="tag">CoStar</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('loi')">
+      <div class="skill-num">02</div>
+      <div class="skill-name">LOI Drafter</div>
+      <div class="skill-desc">Sale and lease LOIs drafted to your defaults, with a flagged Notes for Joe section on anything unusual.</div>
+      <div class="skill-tags"><span class="tag">Sale</span><span class="tag">Lease</span><span class="tag">Dotloop</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('deal')">
+      <div class="skill-num">03</div>
+      <div class="skill-name">Deal Analyzer</div>
+      <div class="skill-desc">Cap rate, NOI, cash-on-cash, and a Go / No-Go verdict benchmarked against Savannah market norms.</div>
+      <div class="skill-tags"><span class="tag">Cap Rate</span><span class="tag">NOI</span><span class="tag">Underwriting</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('comps')">
+      <div class="skill-num">04</div>
+      <div class="skill-name">Comp Analyzer</div>
+      <div class="skill-desc">Paste CoStar data and get a clean table, client-facing market narrative, and sharp broker bullets.</div>
+      <div class="skill-tags"><span class="tag">CoStar</span><span class="tag">Pricing</span><span class="tag">Market</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('lease')">
+      <div class="skill-num">05</div>
+      <div class="skill-name">Lease Abstractor</div>
+      <div class="skill-desc">Upload or paste a lease — every key date, rent schedule, option, and risk flag extracted and organized.</div>
+      <div class="skill-tags"><span class="tag">Due Diligence</span><span class="tag">Admin</span><span class="tag">Risks</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('pitch')">
+      <div class="skill-num">06</div>
+      <div class="skill-name">Client Pitch Builder</div>
+      <div class="skill-desc">Slide-by-slide pitch content ready for Canva — with photo, map, and chart placeholders built in.</div>
+      <div class="skill-tags"><span class="tag">Canva</span><span class="tag">Investor</span><span class="tag">Owner-User</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('market')">
+      <div class="skill-num">07</div>
+      <div class="skill-name">Savannah Market Pulse</div>
+      <div class="skill-desc">Submarket benchmarks across Pooler, Garden City, Port corridor, and I-16 — with deal implications for Joe.</div>
+      <div class="skill-tags"><span class="tag">Savannah</span><span class="tag">Port</span><span class="tag">Industrial</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+    <div class="skill-card" onclick="openModal('dd')">
+      <div class="skill-num">08</div>
+      <div class="skill-name">Due Diligence Checklist</div>
+      <div class="skill-desc">Deal-specific DD by phase with responsible parties and target dates — ready for Dotloop or Google Drive.</div>
+      <div class="skill-tags"><span class="tag">DD</span><span class="tag">Dotloop</span><span class="tag">Georgia</span></div>
+      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
+    </div>
+
+  </div>
+
+  <!-- DOCUMENT ROUTING -->
+  <div class="section-header">
+    <div class="section-rule-left"></div>
+    <div class="section-label">Document Routing</div>
+    <div class="section-rule-right"></div>
+  </div>
+
+  <div class="routing-wrap">
+    <table class="routing">
+      <thead>
+        <tr>
+          <th>Document Type</th>
+          <th>Skill</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Property facts, specs sheet</td><td class="rt-skill">01 — Listing Writer</td><td class="rt-format">Type or paste</td></tr>
+        <tr><td>Deal terms, agreed LOI points</td><td class="rt-skill">02 — LOI Drafter</td><td class="rt-format">Type or paste</td></tr>
+        <tr><td>T12, rent roll, deal summary</td><td class="rt-skill">03 — Deal Analyzer</td><td class="rt-format">Paste text or table</td></tr>
+        <tr><td>CoStar comp export</td><td class="rt-skill">04 — Comp Analyzer</td><td class="rt-format">Paste CSV or text</td></tr>
+        <tr><td>Lease agreement PDF or DOCX</td><td class="rt-skill">05 — Lease Abstractor</td><td class="rt-format">Paste text or upload to Claude</td></tr>
+        <tr><td>Property details + client profile</td><td class="rt-skill">06 — Pitch Builder</td><td class="rt-format">Type or paste</td></tr>
+        <tr><td>CoStar submarket data, broker report</td><td class="rt-skill">07 — Market Pulse</td><td class="rt-format">Paste text or PDF</td></tr>
+        <tr><td>Executed PSA or LOI</td><td class="rt-skill">08 — DD Checklist</td><td class="rt-format">Type deal facts</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-left">HARBOR · The Commercial Group · Savannah, GA</div>
+  <div class="footer-contact">
+    <a href="tel:9126639576">912.663.9576</a>&ensp;·&ensp;
+    <a href="mailto:Joe@solanacre.com">Joe@solanacre.com</a>
+  </div>
+  <div class="footer-markets">
+    <span class="market-tag">SAV Core</span>
+    <span class="market-tag">Pooler</span>
+    <span class="market-tag">Garden City</span>
+    <span class="market-tag">Port</span>
+    <span class="market-tag">I-16</span>
+  </div>
+</footer>
+
+<!-- ═══ MODAL ════════════════════════════════════════════════════════ -->
+<div class="overlay" id="overlay" onclick="closeOutside(event)">
+  <div class="modal" id="modal-box"></div>
+</div>
+
+<script>
+const SKILLS = {
+  harbor: {
+    num: 'Primary Skill',
+    name: 'HARBOR — Full Session',
+    sub: 'All-in-one commercial intelligence session for Joe Solana',
+    claudeUrl: 'https://claude.ai/new?q=Begin+HARBOR+session.+I+am+Joe+Solana+at+The+Commercial+Group+in+Savannah%2C+Georgia.+I+specialize+in+industrial+and+commercial+property+sales+and+leasing.+I+am+ready+to+work+on+a+deal.',
+    fields: [],
+    isLaunch: true
+  },
+  listing: {
+    num: 'Skill 01',
+    name: 'Listing Description Writer',
+    sub: 'Industrial & commercial property copy — CoStar headline, full description, spec bullets',
+    fields: [
+      {id:'l_address',label:'Property Address',type:'input',ph:'123 Logistics Blvd, Pooler, GA 31322',req:true},
+      {id:'l_type',label:'Asset Type',type:'select',opts:['Warehouse / Distribution','Flex Industrial','Manufacturing','Office/Warehouse','General Commercial','Retail','Land / Development Site']},
+      {id:'l_sf',label:'Building SF',type:'input',ph:'48,500 SF',req:false},
+      {id:'l_price',label:'Asking Price or Lease Rate',type:'input',ph:"$4,200,000 or $8.50/SF NNN",req:false},
+      {id:'l_specs',label:'Key Specs',type:'textarea',ph:"Clear height: 28'\nDock doors: 6 dock-high, 2 grade-level\nOffice: 2,400 SF\nYear built: 2018\nZoning: I-1\nLot: 3.8 acres",rows:5,req:false},
+      {id:'l_location',label:'Location Advantages',type:'textarea',ph:'Port of Savannah 4 miles, I-16 interchange 1 mile...',rows:3,req:false},
+      {id:'l_notes',label:'Additional Notes',type:'textarea',ph:'Recent roof replacement, ESFR sprinklers, rail spur...',rows:2,req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate marketing specialist working with Joe Solana at The Commercial Group in Savannah, Georgia.
+
+Write a polished listing description for this property. Produce THREE outputs:
+1. SHORT (2–3 sentences for CoStar headline)
+2. STANDARD (150–200 words full listing description)
+3. BULLET SUMMARY (6–8 key specs as clean bullets)
+
+Lead with the strongest selling point. Confident, active language. Highlight Savannah/port/corridor advantages. End with a call to action for Joe Solana at The Commercial Group, 912.663.9576, Joe@solanacre.com.
+
+PROPERTY:
+Address: ${v.l_address}
+Asset Type: ${v.l_type}
+Building SF: ${v.l_sf}
+Asking Price / Rate: ${v.l_price}
+Key Specs: ${v.l_specs}
+Location Advantages: ${v.l_location}
+Additional Notes: ${v.l_notes}`
+  },
+  loi: {
+    num: 'Skill 02',
+    name: 'LOI Drafter',
+    sub: 'Sale and lease LOIs — draft-ready with a Notes for Joe section',
+    fields: [
+      {id:'loi_type',label:'Deal Type',type:'select',opts:['Sale','Lease']},
+      {id:'loi_address',label:'Property Address',type:'input',ph:'450 Tremont Rd, Savannah, GA',req:true},
+      {id:'loi_sf',label:'Building / Space SF',type:'input',ph:'24,000 SF',req:false},
+      {id:'loi_buyer',label:'Buyer / Tenant Name',type:'input',ph:'ABC Logistics LLC',req:false},
+      {id:'loi_seller',label:'Seller / Landlord Name',type:'input',ph:'XYZ Holdings LLC',req:false},
+      {id:'loi_price',label:'Purchase Price or Base Rent',type:'input',ph:"$2,850,000 or $7.25/SF/yr NNN",req:false},
+      {id:'loi_terms',label:'Key Deal Terms',type:'textarea',ph:'For Sale: earnest money, DD period, financing contingency, closing date\nFor Lease: term, escalations, free rent, TI allowance, permitted use, options',rows:5,req:false},
+      {id:'loi_special',label:'Special Conditions',type:'textarea',ph:'Seller to complete roof repair. Buyer assuming existing lease...',rows:2,req:false},
+      {id:'loi_expiry',label:'LOI Expiration Date',type:'input',ph:'March 28, 2026',req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate transaction assistant working with Joe Solana at The Commercial Group in Savannah, Georgia.
+
+Draft a professional Letter of Intent. Use clean, professional language. Include standard contingencies. Flag anything unusual in a separate "NOTES FOR JOE" section at the bottom. Format as a proper business letter from Joe Solana.
+
+DEAL TYPE: ${v.loi_type}
+PROPERTY: ${v.loi_address} | ${v.loi_sf}
+BUYER/TENANT: ${v.loi_buyer}
+SELLER/LANDLORD: ${v.loi_seller}
+PRICE / RENT: ${v.loi_price}
+KEY TERMS: ${v.loi_terms}
+SPECIAL CONDITIONS: ${v.loi_special}
+LOI EXPIRATION: ${v.loi_expiry}
+BROKER: Joe Solana | The Commercial Group | Savannah, GA | 912.663.9576 | Joe@solanacre.com`
+  },
+  deal: {
+    num: 'Skill 03',
+    name: 'Deal Analyzer',
+    sub: 'Cap rate, NOI, cash-on-cash, and Go / No-Go verdict vs. Savannah market',
+    fields: [
+      {id:'d_address',label:'Property Address',type:'input',ph:'800 Port Connector Blvd, Garden City, GA',req:true},
+      {id:'d_type',label:'Asset Type',type:'select',opts:['Warehouse / Distribution','Flex Industrial','Manufacturing','General Commercial','Office','Retail','Land']},
+      {id:'d_price',label:'Asking Price',type:'input',ph:'$3,750,000',req:false},
+      {id:'d_sf',label:'Building SF',type:'input',ph:'42,000 SF',req:false},
+      {id:'d_noi',label:'In-Place NOI (annual)',type:'input',ph:'$245,000',req:false},
+      {id:'d_rents',label:'Gross Annual Rents',type:'input',ph:'$315,000',req:false},
+      {id:'d_expenses',label:'Operating Expenses',type:'input',ph:'$70,000 or NNN — tenant pays all',req:false},
+      {id:'d_lease',label:'Lease Details',type:'textarea',ph:'Single tenant NNN. 4 yrs remaining. Rent $7.50/SF. 2% bumps. Regional tenant.',rows:3,req:false},
+      {id:'d_financing',label:'Financing Assumption',type:'input',ph:'35% down, 6.75% rate, 25yr amort — or blank for all-cash',req:false},
+      {id:'d_context',label:'Additional Context',type:'textarea',ph:'Why is seller selling? Known capex? Environmental flags?',rows:2,req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate financial analyst working with Joe Solana at The Commercial Group in Savannah, Georgia.
+
+Analyze this deal. Calculate all metrics possible. Flag missing data as [NEEDED]. Benchmark against Savannah market norms (Industrial cap rates ~6.0–7.5%, Flex ~7.0–8.5%, port-adjacent commands premium, industrial vacancy historically sub-5%). End with a clear VERDICT: Go / No-Go / Needs More Data with 2–3 bullet reasons. Be direct.
+
+DEAL:
+Address: ${v.d_address} | ${v.d_type}
+Asking Price: ${v.d_price} | SF: ${v.d_sf}
+In-Place NOI: ${v.d_noi} | Gross Rents: ${v.d_rents} | OpEx: ${v.d_expenses}
+Lease: ${v.d_lease}
+Financing: ${v.d_financing}
+Context: ${v.d_context}`
+  },
+  comps: {
+    num: 'Skill 04',
+    name: 'Comp Analyzer',
+    sub: 'CoStar comp data → clean table, client narrative, broker bullets',
+    fields: [
+      {id:'c_data',label:'Comp Data',type:'textarea',ph:'Paste CoStar export, typed comp list, or describe the comps.\n\nExample:\n123 Port Way | 38,000 SF | $6.75/SF NNN | Q4 2024\n456 Industry Blvd | 52,000 SF | $7.25/SF NNN | Q3 2024',rows:8,req:true},
+      {id:'c_subject',label:'Subject Property',type:'input',ph:'800 Logistics Dr, Pooler — 44,000 SF, asking $7.50/SF NNN',req:false},
+      {id:'c_submarket',label:'Submarket',type:'select',opts:['All Savannah MSA','Savannah Core','Pooler / West Chatham','Garden City / Port Corridor','I-16 Corridor','Savannah Southside','Bryan County']},
+      {id:'c_notes',label:'Context / Client Audience',type:'input',ph:'For investor comparing to asking price / For tenant renewal negotiation',req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate market analyst working with Joe Solana at The Commercial Group in Savannah, Georgia.
+
+Analyze this comp set and produce:
+1. COMP SUMMARY TABLE (clean markdown table)
+2. MARKET NARRATIVE — 2–3 paragraphs, client-facing, plain English
+3. BROKER SUMMARY — 4–6 sharp bullets for Joe
+4. SUBJECT PROPERTY POSITIONING — if provided, suggested price/rent range
+5. DATA GAPS & CAVEATS
+
+COMPS: ${v.c_data}
+SUBJECT: ${v.c_subject}
+SUBMARKET: ${v.c_submarket}
+CONTEXT: ${v.c_notes}`
+  },
+  lease: {
+    num: 'Skill 05',
+    name: 'Lease Abstractor',
+    sub: 'Key terms, rent schedule, options, and risk flags from any lease',
+    fields: [
+      {id:'la_property',label:'Property Address',type:'input',ph:'1200 Crossroads Pkwy, Savannah, GA',req:false},
+      {id:'la_tenant',label:'Tenant Name',type:'input',ph:'Acme Distribution LLC',req:false},
+      {id:'la_focus',label:'Review Focus',type:'input',ph:'Renewal options and rent bumps / Termination rights / Landlord obligations',req:false},
+      {id:'la_text',label:'Lease Text',type:'textarea',ph:'Paste the lease text or key sections here. The more you paste, the more complete the abstract.',rows:12,req:true}
+    ],
+    buildPrompt: v => `You are a commercial real estate lease analyst working with Joe Solana at The Commercial Group in Savannah, Georgia.
+
+Abstract this lease. Extract every material term. Flag unusual items with ⚠️. Mark missing items [NOT FOUND — verify in document]. End with RISK FLAGS: top 3–5 things Joe or his client should watch.
+
+Structure: PARTIES & PROPERTY → TERM & DATES → RENT SCHEDULE → ADDITIONAL RENT & EXPENSES → TI & DELIVERY → OPTIONS & RIGHTS → OTHER KEY TERMS → RISK FLAGS
+
+PROPERTY: ${v.la_property} | TENANT: ${v.la_tenant}
+FOCUS: ${v.la_focus}
+
+LEASE TEXT:
+${v.la_text}`
+  },
+  pitch: {
+    num: 'Skill 06',
+    name: 'Client Pitch Builder',
+    sub: 'Slide-by-slide pitch content ready to drop into Canva',
+    fields: [
+      {id:'p_address',label:'Property Address',type:'input',ph:'3300 Port Connector Blvd, Garden City, GA',req:true},
+      {id:'p_type',label:'Asset Type',type:'select',opts:['Warehouse / Distribution','Flex Industrial','Manufacturing','Commercial / Office','Retail','Development Site']},
+      {id:'p_sf',label:'Size',type:'input',ph:'65,000 SF on 5.2 acres',req:false},
+      {id:'p_price',label:'Asking Price or Lease Rate',type:'input',ph:"$5,800,000 or $9.00/SF NNN",req:false},
+      {id:'p_highlights',label:'Property Highlights',type:'textarea',ph:"ESFR sprinklers, 30' clear, 8 dock doors, renovated office, 400A 3-phase power...",rows:4,req:false},
+      {id:'p_financials',label:'Financial Overview',type:'input',ph:'NOI: $385K | Cap: 6.6% | 100% occupied — or N/A for owner-user',req:false},
+      {id:'p_audience',label:'Audience',type:'select',opts:['Investor / Buyer','Owner-User Buyer','Tenant Prospect','General Marketing']},
+      {id:'p_notes',label:'Additional Context',type:'textarea',ph:'Buyer from Atlanta — emphasize port proximity. Client is price-sensitive...',rows:2,req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate marketing strategist working with Joe Solana at The Commercial Group in Savannah, Georgia. Joe uses Canva for presentations.
+
+Build slide-by-slide pitch content. Organize exactly as below — Joe copies each section into Canva. Lead with the opportunity. Include Savannah market context. Flag photo/map/chart placements with [INSERT: description].
+
+PROPERTY: ${v.p_address} | ${v.p_type} | ${v.p_sf}
+PRICE/RATE: ${v.p_price} | FINANCIALS: ${v.p_financials}
+HIGHLIGHTS: ${v.p_highlights}
+AUDIENCE: ${v.p_audience}
+CONTEXT: ${v.p_notes}
+
+Produce: SLIDE 1 (Cover) → SLIDE 2 (The Opportunity) → SLIDE 3 (Property Highlights) → SLIDE 4 (Location & Savannah Market) → SLIDE 5 (Financials or Space Details) → SLIDE 6 (Why Now) → SLIDE 7 (Contact: Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com)`
+  },
+  market: {
+    num: 'Skill 07',
+    name: 'Savannah Market Pulse',
+    sub: 'Submarket benchmarks and deal implications across the Savannah MSA',
+    fields: [
+      {id:'m_sub',label:'Submarket Focus',type:'select',opts:['Full Savannah MSA','Pooler / West Chatham','Garden City / Port Corridor','Savannah Core / Midtown','I-16 Corridor','Bryan County / Richmond Hill','Savannah Southside']},
+      {id:'m_class',label:'Asset Class',type:'select',opts:['Industrial (all)','Flex Industrial','Office','Retail / Commercial','Investment Sales','All Asset Classes']},
+      {id:'m_type',label:'Report Type',type:'select',opts:['Full Market Report','Quick Brief — key takeaways only','Benchmark Update for Active Deal','Port of Savannah Intelligence']},
+      {id:'m_deal',label:'Active Deal Address',type:'input',ph:'450 Tremont Rd, Savannah — to benchmark a specific deal',req:false},
+      {id:'m_data',label:'Market Data',type:'textarea',ph:"Paste CoStar export, broker report, or news. Leave blank for Claude's training knowledge (estimates flagged).",rows:5,req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate market intelligence analyst specializing in Savannah, Georgia. Working with Joe Solana at The Commercial Group.
+
+Produce a market pulse report: ${v.m_sub} | ${v.m_class} | ${v.m_type}
+
+SECTIONS: HEADLINE (single most important takeaway) → INDUSTRIAL MARKET (vacancy, rents, absorption, supply, transactions, cap rates) → PORT OF SAVANNAH (volume, industrial demand impact) → INVESTMENT MARKET (cap rates, buyer appetite, sales) → MACRO FACTORS (rates, economic development, infrastructure) → IMPLICATIONS FOR JOE (4–5 bullets on listings, buyers, client conversations)
+
+Flag estimates from training data as [ESTIMATE — verify with CoStar].
+
+ACTIVE DEAL: ${v.m_deal}
+DATA: ${v.m_data}`
+  },
+  dd: {
+    num: 'Skill 08',
+    name: 'Due Diligence Checklist',
+    sub: 'Deal-specific DD by phase — ready for Dotloop or Google Drive',
+    fields: [
+      {id:'dd_type',label:'Deal Type',type:'select',opts:['Sale','Lease']},
+      {id:'dd_asset',label:'Asset Type',type:'select',opts:['Industrial / Warehouse','Flex Industrial','Manufacturing','Office','Retail','Land / Development Site']},
+      {id:'dd_address',label:'Property Address',type:'input',ph:'2200 Industrial Way, Savannah, GA 31408',req:true},
+      {id:'dd_price',label:'Purchase Price or Lease Value',type:'input',ph:'$4,100,000 or $180,000/yr',req:false},
+      {id:'dd_period',label:'Due Diligence Period',type:'input',ph:'30 days',req:false},
+      {id:'dd_close',label:'Target Closing / Occupancy Date',type:'input',ph:'May 30, 2026',req:false},
+      {id:'dd_fin',label:'Financing Type',type:'select',opts:['All Cash','Conventional / Bank','SBA 504 or 7(a)','CMBS','Construction / Value-Add','Owner Financing']},
+      {id:'dd_buyer',label:'Buyer / Tenant Type',type:'select',opts:['Investor','Owner-User','Tenant','Developer']},
+      {id:'dd_flags',label:'Known Issues / Flags',type:'textarea',ph:'Environmental concerns, prior industrial use, floodplain, deferred maintenance, title issues...',rows:3,req:false}
+    ],
+    buildPrompt: v => `You are a commercial real estate transaction manager working with Joe Solana at The Commercial Group in Savannah, Georgia. Joe uses Dotloop and Google Drive.
+
+Generate a complete DD checklist organized by phase: PRE-CONTRACT → DUE DILIGENCE → PRE-CLOSING → CLOSING. Each item: [Item] | [Responsible Party] | [Target: Day X of DD].
+
+🔴 = critical path (could kill deal). ⚠️ = Georgia/Savannah-specific.
+
+Include Georgia-specific items: title search standards, Chatham County permitting, coastal/wetland considerations, Georgia license law requirements.
+
+DEAL: ${v.dd_type} | ${v.dd_asset}
+PROPERTY: ${v.dd_address}
+VALUE: ${v.dd_price} | DD: ${v.dd_period} | CLOSE: ${v.dd_close}
+FINANCING: ${v.dd_fin} | BUYER/TENANT: ${v.dd_buyer}
+FLAGS: ${v.dd_flags}`
+  }
+};
+
+function openModal(id) {
+  const s = SKILLS[id];
+  if (!s) return;
+
+  let fields = '';
+  (s.fields || []).forEach(f => {
+    const opt = f.req === false ? '<span class="opt">(optional)</span>' : '';
+    fields += `<div class="field"><label class="field-label" for="${f.id}">${f.label}${opt}</label>`;
+    if (f.type === 'input') {
+      fields += `<input class="f-input" id="${f.id}" type="text" placeholder="${f.ph||''}">`;
+    } else if (f.type === 'select') {
+      fields += `<select class="f-select" id="${f.id}">${f.opts.map(o=>`<option>${o}</option>`).join('')}</select>`;
+    } else if (f.type === 'textarea') {
+      fields += `<textarea class="f-textarea" id="${f.id}" rows="${f.rows||4}" placeholder="${f.ph||''}"></textarea>`;
+    }
+    fields += `</div>`;
+  });
+
+  const footer = s.isLaunch
+    ? `<a class="btn-primary" href="${s.claudeUrl}" target="_blank">↗ Launch HARBOR in Claude</a>`
+    : `<button class="btn-primary" onclick="runSkill('${id}')">↗ Open in Claude</button>
+       <button class="btn-gold" onclick="buildPrompt('${id}')">Build Prompt</button>`;
+
+  document.getElementById('modal-box').innerHTML = `
+    <div class="modal-head">
+      <div>
+        <div class="modal-num">${s.num}</div>
+        <div class="modal-title">${s.name}</div>
+        <div class="modal-sub">${s.sub}</div>
+      </div>
+      <button class="modal-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">${fields}</div>
+    <div class="loading" id="loading"><div class="dots"><span></span><span></span><span></span></div> Building your prompt…</div>
+    <div class="results-area" id="results-area">
+      <div class="results-head">
+        <span class="results-label">Prompt Ready</span>
+        <button class="copy-btn" onclick="copyPrompt()">Copy</button>
+      </div>
+      <div class="results-body" id="results-body"></div>
+    </div>
+    <div class="modal-foot">
+      ${footer}
+      <button class="btn-outline" onclick="closeModal()">Close</button>
+    </div>
+  `;
+
+  document.getElementById('overlay').classList.add('open');
+}
+
+function getVals(id) {
+  const s = SKILLS[id];
+  const v = {};
+  (s.fields||[]).forEach(f => {
+    const el = document.getElementById(f.id);
+    v[f.id] = el ? el.value.trim() : '';
+  });
+  return v;
+}
+
+function buildPrompt(id) {
+  const prompt = SKILLS[id].buildPrompt(getVals(id));
+  document.getElementById('results-area').classList.add('show');
+  document.getElementById('results-body').textContent = prompt;
+}
+
+function runSkill(id) {
+  const prompt = SKILLS[id].buildPrompt(getVals(id));
+  window.open(`https://claude.ai/new?q=${encodeURIComponent(prompt)}`, '_blank');
+}
+
+function copyPrompt() {
+  const body = document.getElementById('results-body');
+  navigator.clipboard.writeText(body.textContent).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1800);
+  });
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function closeOutside(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

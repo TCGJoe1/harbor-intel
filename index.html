@@ -1,1382 +1,3134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HARBOR — The Commercial Group</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>HARBOR v2.0 — The Commercial Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-  :root {
-    --cg-green:       #1a3c34;
-    --cg-green-mid:   #2a5446;
-    --cg-green-light: #3d6e5e;
-    --cg-green-pale:  #c8ddd7;
-    --cg-green-tint:  #eef4f2;
-    --cg-gold:        #b8860b;
-    --cg-gold-light:  #d4a82a;
-    --white:          #ffffff;
-    --off-white:      #f8f6f1;
-    --paper:          #f4f1ea;
-    --ink:            #1a1a18;
-    --ink-mid:        #3d3d3a;
-    --ink-muted:      #7a7a74;
-    --rule:           rgba(26,60,52,0.18);
-    --rule-strong:    rgba(26,60,52,0.35);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: var(--off-white);
-    color: var(--ink);
-    min-height: 100vh;
-  }
-
-  /* ─── HEADER ─────────────────────────────────── */
-  header {
-    background: var(--cg-green);
-    padding: 0 48px;
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    min-height: 72px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--cg-gold);
-  }
-
-  /* Subtle cross-hatch texture on header */
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.015) 0px,
-      rgba(255,255,255,0.015) 1px,
-      transparent 1px,
-      transparent 8px
-    );
-    pointer-events: none;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 16px 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* CG Monogram SVG logo */
-  .cg-logo {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-  }
-
-  .header-divider {
-    width: 1px;
-    height: 32px;
-    background: rgba(255,255,255,0.2);
-  }
-
-  .header-wordmark {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-
-  .header-firm {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-  }
-
-  .header-product {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .header-agent-block {
-    text-align: right;
-  }
-
-  .header-agent-name {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.04em;
-  }
-
-  .header-agent-title {
-    font-size: 11px;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.08em;
-    font-weight: 300;
-  }
-
-  .status-pip {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--cg-gold-light);
-    animation: pip-pulse 3s ease-in-out infinite;
-  }
-
-  @keyframes pip-pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(212,168,42,0.4); }
-    50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(212,168,42,0); }
-  }
-
-  /* ─── HERO BANNER ────────────────────────────── */
-  .hero {
-    background: var(--white);
-    border-bottom: 1px solid var(--rule-strong);
-    padding: 28px 48px 24px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 32px;
-  }
-
-  .hero-eyebrow {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--cg-gold);
-    margin-bottom: 6px;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--cg-green);
-    line-height: 1.2;
-    margin-bottom: 6px;
-  }
-
-  .hero-subtitle {
-    font-size: 13px;
-    color: var(--ink-muted);
-    line-height: 1.6;
-    max-width: 500px;
-    font-weight: 300;
-  }
-
-  .hero-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid var(--rule-strong);
-    padding: 8px 16px;
-    border-radius: 2px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .hero-badge-count {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--cg-green);
-    line-height: 1;
-  }
-
-  .hero-badge-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    line-height: 1.4;
-  }
-
-  /* ─── MAIN LAYOUT ─────────────────────────────── */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 36px 40px 60px;
-  }
-
-  /* ─── SECTION HEADERS ─────────────────────────── */
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-
-  .section-rule-left {
-    height: 1px;
-    width: 32px;
-    background: var(--cg-green);
-    flex-shrink: 0;
-  }
-
-  .section-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--cg-green);
-    white-space: nowrap;
-  }
-
-  .section-rule-right {
-    height: 1px;
-    flex: 1;
-    background: var(--rule);
-  }
-
-  /* ─── PRIMARY CARD ─────────────────────────────── */
-  .primary-card {
-    background: var(--cg-green);
-    border-radius: 3px;
-    margin-bottom: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 28px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.2s;
-    box-shadow: 0 4px 24px rgba(26,60,52,0.2);
-  }
-
-  .primary-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--cg-gold);
-  }
-
-  .primary-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.012) 0px,
-      rgba(255,255,255,0.012) 1px,
-      transparent 1px,
-      transparent 10px
-    );
-    pointer-events: none;
-  }
-
-  .primary-card:hover {
-    box-shadow: 0 8px 36px rgba(26,60,52,0.3);
-  }
-
-  .primary-left { flex: 1; position: relative; z-index: 1; }
-
-  .primary-eyebrow {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--cg-gold-light);
-    margin-bottom: 6px;
-  }
-
-  .primary-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px;
-    font-weight: 900;
-    color: var(--white);
-    letter-spacing: 0.04em;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .primary-desc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.62);
-    line-height: 1.6;
-    max-width: 520px;
-    font-weight: 300;
-  }
-
-  .launch-btn {
-    position: relative;
-    z-index: 1;
-    background: var(--cg-gold);
-    color: var(--white);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 13px 24px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    white-space: nowrap;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.15s;
-    flex-shrink: 0;
-  }
-
-  .launch-btn:hover { background: #9a6f09; }
-
-  /* ─── SKILLS GRID ─────────────────────────────── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-bottom: 40px;
-  }
-
-  .skill-card {
-    background: var(--white);
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    padding: 20px 20px 18px;
-    cursor: pointer;
-    transition: all 0.18s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--cg-gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.22s ease;
-  }
-
-  .skill-card:hover {
-    border-color: var(--cg-green-light);
-    box-shadow: 0 3px 18px rgba(26,60,52,0.09);
-    transform: translateY(-2px);
-  }
-
-  .skill-card:hover::after {
-    transform: scaleX(1);
-  }
-
-  .skill-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--cg-green-pale);
-    margin-bottom: 10px;
-    letter-spacing: 0.04em;
-  }
-
-  .skill-name {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--cg-green);
-    margin-bottom: 6px;
-    line-height: 1.3;
-    letter-spacing: 0.01em;
-  }
-
-  .skill-desc {
-    font-size: 11.5px;
-    color: var(--ink-muted);
-    line-height: 1.6;
-    margin-bottom: 14px;
-    font-weight: 300;
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-bottom: 14px;
-  }
-
-  .tag {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    background: var(--cg-green-tint);
-    color: var(--cg-green-mid);
-    border: 1px solid var(--cg-green-pale);
-    border-radius: 1px;
-  }
-
-  .skill-cta {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--cg-gold);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.15s;
-  }
-
-  .skill-card:hover .skill-cta { color: var(--cg-green); }
-
-  .skill-cta-arrow { transition: transform 0.15s; }
-  .skill-card:hover .skill-cta-arrow { transform: translate(2px, -2px); }
-
-  /* ─── ROUTING TABLE ───────────────────────────── */
-  .routing-wrap {
-    background: var(--white);
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 40px;
-  }
-
-  .routing-inner { padding: 0; }
-
-  table.routing {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-  }
-
-  table.routing thead tr {
-    background: var(--cg-green-tint);
-    border-bottom: 1px solid var(--rule-strong);
-  }
-
-  table.routing th {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--cg-green);
-    padding: 10px 16px;
-    text-align: left;
-  }
-
-  table.routing td {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--rule);
-    color: var(--ink-mid);
-    vertical-align: middle;
-  }
-
-  table.routing tr:last-child td { border-bottom: none; }
-  table.routing tr:hover td { background: var(--cg-green-tint); }
-
-  .rt-skill {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--cg-green-mid);
-  }
-
-  .rt-format {
-    font-size: 11px;
-    color: var(--ink-muted);
-  }
-
-  /* ─── FOOTER ──────────────────────────────────── */
-  footer {
-    background: var(--cg-green);
-    padding: 18px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    position: relative;
-  }
-
-  footer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--cg-gold);
-  }
-
-  .footer-left {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-  }
-
-  .footer-contact {
-    font-size: 11px;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.04em;
-  }
-
-  .footer-contact a {
-    color: rgba(255,255,255,0.65);
-    text-decoration: none;
-  }
-
-  .footer-markets {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .market-tag {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 1px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  /* ─── MODAL ───────────────────────────────────── */
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(26,60,52,0.55);
-    backdrop-filter: blur(5px);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .overlay.open { display: flex; }
-
-  .modal {
-    background: var(--white);
-    border: 1px solid var(--rule-strong);
-    border-top: 3px solid var(--cg-gold);
-    border-radius: 3px;
-    width: 100%;
-    max-width: 660px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 24px 64px rgba(26,60,52,0.3);
-    animation: modal-rise 0.22s ease;
-  }
-
-  @keyframes modal-rise {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .modal-head {
-    padding: 24px 28px 18px;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    background: var(--off-white);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .modal-num {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--cg-gold);
-    margin-bottom: 4px;
-  }
-
-  .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--cg-green);
-    line-height: 1.1;
-    margin-bottom: 4px;
-  }
-
-  .modal-sub {
-    font-size: 12px;
-    color: var(--ink-muted);
-    font-weight: 300;
-  }
-
-  .modal-x {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--ink-muted);
-    flex-shrink: 0;
-    transition: background 0.15s;
-  }
-
-  .modal-x:hover { background: var(--cg-green-pale); }
-
-  .modal-body {
-    padding: 22px 28px 8px;
-  }
-
-  /* Form fields */
-  .field { margin-bottom: 16px; }
-
-  .field-label {
-    display: block;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--cg-green);
-    margin-bottom: 6px;
-  }
-
-  .field-label .opt {
-    font-weight: 400;
-    color: var(--ink-muted);
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 10px;
-    margin-left: 4px;
-  }
-
-  .f-input, .f-select, .f-textarea {
-    width: 100%;
-    background: var(--off-white);
-    border: 1px solid var(--rule-strong);
-    border-radius: 2px;
-    padding: 9px 12px;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 13px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-
-  .f-input:focus, .f-select:focus, .f-textarea:focus {
-    border-color: var(--cg-green-light);
-    box-shadow: 0 0 0 3px rgba(26,60,52,0.08);
-  }
-
-  .f-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
-
-  .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-  /* Results */
-  .results-area {
-    display: none;
-    background: var(--off-white);
-    border: 1px solid var(--rule-strong);
-    border-radius: 2px;
-    margin: 16px 28px 0;
-    overflow: hidden;
-  }
-
-  .results-area.show { display: block; }
-
-  .results-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 9px 14px;
-    background: var(--cg-green-tint);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .results-label {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--cg-green);
-  }
-
-  .copy-btn {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    background: none;
-    border: 1px solid var(--rule);
-    padding: 3px 9px;
-    border-radius: 1px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .copy-btn:hover { color: var(--cg-green); border-color: var(--cg-green-light); }
-
-  .results-body {
-    padding: 14px;
-    font-size: 12.5px;
-    line-height: 1.7;
-    color: var(--ink-mid);
-    white-space: pre-wrap;
-    max-height: 260px;
-    overflow-y: auto;
-  }
-
-  .loading {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    font-size: 11px;
-    color: var(--cg-green-light);
-    font-weight: 500;
-    letter-spacing: 0.06em;
-  }
-
-  .loading.show { display: flex; }
-
-  .dots span {
-    display: inline-block;
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--cg-green-light);
-    animation: dot 1.2s ease-in-out infinite;
-    margin-right: 3px;
-  }
-
-  .dots span:nth-child(2) { animation-delay: .18s; }
-  .dots span:nth-child(3) { animation-delay: .36s; }
-
-  @keyframes dot {
-    0%,80%,100% { transform: translateY(0); opacity:.35; }
-    40% { transform: translateY(-5px); opacity:1; }
-  }
-
-  /* Modal footer */
-  .modal-foot {
-    padding: 16px 28px 22px;
-    border-top: 1px solid var(--rule);
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .btn-primary {
-    background: var(--cg-green);
-    color: var(--white);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 11px 22px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    transition: background 0.15s;
-  }
-
-  .btn-primary:hover { background: var(--cg-green-mid); }
-
-  .btn-gold {
-    background: var(--cg-gold);
-    color: var(--white);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 11px 20px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .btn-gold:hover { background: #9a6f09; }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--ink-muted);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 11px 18px;
-    border: 1px solid var(--rule-strong);
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .btn-outline:hover { border-color: var(--cg-green-light); color: var(--cg-green); }
-
-  /* Responsive */
-  @media(max-width:900px) {
-    .skills-grid { grid-template-columns: repeat(2,1fr); }
-    header, .hero, main, footer { padding-left:20px; padding-right:20px; }
-  }
-
-  @media(max-width:540px) {
-    .skills-grid { grid-template-columns: 1fr; }
-    .primary-card { flex-direction:column; align-items:flex-start; }
-    .f-row { grid-template-columns:1fr; }
-    .hero { flex-direction:column; align-items:flex-start; }
-  }
+/* ═══════════════════════════════════════════════════
+   HARBOR v2.0 — The Commercial Group
+   20 Skills · Deal Intelligence · Savannah MSA
+   ═══════════════════════════════════════════════════ */
+
+/* ─── THEME TOKENS ─── */
+:root,
+[data-theme="light"] {
+  --bg-primary:     #f8f6f1;
+  --bg-secondary:   #ffffff;
+  --bg-card:        #ffffff;
+  --bg-header:      #1a3c34;
+  --bg-modal:       #ffffff;
+  --bg-input:       #f4f1ea;
+  --bg-output:      #1a3c34;
+  --text-primary:   #1a1a18;
+  --text-secondary: #3d3d3a;
+  --text-muted:     #7a7a74;
+  --text-inverse:   #ffffff;
+  --text-output:    #e8e0d4;
+  --cg-green:       #1a3c34;
+  --cg-green-mid:   #2a5446;
+  --cg-green-light: #3d6e5e;
+  --cg-green-pale:  #c8ddd7;
+  --cg-green-tint:  #eef4f2;
+  --cg-gold:        #b8860b;
+  --cg-gold-light:  #d4a82a;
+  --cg-gold-soft:   rgba(184,134,11,0.12);
+  --teal:           #0d9488;
+  --teal-soft:      rgba(13,148,136,0.12);
+  --amber:          #d97706;
+  --amber-soft:     rgba(217,119,6,0.12);
+  --border:         rgba(26,60,52,0.18);
+  --border-strong:  rgba(26,60,52,0.35);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg:      0 8px 32px rgba(0,0,0,0.12);
+  --radius:         8px;
+  --radius-lg:      12px;
+}
+
+[data-theme="dark"] {
+  --bg-primary:     #0f1923;
+  --bg-secondary:   #162230;
+  --bg-card:        #1a2a3a;
+  --bg-header:      #0a1219;
+  --bg-modal:       #162230;
+  --bg-input:       #0f1923;
+  --bg-output:      #0a1219;
+  --text-primary:   #e8e0d4;
+  --text-secondary: #b8b0a4;
+  --text-muted:     #7a7a74;
+  --text-inverse:   #0f1923;
+  --text-output:    #e8e0d4;
+  --cg-green:       #2a5446;
+  --cg-green-mid:   #3d6e5e;
+  --cg-green-light: #4a8a76;
+  --cg-green-pale:  #1a3c34;
+  --cg-green-tint:  #0f1923;
+  --cg-gold:        #c8a45e;
+  --cg-gold-light:  #d4b870;
+  --cg-gold-soft:   rgba(200,164,94,0.15);
+  --teal:           #2dd4bf;
+  --teal-soft:      rgba(45,212,191,0.15);
+  --amber:          #fbbf24;
+  --amber-soft:     rgba(251,191,36,0.15);
+  --border:         rgba(200,164,94,0.15);
+  --border-strong:  rgba(200,164,94,0.25);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.25);
+  --shadow-lg:      0 8px 32px rgba(0,0,0,0.35);
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  line-height: 1.5;
+}
+
+/* ─── STICKY HEADER ─── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-header);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  border-bottom: 3px solid var(--cg-gold);
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 8px);
+  pointer-events: none;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.cg-logo {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.header-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.2);
+}
+
+.header-product {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.header-agent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: right;
+}
+
+.header-agent-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+.header-agent-title {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.status-pip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pip-pulse 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pip-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(74,222,128,0); }
+}
+
+.theme-toggle {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.7);
+  transition: all 0.2s;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.18);
+  color: #ffffff;
+}
+
+.theme-toggle svg { width: 14px; height: 14px; }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-strong);
+  padding: 32px 40px 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cg-gold);
+  margin-bottom: 6px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cg-green);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+[data-theme="dark"] .hero-title { color: var(--cg-gold); }
+
+.hero-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 520px;
+  font-weight: 400;
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 8px 16px;
+  background: var(--bg-card);
+  flex-shrink: 0;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pip-pulse 3s ease-in-out infinite;
+}
+
+.hero-badge-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+}
+
+/* ─── MAIN CONTENT ─── */
+main {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+
+/* ─── PRIMARY SKILL CARD (HARBOR) ─── */
+.primary-card {
+  margin-top: 32px;
+  background: var(--cg-green);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .primary-card {
+  background: linear-gradient(135deg, #1a3c34, #0f2920);
+  border: 1px solid rgba(200,164,94,0.2);
+}
+
+.primary-card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(184,134,11,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.primary-info { flex: 1; }
+
+.primary-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+
+.primary-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.primary-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  max-width: 580px;
+}
+
+.primary-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cg-gold);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.primary-btn:hover {
+  background: var(--cg-gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(184,134,11,0.3);
+}
+
+.primary-btn svg { width: 16px; height: 16px; }
+
+/* ─── SECTION HEADERS ─── */
+.section-header {
+  margin-top: 48px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon svg { width: 16px; height: 16px; }
+
+.section-icon.deal { background: var(--cg-gold-soft); color: var(--cg-gold); }
+.section-icon.market { background: var(--teal-soft); color: var(--teal); }
+.section-icon.growth { background: var(--amber-soft); color: var(--amber); }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.section-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* ─── CARD GRID ─── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ─── SKILL CARDS ─── */
+.skill-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.skill-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.skill-card.deal-card   { border-left-color: var(--cg-gold); }
+.skill-card.market-card { border-left-color: var(--teal); }
+.skill-card.growth-card { border-left-color: var(--amber); }
+
+.card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.tag {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: var(--bg-primary);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.run-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.run-btn:hover {
+  background: var(--cg-green);
+  color: #ffffff;
+  border-color: var(--cg-green);
+}
+
+.deal-card .run-btn:hover   { background: var(--cg-gold); border-color: var(--cg-gold); }
+.market-card .run-btn:hover { background: var(--teal); border-color: var(--teal); }
+.growth-card .run-btn:hover { background: var(--amber); border-color: var(--amber); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--bg-modal);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 720px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-modal);
+  z-index: 2;
+}
+
+.modal-title-group { display: flex; align-items: center; gap: 10px; }
+
+.modal-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.modal-close svg { width: 16px; height: 16px; }
+
+.modal-body { padding: 24px; }
+
+/* ─── FORM ELEMENTS ─── */
+.form-group { margin-bottom: 16px; }
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--cg-gold);
+  box-shadow: 0 0 0 3px var(--cg-gold-soft);
+}
+
+.form-textarea { min-height: 80px; resize: vertical; }
+.form-textarea.lg { min-height: 140px; }
+.form-textarea.xl { min-height: 200px; }
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a7a74' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--cg-gold);
+}
+
+.toggle-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  background: var(--bg-input);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-btn.active {
+  background: var(--cg-green);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .toggle-btn.active {
+  background: var(--cg-gold);
+  color: #0f1923;
+}
+
+/* ─── MODAL BUTTONS ─── */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.btn svg { width: 14px; height: 14px; }
+
+.btn-primary {
+  background: var(--cg-gold);
+  color: #ffffff;
+  border-color: var(--cg-gold);
+}
+
+.btn-primary:hover {
+  background: var(--cg-gold-light);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-primary);
+}
+
+.btn-compute {
+  background: var(--cg-green);
+  color: #ffffff;
+  border-color: var(--cg-green);
+}
+
+[data-theme="dark"] .btn-compute {
+  background: var(--cg-gold);
+  color: #0f1923;
+}
+
+.btn-compute:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-close-modal {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+.btn-close-modal:hover {
+  background: var(--bg-primary);
+}
+
+/* ─── OUTPUT PANEL ─── */
+.output-panel {
+  display: none;
+  margin-top: 20px;
+  background: var(--bg-output);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.output-panel.active { display: block; }
+
+.output-panel h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cg-gold);
+  margin-bottom: 12px;
+}
+
+.output-content {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-output);
+  white-space: pre-wrap;
+}
+
+/* ─── DOCUMENT ROUTING TABLE ─── */
+.doc-routing {
+  margin-top: 48px;
+}
+
+.doc-routing-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doc-routing-title svg { width: 18px; height: 18px; color: var(--cg-gold); }
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.doc-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border-strong);
+  background: var(--bg-primary);
+}
+
+.doc-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.doc-table tr:hover td { background: var(--bg-primary); }
+
+.doc-table .doc-type {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.doc-table .doc-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--cg-gold-soft);
+  color: var(--cg-gold);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg-header);
+  padding: 32px 40px;
+  margin-top: 60px;
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+}
+
+.footer-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-contact h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.footer-contact p {
+  line-height: 1.8;
+}
+
+.footer-contact a {
+  color: var(--cg-gold-light);
+  text-decoration: none;
+}
+
+.footer-contact a:hover { text-decoration: underline; }
+
+.footer-markets h4 {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 10px;
+}
+
+.submarket-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.submarket-tag {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-bottom {
+  max-width: 1320px;
+  margin: 20px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+}
+
+.footer-bottom a {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+}
+
+.footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--cg-green);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 2000;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .toast { background: var(--cg-gold); color: #0f1923; }
+
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ─── PROGRESS BAR (for DD Checklist) ─── */
+.progress-bar-container {
+  background: var(--bg-primary);
+  border-radius: 10px;
+  height: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cg-green), var(--cg-gold));
+  border-radius: 10px;
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.progress-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.checklist-phase {
+  margin-bottom: 16px;
+}
+
+.checklist-phase-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.checklist-item input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: var(--cg-gold);
+}
+
+.checklist-item.checked { text-decoration: line-through; color: var(--text-muted); }
+
+/* ─── BLOOMBERG STYLE (Commission Calculator) ─── */
+.bloomberg-panel {
+  background: #0a0e14;
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid #1a2636;
+}
+
+.bloomberg-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.bloomberg-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #6b7b8d;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bloomberg-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.bloomberg-value.gold { color: #c8a45e; }
+.bloomberg-value.white { color: #e8e0d4; }
+.bloomberg-value.amber { color: #fbbf24; }
+
+.bloomberg-tier {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px;
+  margin-top: 12px;
+  border-radius: 6px;
+  border: 2px solid;
+}
+
+.tier-A { color: #4ade80; border-color: #4ade80; background: rgba(74,222,128,0.08); }
+.tier-B { color: #c8a45e; border-color: #c8a45e; background: rgba(200,164,94,0.08); }
+.tier-C { color: #fbbf24; border-color: #fbbf24; background: rgba(251,191,36,0.08); }
+.tier-D { color: #6b7b8d; border-color: #3a4a5c; background: rgba(58,74,92,0.08); }
+
+/* ─── BRIEFING CARD STYLES ─── */
+.briefing-section {
+  margin-bottom: 16px;
+  padding: 14px;
+  background: var(--bg-primary);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.briefing-section h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cg-gold);
+  margin-bottom: 8px;
+}
+
+.briefing-section p,
+.briefing-section li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.briefing-section ul { padding-left: 18px; }
+
+.money-move {
+  background: var(--cg-gold-soft);
+  border: 1px solid var(--cg-gold);
+  border-radius: 6px;
+  padding: 14px;
+  margin-top: 12px;
+}
+
+.money-move h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cg-gold);
+  margin-bottom: 4px;
+}
+
+.money-move p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  header { padding: 0 24px; }
+  .hero { padding: 24px; }
+  main { padding: 0 24px 40px; }
+}
+
+@media (max-width: 640px) {
+  .card-grid { grid-template-columns: 1fr; }
+  header { padding: 0 16px; min-height: 56px; }
+  .hero { flex-direction: column; align-items: flex-start; padding: 20px 16px; }
+  main { padding: 0 16px 32px; }
+  .primary-card { flex-direction: column; padding: 24px; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; }
+  .header-agent-title { display: none; }
+  .modal { max-height: 92vh; }
+}
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══════════════════════════════════════════════════════ -->
+<!-- ═══════════ HEADER ═══════════ -->
 <header>
   <div class="header-left">
-    <!-- CG Monogram Logo (SVG recreation matching flyer) -->
-    <svg class="cg-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="21" cy="21" r="20" stroke="rgba(255,255,255,0.25)" stroke-width="0.75"/>
-      <text x="21" y="16" font-family="'Playfair Display', Georgia, serif" font-size="13" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">C</text>
-      <line x1="10" y1="22" x2="32" y2="22" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
-      <text x="21" y="30" font-family="'Playfair Display', Georgia, serif" font-size="13" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">G</text>
+    <svg class="cg-logo" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="The Commercial Group">
+      <rect x="1" y="1" width="40" height="40" rx="6" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <text x="8" y="30" font-family="'Playfair Display', serif" font-size="24" font-weight="700" fill="#ffffff" letter-spacing="-1">CG</text>
     </svg>
     <div class="header-divider"></div>
-    <div class="header-wordmark">
-      <div class="header-firm">The Commercial Group</div>
-      <div class="header-product">HARBOR</div>
-    </div>
+    <span class="header-product">HARBOR</span>
   </div>
   <div class="header-right">
-    <div class="header-agent-block">
-      <div class="header-agent-name">Joe Solana</div>
-      <div class="header-agent-title">Commercial Real Estate Specialist</div>
+    <div class="header-agent">
+      <div>
+        <div class="header-agent-name">Joe Solana</div>
+        <div class="header-agent-title">Commercial Real Estate</div>
+      </div>
+      <div class="status-pip"></div>
     </div>
-    <div class="status-pip"></div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+      <i data-lucide="sun" class="theme-icon-light"></i>
+      <i data-lucide="moon" class="theme-icon-dark" style="display:none"></i>
+    </button>
   </div>
 </header>
 
-<!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
+<!-- ═══════════ HERO ═══════════ -->
 <div class="hero">
   <div>
-    <div class="hero-eyebrow">Commercial Intelligence Platform</div>
-    <div class="hero-title">Deal Intelligence · Savannah's Logistics Market</div>
-    <div class="hero-subtitle">8 AI-powered skills for industrial and commercial brokerage — listings, LOIs, deal analysis, comps, leases, pitches, market intelligence, and due diligence.</div>
+    <div class="hero-eyebrow">The Commercial Group Intelligence Platform</div>
+    <h1 class="hero-title">Deal Intelligence · Savannah's Logistics Market</h1>
+    <p class="hero-subtitle">20 AI-powered skills for industrial and commercial real estate — listing, analysis, underwriting, market intelligence, and growth across the Savannah MSA.</p>
   </div>
   <div class="hero-badge">
-    <div class="hero-badge-count">8</div>
-    <div class="hero-badge-label">Skills<br>Active</div>
+    <div class="hero-badge-dot"></div>
+    <span class="hero-badge-text">20 SKILLS ACTIVE</span>
   </div>
 </div>
 
-<!-- ═══ MAIN ══════════════════════════════════════════════════════════ -->
+<!-- ═══════════ MAIN ═══════════ -->
 <main>
 
-  <!-- PRIMARY SKILL -->
-  <div class="section-header">
-    <div class="section-rule-left"></div>
-    <div class="section-label">Primary Skill</div>
-    <div class="section-rule-right"></div>
+<!-- PRIMARY: LAUNCH HARBOR -->
+<div class="primary-card">
+  <div class="primary-info">
+    <div class="primary-eyebrow">Primary Intelligence Interface</div>
+    <h2 class="primary-title">HARBOR — All-In-One</h2>
+    <p class="primary-desc">Launch a full HARBOR session with all 20 skills active. Your AI deal intelligence assistant for the Savannah MSA — listing, analysis, outreach, and market research in one interface.</p>
   </div>
+  <a class="primary-btn" id="launchHarborBtn" href="#" onclick="launchHarbor(event)">
+    <i data-lucide="zap"></i>
+    LAUNCH HARBOR
+  </a>
+</div>
 
-  <div class="primary-card" onclick="openModal('harbor')">
-    <div class="primary-left">
-      <div class="primary-eyebrow">All-In-One Session</div>
-      <div class="primary-name">HARBOR</div>
-      <div class="primary-desc">Full-service commercial intelligence. Sourcing, writing, underwriting, and deal management — start here for any task or kick off a complete deal session with all 8 skills available.</div>
-    </div>
-    <a class="launch-btn" href="https://claude.ai/new?q=Begin+HARBOR+session.+I+am+Joe+Solana+at+The+Commercial+Group+in+Savannah%2C+Georgia.+I+specialize+in+industrial+and+commercial+property+sales+and+leasing.+I+am+ready+to+work+on+a+deal." target="_blank" onclick="event.stopPropagation()">
-      ↗ Launch HARBOR
-    </a>
+<!-- ═══════════ DEAL TOOLS ═══════════ -->
+<div class="section-header">
+  <div class="section-icon deal"><i data-lucide="briefcase"></i></div>
+  <h2 class="section-title">Deal Tools</h2>
+  <span class="section-count">8 ACTIVE</span>
+</div>
+
+<div class="card-grid">
+  <!-- 01 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 01</div>
+    <div class="card-title">Listing Description Writer</div>
+    <div class="card-desc">Generate CoStar headlines, marketing descriptions, and spec sheets from property data.</div>
+    <div class="card-tags"><span class="tag">INDUSTRIAL</span><span class="tag">FLEX</span><span class="tag">COSTAR</span></div>
+    <button class="run-btn" onclick="openModal('modal-01')">↗ RUN ↗</button>
   </div>
-
-  <!-- SUPPORT SKILLS -->
-  <div class="section-header" style="margin-top:32px;">
-    <div class="section-rule-left"></div>
-    <div class="section-label">Support Skills · 8 Active · Select any to run</div>
-    <div class="section-rule-right"></div>
+  <!-- 02 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 02</div>
+    <div class="card-title">LOI Drafter</div>
+    <div class="card-desc">Draft non-binding Letters of Intent for sale or lease using Georgia CRE conventions.</div>
+    <div class="card-tags"><span class="tag">SALE</span><span class="tag">LEASE</span><span class="tag">DOTLOOP</span></div>
+    <button class="run-btn" onclick="openModal('modal-02')">↗ RUN ↗</button>
   </div>
-
-  <div class="skills-grid">
-
-    <div class="skill-card" onclick="openModal('listing')">
-      <div class="skill-num">01</div>
-      <div class="skill-name">Listing Description Writer</div>
-      <div class="skill-desc">CoStar headline, full listing, and spec bullets — all three outputs from one set of property facts.</div>
-      <div class="skill-tags"><span class="tag">Industrial</span><span class="tag">Flex</span><span class="tag">CoStar</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('loi')">
-      <div class="skill-num">02</div>
-      <div class="skill-name">LOI Drafter</div>
-      <div class="skill-desc">Sale and lease LOIs drafted to your defaults, with a flagged Notes for Joe section on anything unusual.</div>
-      <div class="skill-tags"><span class="tag">Sale</span><span class="tag">Lease</span><span class="tag">Dotloop</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('deal')">
-      <div class="skill-num">03</div>
-      <div class="skill-name">Deal Analyzer</div>
-      <div class="skill-desc">Cap rate, NOI, cash-on-cash, and a Go / No-Go verdict benchmarked against Savannah market norms.</div>
-      <div class="skill-tags"><span class="tag">Cap Rate</span><span class="tag">NOI</span><span class="tag">Underwriting</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('comps')">
-      <div class="skill-num">04</div>
-      <div class="skill-name">Comp Analyzer</div>
-      <div class="skill-desc">Paste CoStar data and get a clean table, client-facing market narrative, and sharp broker bullets.</div>
-      <div class="skill-tags"><span class="tag">CoStar</span><span class="tag">Pricing</span><span class="tag">Market</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('lease')">
-      <div class="skill-num">05</div>
-      <div class="skill-name">Lease Abstractor</div>
-      <div class="skill-desc">Upload or paste a lease — every key date, rent schedule, option, and risk flag extracted and organized.</div>
-      <div class="skill-tags"><span class="tag">Due Diligence</span><span class="tag">Admin</span><span class="tag">Risks</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('pitch')">
-      <div class="skill-num">06</div>
-      <div class="skill-name">Client Pitch Builder</div>
-      <div class="skill-desc">Slide-by-slide pitch content ready for Canva — with photo, map, and chart placeholders built in.</div>
-      <div class="skill-tags"><span class="tag">Canva</span><span class="tag">Investor</span><span class="tag">Owner-User</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('market')">
-      <div class="skill-num">07</div>
-      <div class="skill-name">Savannah Market Pulse</div>
-      <div class="skill-desc">Submarket benchmarks across Pooler, Garden City, Port corridor, and I-16 — with deal implications for Joe.</div>
-      <div class="skill-tags"><span class="tag">Savannah</span><span class="tag">Port</span><span class="tag">Industrial</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
-    <div class="skill-card" onclick="openModal('dd')">
-      <div class="skill-num">08</div>
-      <div class="skill-name">Due Diligence Checklist</div>
-      <div class="skill-desc">Deal-specific DD by phase with responsible parties and target dates — ready for Dotloop or Google Drive.</div>
-      <div class="skill-tags"><span class="tag">DD</span><span class="tag">Dotloop</span><span class="tag">Georgia</span></div>
-      <button class="skill-cta">↗ Run <span class="skill-cta-arrow">↗</span></button>
-    </div>
-
+  <!-- 03 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 03</div>
+    <div class="card-title">Deal Analyzer</div>
+    <div class="card-desc">Underwrite deals with NOI, Cap Rate, DSCR, Cash-on-Cash, and GO/NO-GO verdict.</div>
+    <div class="card-tags"><span class="tag">CAP RATE</span><span class="tag">NOI</span><span class="tag">UNDERWRITING</span></div>
+    <button class="run-btn" onclick="openModal('modal-03')">↗ RUN ↗</button>
   </div>
-
-  <!-- DOCUMENT ROUTING -->
-  <div class="section-header">
-    <div class="section-rule-left"></div>
-    <div class="section-label">Document Routing</div>
-    <div class="section-rule-right"></div>
+  <!-- 04 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 04</div>
+    <div class="card-title">Comp Analyzer</div>
+    <div class="card-desc">Compare properties with formatted tables, market narratives, and pitch-ready bullet points.</div>
+    <div class="card-tags"><span class="tag">COSTAR</span><span class="tag">PRICING</span><span class="tag">MARKET</span></div>
+    <button class="run-btn" onclick="openModal('modal-04')">↗ RUN ↗</button>
   </div>
-
-  <div class="routing-wrap">
-    <table class="routing">
-      <thead>
-        <tr>
-          <th>Document Type</th>
-          <th>Skill</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Property facts, specs sheet</td><td class="rt-skill">01 — Listing Writer</td><td class="rt-format">Type or paste</td></tr>
-        <tr><td>Deal terms, agreed LOI points</td><td class="rt-skill">02 — LOI Drafter</td><td class="rt-format">Type or paste</td></tr>
-        <tr><td>T12, rent roll, deal summary</td><td class="rt-skill">03 — Deal Analyzer</td><td class="rt-format">Paste text or table</td></tr>
-        <tr><td>CoStar comp export</td><td class="rt-skill">04 — Comp Analyzer</td><td class="rt-format">Paste CSV or text</td></tr>
-        <tr><td>Lease agreement PDF or DOCX</td><td class="rt-skill">05 — Lease Abstractor</td><td class="rt-format">Paste text or upload to Claude</td></tr>
-        <tr><td>Property details + client profile</td><td class="rt-skill">06 — Pitch Builder</td><td class="rt-format">Type or paste</td></tr>
-        <tr><td>CoStar submarket data, broker report</td><td class="rt-skill">07 — Market Pulse</td><td class="rt-format">Paste text or PDF</td></tr>
-        <tr><td>Executed PSA or LOI</td><td class="rt-skill">08 — DD Checklist</td><td class="rt-format">Type deal facts</td></tr>
-      </tbody>
-    </table>
+  <!-- 05 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 05</div>
+    <div class="card-title">Lease Abstractor</div>
+    <div class="card-desc">Extract every key term from a lease document with risk flags and missing-item alerts.</div>
+    <div class="card-tags"><span class="tag">DUE DILIGENCE</span><span class="tag">ADMIN</span><span class="tag">RISKS</span></div>
+    <button class="run-btn" onclick="openModal('modal-05')">↗ RUN ↗</button>
   </div>
+  <!-- 06 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 06</div>
+    <div class="card-title">Client Pitch Builder</div>
+    <div class="card-desc">Build investor/owner-user pitches with Savannah market context and Canva placeholders.</div>
+    <div class="card-tags"><span class="tag">CANVA</span><span class="tag">INVESTOR</span><span class="tag">OWNER-USER</span></div>
+    <button class="run-btn" onclick="openModal('modal-06')">↗ RUN ↗</button>
+  </div>
+  <!-- 07 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 07</div>
+    <div class="card-title">Savannah Market Pulse</div>
+    <div class="card-desc">Market intelligence briefs by submarket — vacancy, absorption, rents, and deal implications.</div>
+    <div class="card-tags"><span class="tag">SAVANNAH</span><span class="tag">PORT</span><span class="tag">INDUSTRIAL</span></div>
+    <button class="run-btn" onclick="openModal('modal-07')">↗ RUN ↗</button>
+  </div>
+  <!-- 08 -->
+  <div class="skill-card deal-card">
+    <div class="card-num">SKILL 08</div>
+    <div class="card-title">Due Diligence Checklist</div>
+    <div class="card-desc">Interactive Georgia-specific DD checklist with phases, dates, and progress tracking.</div>
+    <div class="card-tags"><span class="tag">DD</span><span class="tag">DOTLOOP</span><span class="tag">GEORGIA</span></div>
+    <button class="run-btn" onclick="openModal('modal-08')">↗ RUN ↗</button>
+  </div>
+</div>
+
+<!-- ═══════════ MARKET INTELLIGENCE ═══════════ -->
+<div class="section-header">
+  <div class="section-icon market"><i data-lucide="bar-chart-3"></i></div>
+  <h2 class="section-title">Market Intelligence</h2>
+  <span class="section-count">4 ACTIVE</span>
+</div>
+
+<div class="card-grid">
+  <!-- 09 -->
+  <div class="skill-card market-card">
+    <div class="card-num">SKILL 09</div>
+    <div class="card-title">Submarket Snapshot</div>
+    <div class="card-desc">One-page submarket snapshots with key metrics, trends, and competitive positioning.</div>
+    <div class="card-tags"><span class="tag">VACANCY</span><span class="tag">ABSORPTION</span><span class="tag">RENTS</span></div>
+    <button class="run-btn" onclick="openModal('modal-09')">↗ RUN ↗</button>
+  </div>
+  <!-- 10 -->
+  <div class="skill-card market-card">
+    <div class="card-num">SKILL 10</div>
+    <div class="card-title">Port of Savannah Tracker</div>
+    <div class="card-desc">Analyze port TEU data and its impact on Savannah industrial real estate demand.</div>
+    <div class="card-tags"><span class="tag">GPA</span><span class="tag">TEU</span><span class="tag">LOGISTICS</span></div>
+    <button class="run-btn" onclick="openModal('modal-10')">↗ RUN ↗</button>
+  </div>
+  <!-- 11 -->
+  <div class="skill-card market-card">
+    <div class="card-num">SKILL 11</div>
+    <div class="card-title">Development Pipeline Tracker</div>
+    <div class="card-desc">Track new supply — spec, BTS, delivered — and how it affects your listings.</div>
+    <div class="card-tags"><span class="tag">NEW SUPPLY</span><span class="tag">SPEC</span><span class="tag">BUILD-TO-SUIT</span></div>
+    <button class="run-btn" onclick="openModal('modal-11')">↗ RUN ↗</button>
+  </div>
+  <!-- 12 -->
+  <div class="skill-card market-card">
+    <div class="card-num">SKILL 12</div>
+    <div class="card-title">Economic Development Monitor</div>
+    <div class="card-desc">Track employer relocations, SEDA activity, and prospecting opportunities.</div>
+    <div class="card-tags"><span class="tag">SEDA</span><span class="tag">HYUNDAI</span><span class="tag">JOBS</span></div>
+    <button class="run-btn" onclick="openModal('modal-12')">↗ RUN ↗</button>
+  </div>
+</div>
+
+<!-- ═══════════ GROWTH ENGINE ═══════════ -->
+<div class="section-header">
+  <div class="section-icon growth"><i data-lucide="rocket"></i></div>
+  <h2 class="section-title">Growth Engine</h2>
+  <span class="section-count">8 ACTIVE</span>
+</div>
+
+<div class="card-grid">
+  <!-- 13 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 13</div>
+    <div class="card-title">Email Drafting Suite</div>
+    <div class="card-desc">Cold outreach, follow-ups, LOI covers, and closing emails in broker voice.</div>
+    <div class="card-tags"><span class="tag">COLD</span><span class="tag">FOLLOW-UP</span><span class="tag">CLOSING</span></div>
+    <button class="run-btn" onclick="openModal('modal-13')">↗ RUN ↗</button>
+  </div>
+  <!-- 14 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 14</div>
+    <div class="card-title">Tenant Requirements Matcher</div>
+    <div class="card-desc">Match tenant needs to CoStar search parameters and blind inquiry emails.</div>
+    <div class="card-tags"><span class="tag">COSTAR</span><span class="tag">REQUIREMENTS</span><span class="tag">LANDLORDS</span></div>
+    <button class="run-btn" onclick="openModal('modal-14')">↗ RUN ↗</button>
+  </div>
+  <!-- 15 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 15</div>
+    <div class="card-title">Commission Calculator</div>
+    <div class="card-desc">GCI, net splits, deal priority tier, and effective hourly rate — Bloomberg style.</div>
+    <div class="card-tags"><span class="tag">GCI</span><span class="tag">NET</span><span class="tag">PRIORITY</span></div>
+    <button class="run-btn" onclick="openModal('modal-15')">↗ RUN ↗</button>
+  </div>
+  <!-- 16 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 16</div>
+    <div class="card-title">Property Owner Researcher</div>
+    <div class="card-desc">Step-by-step Chatham County owner research with entity search and cold outreach drafts.</div>
+    <div class="card-tags"><span class="tag">CHATHAM</span><span class="tag">ENTITY</span><span class="tag">COLD-CALL</span></div>
+    <button class="run-btn" onclick="openModal('modal-16')">↗ RUN ↗</button>
+  </div>
+  <!-- 17 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 17</div>
+    <div class="card-title">Morning Briefing Builder</div>
+    <div class="card-desc">Daily priority matrix, action checklist, and Savannah market fact of the day.</div>
+    <div class="card-tags"><span class="tag">DAILY</span><span class="tag">PRIORITIES</span><span class="tag">SAVANNAH</span></div>
+    <button class="run-btn" onclick="openModal('modal-17')">↗ RUN ↗</button>
+  </div>
+  <!-- 18 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 18</div>
+    <div class="card-title">OM Copywriter</div>
+    <div class="card-desc">Generate Offering Memorandum copy with executive summary, property overview, and financials.</div>
+    <div class="card-tags"><span class="tag">INVESTMENT</span><span class="tag">MARKETING</span><span class="tag">CANVA</span></div>
+    <button class="run-btn" onclick="openModal('modal-18')">↗ RUN ↗</button>
+  </div>
+  <!-- 19 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 19</div>
+    <div class="card-title">Objection Handler</div>
+    <div class="card-desc">Counter common CRE objections with data-backed responses and reframing scripts.</div>
+    <div class="card-tags"><span class="tag">NEGOTIATION</span><span class="tag">SCRIPTS</span><span class="tag">CLOSING</span></div>
+    <button class="run-btn" onclick="openModal('modal-19')">↗ RUN ↗</button>
+  </div>
+  <!-- 20 -->
+  <div class="skill-card growth-card">
+    <div class="card-num">SKILL 20</div>
+    <div class="card-title">Deal Tracker Dashboard</div>
+    <div class="card-desc">Track active deals with status, next steps, and pipeline value summary.</div>
+    <div class="card-tags"><span class="tag">PIPELINE</span><span class="tag">STATUS</span><span class="tag">REVENUE</span></div>
+    <button class="run-btn" onclick="openModal('modal-20')">↗ RUN ↗</button>
+  </div>
+</div>
+
+<!-- ═══════════ DOCUMENT ROUTING ═══════════ -->
+<div class="doc-routing">
+  <h3 class="doc-routing-title"><i data-lucide="file-text"></i> Document Routing</h3>
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th>Document Type</th>
+        <th>Source Skill</th>
+        <th>Destination</th>
+        <th>Format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="doc-type">Listing Description</td><td>Skill 01</td><td>CoStar / Marketing Flyer</td><td><span class="doc-tag">TXT</span></td></tr>
+      <tr><td class="doc-type">Letter of Intent</td><td>Skill 02</td><td>Dotloop / Email</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Deal Analysis</td><td>Skill 03</td><td>Client Report / Internal</td><td><span class="doc-tag">XLS</span></td></tr>
+      <tr><td class="doc-type">Comp Report</td><td>Skill 04</td><td>Client Pitch / Pricing Strategy</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Lease Abstract</td><td>Skill 05</td><td>DD File / Dotloop</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Client Pitch</td><td>Skill 06</td><td>Canva / Email</td><td><span class="doc-tag">PPTX</span></td></tr>
+      <tr><td class="doc-type">Market Brief</td><td>Skill 07</td><td>Client Meeting / Email</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">DD Checklist</td><td>Skill 08</td><td>Dotloop / Google Drive</td><td><span class="doc-tag">MD</span></td></tr>
+      <tr><td class="doc-type">Market Snapshot</td><td>Skill 09</td><td>Listing Pitch / Internal</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Port Analysis</td><td>Skill 10</td><td>Client Report / Blog</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Pipeline Summary</td><td>Skill 11</td><td>Market Report / Internal</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Econ Dev Brief</td><td>Skill 12</td><td>Prospecting / Cold Call Prep</td><td><span class="doc-tag">PDF</span></td></tr>
+      <tr><td class="doc-type">Email Draft</td><td>Skill 13</td><td>Gmail / HubSpot</td><td><span class="doc-tag">TXT</span></td></tr>
+      <tr><td class="doc-type">Tenant Match</td><td>Skill 14</td><td>CoStar Search / Broker Email</td><td><span class="doc-tag">TXT</span></td></tr>
+      <tr><td class="doc-type">Commission Calc</td><td>Skill 15</td><td>Internal / Deal File</td><td><span class="doc-tag">XLS</span></td></tr>
+      <tr><td class="doc-type">Owner Research</td><td>Skill 16</td><td>Cold Outreach / HubSpot</td><td><span class="doc-tag">TXT</span></td></tr>
+      <tr><td class="doc-type">Morning Briefing</td><td>Skill 17</td><td>Daily Review / Print</td><td><span class="doc-tag">MD</span></td></tr>
+      <tr><td class="doc-type">OM Copy</td><td>Skill 18</td><td>Canva / InDesign</td><td><span class="doc-tag">DOCX</span></td></tr>
+      <tr><td class="doc-type">Objection Script</td><td>Skill 19</td><td>Call Prep / Training</td><td><span class="doc-tag">TXT</span></td></tr>
+      <tr><td class="doc-type">Deal Tracker</td><td>Skill 20</td><td>Google Sheets / Internal</td><td><span class="doc-tag">XLS</span></td></tr>
+    </tbody>
+  </table>
+</div>
 
 </main>
 
-<!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
+<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
-  <div class="footer-left">HARBOR · The Commercial Group · Savannah, GA</div>
-  <div class="footer-contact">
-    <a href="tel:9126639576">912.663.9576</a>&ensp;·&ensp;
-    <a href="mailto:Joe@solanacre.com">Joe@solanacre.com</a>
+  <div class="footer-inner">
+    <div class="footer-contact">
+      <h4>Joe Solana · The Commercial Group</h4>
+      <p>
+        <a href="tel:912-663-9576">912.663.9576</a> · <a href="mailto:Joe@solanacre.com">Joe@solanacre.com</a><br>
+        Commercial &amp; Industrial Real Estate · Savannah, Georgia
+      </p>
+    </div>
+    <div class="footer-markets">
+      <h4>Active Submarkets</h4>
+      <div class="submarket-tags">
+        <span class="submarket-tag">Savannah Core</span>
+        <span class="submarket-tag">Pooler</span>
+        <span class="submarket-tag">Garden City</span>
+        <span class="submarket-tag">Port Wentworth</span>
+        <span class="submarket-tag">I-16 Corridor</span>
+        <span class="submarket-tag">Bryan County</span>
+        <span class="submarket-tag">Effingham County</span>
+      </div>
+    </div>
   </div>
-  <div class="footer-markets">
-    <span class="market-tag">SAV Core</span>
-    <span class="market-tag">Pooler</span>
-    <span class="market-tag">Garden City</span>
-    <span class="market-tag">Port</span>
-    <span class="market-tag">I-16</span>
+  <div class="footer-bottom">
+    <span>HARBOR v2.0 · 20 Skills Active · The Commercial Group</span>
+    <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
   </div>
 </footer>
 
-<!-- ═══ MODAL ════════════════════════════════════════════════════════ -->
-<div class="overlay" id="overlay" onclick="closeOutside(event)">
-  <div class="modal" id="modal-box"></div>
+<!-- ═══════════ MODALS ═══════════ -->
+
+<!-- MODAL 01: Listing Description Writer -->
+<div class="modal-overlay" id="modal-01">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 01</span><h3 class="modal-title">Listing Description Writer</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-01')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Property Address</label>
+        <input class="form-input" id="s01-address" placeholder="123 Industrial Blvd, Savannah, GA">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Asset Type</label>
+          <select class="form-select" id="s01-type">
+            <option>Warehouse/Distribution</option><option>Flex</option><option>Manufacturing</option><option>Office/Warehouse</option><option>Retail</option><option>Land</option><option>Office</option><option>Cold Storage</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Transaction Type</label>
+          <select class="form-select" id="s01-txn">
+            <option>For Lease</option><option>For Sale</option><option>Both</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Building SF</label>
+          <input class="form-input" id="s01-sf" placeholder="50,000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asking Price or Rate</label>
+          <input class="form-input" id="s01-price" placeholder="$6.50/SF NNN or $3,500,000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Key Specs</label>
+        <textarea class="form-textarea" id="s01-specs" placeholder="Clear height, dock doors, drive-in doors, power, office %..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Location Advantages</label>
+        <textarea class="form-textarea" id="s01-location" placeholder="Proximity to port, highway access, workforce..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Additional Notes</label>
+        <textarea class="form-textarea" id="s01-notes" placeholder="Any special features, recent renovations, tenant history..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s01', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s01')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-01')">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- MODAL 02: LOI Drafter -->
+<div class="modal-overlay" id="modal-02">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 02</span><h3 class="modal-title">LOI Drafter</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-02')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Transaction Type</label>
+        <div class="toggle-group">
+          <button class="toggle-btn active" onclick="toggleLOI('sale', this)">Sale</button>
+          <button class="toggle-btn" onclick="toggleLOI('lease', this)">Lease</button>
+        </div>
+      </div>
+      <div id="loi-sale-fields">
+        <div class="form-group">
+          <label class="form-label">Property Address</label>
+          <input class="form-input" id="s02s-address" placeholder="Property address">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Buyer</label>
+            <input class="form-input" id="s02s-buyer" placeholder="Buyer name / entity">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Seller</label>
+            <input class="form-input" id="s02s-seller" placeholder="Seller name / entity">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Purchase Price</label>
+            <input class="form-input" id="s02s-price" placeholder="$3,500,000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Earnest Money</label>
+            <input class="form-input" id="s02s-earnest" placeholder="$25,000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">DD Period (days)</label>
+            <input class="form-input" id="s02s-dd" placeholder="30">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Closing Date</label>
+            <input class="form-input" type="date" id="s02s-closing">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Financing Type</label>
+          <select class="form-select" id="s02s-financing">
+            <option>Conventional</option><option>SBA 504</option><option>Cash</option><option>Seller Financing</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Conditions</label>
+          <textarea class="form-textarea" id="s02s-conditions" placeholder="Any contingencies, conditions, or special terms..."></textarea>
+        </div>
+      </div>
+      <div id="loi-lease-fields" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Property Address</label>
+          <input class="form-input" id="s02l-address" placeholder="Property address">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Tenant</label>
+            <input class="form-input" id="s02l-tenant" placeholder="Tenant name / entity">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Landlord</label>
+            <input class="form-input" id="s02l-landlord" placeholder="Landlord name / entity">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Premises SF</label>
+            <input class="form-input" id="s02l-sf" placeholder="25,000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rate ($/SF)</label>
+            <input class="form-input" id="s02l-rate" placeholder="$6.50 NNN">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Lease Type</label>
+            <select class="form-select" id="s02l-ltype">
+              <option>NNN</option><option>Modified Gross</option><option>Full Service</option><option>Industrial Gross</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Term (months)</label>
+            <input class="form-input" id="s02l-term" placeholder="60">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Commencement</label>
+            <input class="form-input" type="date" id="s02l-commence">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Free Rent (months)</label>
+            <input class="form-input" id="s02l-freerent" placeholder="2">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">TI ($/SF)</label>
+            <input class="form-input" id="s02l-ti" placeholder="$5.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Renewal Options</label>
+            <input class="form-input" id="s02l-renewal" placeholder="Two 5-year options">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Conditions</label>
+          <textarea class="form-textarea" id="s02l-conditions" placeholder="Any special terms..."></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Joe's Notes</label>
+        <textarea class="form-textarea" id="s02-notes" placeholder="Any context, strategy notes, or special instructions..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s02', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s02')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-02')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 03: Deal Analyzer -->
+<div class="modal-overlay" id="modal-03">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 03</span><h3 class="modal-title">Deal Analyzer</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-03')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Property Address</label>
+          <input class="form-input" id="s03-address" placeholder="Property address">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asset Type</label>
+          <select class="form-select" id="s03-type">
+            <option>Industrial</option><option>Office</option><option>Retail</option><option>Flex</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Asking Price ($)</label>
+          <input class="form-input" id="s03-price" type="number" placeholder="3500000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Building SF</label>
+          <input class="form-input" id="s03-sf" type="number" placeholder="50000">
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label class="form-label">Annual Gross Income ($)</label>
+          <input class="form-input" id="s03-income" type="number" placeholder="350000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vacancy (%)</label>
+          <input class="form-input" id="s03-vacancy" type="number" placeholder="5" value="5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Operating Expenses ($)</label>
+          <input class="form-input" id="s03-opex" type="number" placeholder="75000">
+        </div>
+      </div>
+      <div style="margin: 16px 0 8px; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted);">Financing (Optional)</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Loan Amount ($)</label>
+          <input class="form-input" id="s03-loan" type="number" placeholder="2450000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Interest Rate (%)</label>
+          <input class="form-input" id="s03-rate" type="number" step="0.01" placeholder="6.5">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Loan Term (years)</label>
+          <input class="form-input" id="s03-term" type="number" placeholder="10">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Amortization (years)</label>
+          <input class="form-input" id="s03-amort" type="number" placeholder="25">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-compute" onclick="runDealAnalyzer()"><i data-lucide="calculator"></i> Calculate</button>
+        <button class="btn btn-secondary" onclick="copyOutput('s03-output')"><i data-lucide="clipboard"></i> Copy Results</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-03')">Close</button>
+      </div>
+      <div class="output-panel" id="s03-output">
+        <h4>Deal Analysis Results</h4>
+        <div class="output-content" id="s03-results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 04: Comp Analyzer -->
+<div class="modal-overlay" id="modal-04">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 04</span><h3 class="modal-title">Comp Analyzer</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-04')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Subject Property Address</label>
+        <input class="form-input" id="s04-address" placeholder="Subject property address">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Asset Type</label>
+          <select class="form-select" id="s04-type">
+            <option>Warehouse/Distribution</option><option>Flex</option><option>Manufacturing</option><option>Office</option><option>Retail</option><option>Land</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Analysis Focus</label>
+          <select class="form-select" id="s04-focus">
+            <option>Sale Pricing</option><option>Lease Rate</option><option>Both</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Comp Data (paste from CoStar)</label>
+        <textarea class="form-textarea xl" id="s04-data" placeholder="Paste CoStar comp data here..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Client Name (Optional)</label>
+        <input class="form-input" id="s04-client" placeholder="Client name for personalized narrative">
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s04', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s04')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-04')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 05: Lease Abstractor -->
+<div class="modal-overlay" id="modal-05">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 05</span><h3 class="modal-title">Lease Abstractor</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-05')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Lease Type</label>
+        <select class="form-select" id="s05-type">
+          <option>NNN</option><option>Modified Gross</option><option>Full Service</option><option>Industrial Gross</option><option>Ground Lease</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Focus Areas</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" value="Rent" checked> Rent</label>
+          <label class="checkbox-label"><input type="checkbox" value="Options" checked> Options</label>
+          <label class="checkbox-label"><input type="checkbox" value="CAM" checked> CAM</label>
+          <label class="checkbox-label"><input type="checkbox" value="Assignment"> Assignment</label>
+          <label class="checkbox-label"><input type="checkbox" value="Default"> Default</label>
+          <label class="checkbox-label"><input type="checkbox" value="Insurance"> Insurance</label>
+          <label class="checkbox-label"><input type="checkbox" value="All"> All</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Lease Text</label>
+        <textarea class="form-textarea xl" id="s05-text" placeholder="Paste the full lease text here..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s05', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s05')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-05')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 06: Client Pitch Builder -->
+<div class="modal-overlay" id="modal-06">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 06</span><h3 class="modal-title">Client Pitch Builder</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-06')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Client Name</label>
+          <input class="form-input" id="s06-client" placeholder="Client name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Client Type</label>
+          <select class="form-select" id="s06-type">
+            <option>Investor</option><option>Owner-User</option><option>Tenant (Relocating)</option><option>Developer</option><option>1031 Exchange Buyer</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Property / Requirement</label>
+        <textarea class="form-textarea" id="s06-property" placeholder="Describe the property or client requirement..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Joe's Value Proposition</label>
+        <textarea class="form-textarea" id="s06-value" placeholder="What unique value do you bring to this client?"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Output Format</label>
+        <select class="form-select" id="s06-format">
+          <option>Canva Deck</option><option>Email</option><option>One-Page PDF</option><option>Talking Points</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s06', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s06')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-06')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 07: Savannah Market Pulse -->
+<div class="modal-overlay" id="modal-07">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 07</span><h3 class="modal-title">Savannah Market Pulse</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-07')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Submarkets</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-core" value="Savannah Core"> Savannah Core</label>
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-pooler" value="Pooler"> Pooler</label>
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-gc" value="Garden City"> Garden City</label>
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-i16" value="I-16 Corridor"> I-16 Corridor</label>
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-bryan" value="Bryan County"> Bryan County</label>
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-eff" value="Effingham County"> Effingham County</label>
+          <label class="checkbox-label"><input type="checkbox" id="s07-sub-all" value="All" checked> All</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Asset Class</label>
+          <select class="form-select" id="s07-class">
+            <option>Industrial</option><option>Office</option><option>Retail</option><option>Flex</option><option>All</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Report Purpose</label>
+          <select class="form-select" id="s07-purpose">
+            <option>Client Meeting</option><option>Listing Pitch</option><option>Internal Research</option><option>Email Insert</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Pasted Data (Optional)</label>
+        <textarea class="form-textarea" id="s07-data" placeholder="Paste CoStar or market data here..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s07', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s07')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-07')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 08: Due Diligence Checklist -->
+<div class="modal-overlay" id="modal-08">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 08</span><h3 class="modal-title">Due Diligence Checklist</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-08')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Property Address</label>
+          <input class="form-input" id="s08-address" placeholder="Property address">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Transaction Type</label>
+          <select class="form-select" id="s08-txn">
+            <option>Sale</option><option>Lease</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">DD Period End Date</label>
+          <input class="form-input" type="date" id="s08-ddend">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Parties</label>
+          <input class="form-input" id="s08-parties" placeholder="Buyer/Tenant & Seller/Landlord">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Special Requirements</label>
+        <textarea class="form-textarea" id="s08-special" placeholder="Environmental, zoning, title issues..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-compute" onclick="runDDChecklist()"><i data-lucide="list-checks"></i> Generate Checklist</button>
+        <button class="btn btn-secondary" onclick="copyDDChecklist()"><i data-lucide="clipboard"></i> Copy as Markdown</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-08')">Close</button>
+      </div>
+      <div class="output-panel" id="s08-output">
+        <h4>Due Diligence Checklist</h4>
+        <div id="s08-results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 09: Submarket Snapshot -->
+<div class="modal-overlay" id="modal-09">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 09</span><h3 class="modal-title">Submarket Snapshot</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-09')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Submarket</label>
+          <select class="form-select" id="s09-sub">
+            <option>Savannah Core</option><option>Pooler</option><option>Garden City</option><option>Port Wentworth</option><option>I-16 Corridor</option><option>Bryan County</option><option>Effingham County</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asset Class</label>
+          <select class="form-select" id="s09-class">
+            <option>Industrial</option><option>Office</option><option>Retail</option><option>Flex</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Time Period</label>
+        <select class="form-select" id="s09-period">
+          <option>Current Quarter</option><option>Trailing 12 Months</option><option>Year-over-Year</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Pasted CoStar Data (Optional)</label>
+        <textarea class="form-textarea lg" id="s09-data" placeholder="Paste CoStar submarket data here..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s09', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s09')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-09')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 10: Port of Savannah Tracker -->
+<div class="modal-overlay" id="modal-10">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 10</span><h3 class="modal-title">Port of Savannah Tracker</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-10')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Pasted Port Data or News</label>
+        <textarea class="form-textarea lg" id="s10-data" placeholder="Paste GPA port data, press releases, or news..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Focus</label>
+        <select class="form-select" id="s10-focus">
+          <option>All</option><option>TEU Volume</option><option>New Routes</option><option>Warehouse Demand Impact</option><option>Infrastructure Projects</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s10', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s10')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-10')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 11: Development Pipeline Tracker -->
+<div class="modal-overlay" id="modal-11">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 11</span><h3 class="modal-title">Development Pipeline Tracker</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-11')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Pasted Development News or Data</label>
+        <textarea class="form-textarea lg" id="s11-data" placeholder="Paste development pipeline data or news articles..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Submarket Focus</label>
+          <select class="form-select" id="s11-sub">
+            <option>All Submarkets</option><option>Savannah Core</option><option>Pooler</option><option>Garden City</option><option>I-16 Corridor</option><option>Bryan County</option><option>Effingham County</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asset Class</label>
+          <select class="form-select" id="s11-class">
+            <option>Industrial</option><option>Office</option><option>Retail</option><option>Mixed</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s11', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s11')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-11')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 12: Economic Development Monitor -->
+<div class="modal-overlay" id="modal-12">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 12</span><h3 class="modal-title">Economic Development Monitor</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-12')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Pasted News / Data</label>
+        <textarea class="form-textarea lg" id="s12-data" placeholder="Paste economic development news, SEDA announcements, job data..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Focus</label>
+        <select class="form-select" id="s12-focus">
+          <option>All</option><option>New Employers</option><option>Workforce Growth</option><option>Infrastructure</option><option>Incentives</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s12', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s12')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-12')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 13: Email Drafting Suite -->
+<div class="modal-overlay" id="modal-13">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 13</span><h3 class="modal-title">Email Drafting Suite</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-13')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email Type</label>
+          <select class="form-select" id="s13-type">
+            <option>Cold Owner Outreach</option><option>Cold Tenant Outreach</option><option>Follow-Up After Meeting</option><option>LOI Cover Email</option><option>Deal Status Update</option><option>Post-Closing Thank You</option><option>Co-Broke Introduction</option><option>Price Reduction Announcement</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tone</label>
+          <select class="form-select" id="s13-tone">
+            <option>Professional</option><option>Warm/Relationship</option><option>Urgent</option><option>Celebratory</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Recipient Name</label>
+        <input class="form-input" id="s13-recipient" placeholder="Recipient name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Property / Deal Reference</label>
+        <textarea class="form-textarea" id="s13-ref" placeholder="Property address, deal name, or relevant context..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Key Points</label>
+        <textarea class="form-textarea" id="s13-points" placeholder="Main points to convey in the email..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s13', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s13')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-13')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 14: Tenant Requirements Matcher -->
+<div class="modal-overlay" id="modal-14">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 14</span><h3 class="modal-title">Tenant Requirements Matcher</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-14')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tenant Name</label>
+          <input class="form-input" id="s14-tenant" placeholder="Tenant name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asset Type Needed</label>
+          <select class="form-select" id="s14-type">
+            <option>Warehouse/Distribution</option><option>Flex</option><option>Manufacturing</option><option>Office/Warehouse</option><option>Cold Storage</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label class="form-label">Min SF</label>
+          <input class="form-input" id="s14-minsf" type="number" placeholder="10000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Max SF</label>
+          <input class="form-input" id="s14-maxsf" type="number" placeholder="50000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Max Budget ($/SF)</label>
+          <input class="form-input" id="s14-budget" placeholder="$7.00">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Must-Haves</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" value="Dock High Doors"> Dock High</label>
+          <label class="checkbox-label"><input type="checkbox" value="Grade Level Doors"> Grade Level</label>
+          <label class="checkbox-label"><input type="checkbox" value="Clear Height 28'+"> 28'+ Clear</label>
+          <label class="checkbox-label"><input type="checkbox" value="Clear Height 32'+"> 32'+ Clear</label>
+          <label class="checkbox-label"><input type="checkbox" value="Rail Access"> Rail</label>
+          <label class="checkbox-label"><input type="checkbox" value="Crane/Hoist"> Crane</label>
+          <label class="checkbox-label"><input type="checkbox" value="Cold Storage"> Cold</label>
+          <label class="checkbox-label"><input type="checkbox" value="Office Buildout"> Office</label>
+          <label class="checkbox-label"><input type="checkbox" value="Yard/Trailer Parking"> Yard</label>
+          <label class="checkbox-label"><input type="checkbox" value="Highway Frontage"> Hwy Frontage</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred Submarkets</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" value="Savannah Core"> Savannah Core</label>
+          <label class="checkbox-label"><input type="checkbox" value="Pooler"> Pooler</label>
+          <label class="checkbox-label"><input type="checkbox" value="Garden City"> Garden City</label>
+          <label class="checkbox-label"><input type="checkbox" value="Port Wentworth"> Port Wentworth</label>
+          <label class="checkbox-label"><input type="checkbox" value="I-16 Corridor"> I-16 Corridor</label>
+          <label class="checkbox-label"><input type="checkbox" value="Bryan County"> Bryan Co</label>
+          <label class="checkbox-label"><input type="checkbox" value="Effingham County"> Effingham Co</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Timeline</label>
+        <input class="form-input" id="s14-timeline" placeholder="e.g., Q2 2026, ASAP, 6 months">
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s14', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s14')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-14')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 15: Commission Calculator -->
+<div class="modal-overlay" id="modal-15">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 15</span><h3 class="modal-title">Commission Calculator</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-15')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Transaction Type</label>
+        <div class="toggle-group">
+          <button class="toggle-btn active" onclick="toggleComm('sale', this)">Sale</button>
+          <button class="toggle-btn" onclick="toggleComm('lease', this)">Lease</button>
+        </div>
+      </div>
+      <div id="comm-sale-fields">
+        <div class="form-group">
+          <label class="form-label">Sale Price ($)</label>
+          <input class="form-input" id="s15s-price" type="number" placeholder="3500000">
+        </div>
+      </div>
+      <div id="comm-lease-fields" style="display:none">
+        <div class="form-row-3">
+          <div class="form-group">
+            <label class="form-label">Lease Rate ($/SF/yr)</label>
+            <input class="form-input" id="s15l-rate" type="number" step="0.01" placeholder="6.50">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Leasable SF</label>
+            <input class="form-input" id="s15l-sf" type="number" placeholder="25000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Term (years)</label>
+            <input class="form-input" id="s15l-term" type="number" placeholder="5">
+          </div>
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label class="form-label">Commission Rate (%)</label>
+          <input class="form-input" id="s15-commrate" type="number" step="0.1" placeholder="6" value="6">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Co-Broke Split (%)</label>
+          <input class="form-input" id="s15-cobroke" type="number" placeholder="50" value="50">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Joe's Split w/ TCG (%)</label>
+          <input class="form-input" id="s15-joesplit" type="number" placeholder="70" value="70">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Referral/Additional Fees ($)</label>
+          <input class="form-input" id="s15-fees" type="number" placeholder="0" value="0">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Estimated Hours on Deal</label>
+          <input class="form-input" id="s15-hours" type="number" placeholder="40" value="40">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-compute" onclick="runCommCalc()"><i data-lucide="calculator"></i> Calculate</button>
+        <button class="btn btn-secondary" onclick="copyOutput('s15-output')"><i data-lucide="clipboard"></i> Copy Results</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-15')">Close</button>
+      </div>
+      <div class="output-panel" id="s15-output">
+        <h4>Commission Breakdown</h4>
+        <div id="s15-results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 16: Property Owner Researcher -->
+<div class="modal-overlay" id="modal-16">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 16</span><h3 class="modal-title">Property Owner Researcher</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-16')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Property Address</label>
+        <input class="form-input" id="s16-address" placeholder="Property address in Savannah area">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Owner Name (if known)</label>
+          <input class="form-input" id="s16-owner" placeholder="Owner name or entity">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Parcel ID (Optional)</label>
+          <input class="form-input" id="s16-parcel" placeholder="Parcel number">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s16', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s16')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-16')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 17: Morning Briefing Builder -->
+<div class="modal-overlay" id="modal-17">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 17</span><h3 class="modal-title">Morning Briefing Builder</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-17')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Active Deals</label>
+        <textarea class="form-textarea" id="s17-deals" placeholder="List active deals with names, values, and status..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Today's Appointments</label>
+        <textarea class="form-textarea" id="s17-appts" placeholder="List today's meetings, showings, calls..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Prospecting Targets</label>
+        <textarea class="form-textarea" id="s17-prospects" placeholder="Properties or contacts to pursue today..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Market Note (Optional)</label>
+        <textarea class="form-textarea" id="s17-note" placeholder="Any market news or observations..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-compute" onclick="runBriefing()"><i data-lucide="coffee"></i> Generate Briefing</button>
+        <button class="btn btn-secondary" onclick="copyOutput('s17-output')"><i data-lucide="clipboard"></i> Copy Results</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-17')">Close</button>
+      </div>
+      <div class="output-panel" id="s17-output">
+        <h4>Morning Briefing</h4>
+        <div id="s17-results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 18: OM Copywriter -->
+<div class="modal-overlay" id="modal-18">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 18</span><h3 class="modal-title">OM Copywriter</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-18')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Property Address</label>
+        <input class="form-input" id="s18-address" placeholder="Property address">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Asset Type</label>
+          <select class="form-select" id="s18-type">
+            <option>Warehouse/Distribution</option><option>Flex</option><option>Manufacturing</option><option>Office</option><option>Retail</option><option>NNN Investment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asking Price</label>
+          <input class="form-input" id="s18-price" placeholder="$3,500,000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Building SF</label>
+          <input class="form-input" id="s18-sf" placeholder="50,000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cap Rate / NOI</label>
+          <input class="form-input" id="s18-cap" placeholder="7.2% / $252,000 NOI">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Property Details</label>
+        <textarea class="form-textarea lg" id="s18-details" placeholder="Tenant info, lease terms, building specs, improvements, location highlights..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Target Buyer Profile</label>
+        <select class="form-select" id="s18-buyer">
+          <option>Institutional Investor</option><option>Private Investor</option><option>1031 Exchange Buyer</option><option>Owner-User</option><option>Developer</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s18', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s18')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-18')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 19: Objection Handler -->
+<div class="modal-overlay" id="modal-19">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 19</span><h3 class="modal-title">Objection Handler</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-19')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Objection Type</label>
+        <select class="form-select" id="s19-type">
+          <option>Price Too High</option><option>Cap Rate Too Low</option><option>Market Timing / Wait and See</option><option>Location Concerns</option><option>Environmental / Due Diligence Risk</option><option>Already Working With Another Broker</option><option>Not Ready to Sell / Lease</option><option>Tenant Credit Concerns</option><option>Interest Rate / Financing</option><option>Custom / Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Context / Scenario</label>
+        <textarea class="form-textarea" id="s19-context" placeholder="Describe the situation — who said it, what property, what stage of the deal..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Side of the Argument</label>
+        <textarea class="form-textarea" id="s19-argument" placeholder="Any data points, comps, or reasoning you want to include..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s19', event)"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s19')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-19')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 20: Deal Tracker Dashboard -->
+<div class="modal-overlay" id="modal-20">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title-group"><span class="modal-num">SKILL 20</span><h3 class="modal-title">Deal Tracker Dashboard</h3></div>
+      <button class="modal-close" onclick="closeModal('modal-20')"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="deal-tracker-list">
+        <div class="deal-entry" data-index="0">
+          <div style="font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--cg-gold); margin-bottom:8px;">Deal 1</div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Deal Name</label><input class="form-input deal-name" placeholder="Property / Client"></div>
+            <div class="form-group"><label class="form-label">Deal Value ($)</label><input class="form-input deal-value" type="number" placeholder="3500000"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-select deal-status">
+                <option>Prospecting</option><option>LOI Submitted</option><option>Under Contract</option><option>Due Diligence</option><option>Pre-Closing</option><option>Closed</option><option>Dead</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Next Step</label><input class="form-input deal-next" placeholder="What's the next action?"></div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-secondary" style="margin-top:8px" onclick="addDealEntry()"><i data-lucide="plus"></i> Add Deal</button>
+      <div class="modal-actions">
+        <button class="btn btn-compute" onclick="runDealTracker()"><i data-lucide="layout-dashboard"></i> Generate Dashboard</button>
+        <button class="btn btn-secondary" onclick="copyOutput('s20-output')"><i data-lucide="clipboard"></i> Copy Results</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-20')">Close</button>
+      </div>
+      <div class="output-panel" id="s20-output">
+        <h4>Deal Pipeline Summary</h4>
+        <div id="s20-results"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TOAST ═══════════ -->
+<div class="toast" id="toast"></div>
+
 <script>
-const SKILLS = {
-  harbor: {
-    num: 'Primary Skill',
-    name: 'HARBOR — Full Session',
-    sub: 'All-in-one commercial intelligence session for Joe Solana',
-    claudeUrl: 'https://claude.ai/new?q=Begin+HARBOR+session.+I+am+Joe+Solana+at+The+Commercial+Group+in+Savannah%2C+Georgia.+I+specialize+in+industrial+and+commercial+property+sales+and+leasing.+I+am+ready+to+work+on+a+deal.',
-    fields: [],
-    isLaunch: true
+/* ═══════════════════════════════════════════════════
+   HARBOR v2.0 — Application Logic
+   ═══════════════════════════════════════════════════ */
+
+// Initialize Lucide icons
+lucide.createIcons();
+
+// ─── Theme Toggle ───
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('harbor-theme', next);
+  updateThemeIcons(next);
+}
+
+function updateThemeIcons(theme) {
+  const lightIcon = document.querySelector('.theme-icon-light');
+  const darkIcon = document.querySelector('.theme-icon-dark');
+  if (theme === 'dark') {
+    if (lightIcon) lightIcon.style.display = 'none';
+    if (darkIcon) darkIcon.style.display = 'block';
+  } else {
+    if (lightIcon) lightIcon.style.display = 'block';
+    if (darkIcon) darkIcon.style.display = 'none';
+  }
+}
+
+// Load saved theme
+(function() {
+  const saved = localStorage.getItem('harbor-theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+    updateThemeIcons(saved);
+  }
+})();
+
+// ─── Toast ───
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─── Modal ───
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+// Close modal on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(m => {
+      m.classList.remove('active');
+    });
+    document.body.style.overflow = '';
+  }
+});
+
+// ─── LOI Toggle ───
+function toggleLOI(type, btn) {
+  btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('loi-sale-fields').style.display = type === 'sale' ? 'block' : 'none';
+  document.getElementById('loi-lease-fields').style.display = type === 'lease' ? 'block' : 'none';
+}
+
+// ─── Commission Toggle ───
+function toggleComm(type, btn) {
+  btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('comm-sale-fields').style.display = type === 'sale' ? 'block' : 'none';
+  document.getElementById('comm-lease-fields').style.display = type === 'lease' ? 'block' : 'none';
+}
+
+// ─── LAUNCH HARBOR ───
+function launchHarbor(e) {
+  e.preventDefault();
+  const prompt = `Begin HARBOR session. I am Joe Solana at The Commercial Group in Savannah, Georgia. I specialize in industrial and commercial property sales and leasing in the Savannah MSA. Available skills: Listing Writer, LOI Drafter, Deal Analyzer, Comp Analyzer, Lease Abstractor, Client Pitch Builder, Market Pulse, DD Checklist, Email Suite, Tenant Matcher, Commission Calculator, Owner Researcher, Morning Briefing, OM Copywriter, Objection Handler, Deal Tracker, Cold Call Script, Stacking Plan, Rent Escalation Modeler, Property Tax Estimator. Ask me what I need help with.`;
+  const url = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+  window.open(url, '_blank');
+}
+
+// ─── Prompt Builders ───
+const promptTemplates = {
+  s01: () => {
+    const addr = g('s01-address'), type = g('s01-type'), txn = g('s01-txn'), sf = g('s01-sf'), price = g('s01-price'), specs = g('s01-specs'), loc = g('s01-location'), notes = g('s01-notes');
+    return `You are a commercial real estate marketing writer working for Joe Solana at The Commercial Group in Savannah, Georgia.\n\nWrite three outputs from this property data:\n(1) CoStar headline — max 80 characters\n(2) Full marketing description — 3-4 paragraphs in professional broker tone, referencing Port of Savannah, I-16/I-95 access, Hyundai MetaPlant supply chain where relevant\n(3) Bullet-point spec sheet for flyer/email\n\nPROPERTY DATA:\nAddress: ${addr}\nAsset Type: ${type}\nTransaction: ${txn}\nBuilding SF: ${sf}\nAsking Price/Rate: ${price}\nKey Specs: ${specs}\nLocation Advantages: ${loc}\nAdditional Notes: ${notes}`;
   },
-  listing: {
-    num: 'Skill 01',
-    name: 'Listing Description Writer',
-    sub: 'Industrial & commercial property copy — CoStar headline, full description, spec bullets',
-    fields: [
-      {id:'l_address',label:'Property Address',type:'input',ph:'123 Logistics Blvd, Pooler, GA 31322',req:true},
-      {id:'l_type',label:'Asset Type',type:'select',opts:['Warehouse / Distribution','Flex Industrial','Manufacturing','Office/Warehouse','General Commercial','Retail','Land / Development Site']},
-      {id:'l_sf',label:'Building SF',type:'input',ph:'48,500 SF',req:false},
-      {id:'l_price',label:'Asking Price or Lease Rate',type:'input',ph:"$4,200,000 or $8.50/SF NNN",req:false},
-      {id:'l_specs',label:'Key Specs',type:'textarea',ph:"Clear height: 28'\nDock doors: 6 dock-high, 2 grade-level\nOffice: 2,400 SF\nYear built: 2018\nZoning: I-1\nLot: 3.8 acres",rows:5,req:false},
-      {id:'l_location',label:'Location Advantages',type:'textarea',ph:'Port of Savannah 4 miles, I-16 interchange 1 mile...',rows:3,req:false},
-      {id:'l_notes',label:'Additional Notes',type:'textarea',ph:'Recent roof replacement, ESFR sprinklers, rail spur...',rows:2,req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate marketing specialist working with Joe Solana at The Commercial Group in Savannah, Georgia.
-
-Write a polished listing description for this property. Produce THREE outputs:
-1. SHORT (2–3 sentences for CoStar headline)
-2. STANDARD (150–200 words full listing description)
-3. BULLET SUMMARY (6–8 key specs as clean bullets)
-
-Lead with the strongest selling point. Confident, active language. Highlight Savannah/port/corridor advantages. End with a call to action for Joe Solana at The Commercial Group, 912.663.9576, Joe@solanacre.com.
-
-PROPERTY:
-Address: ${v.l_address}
-Asset Type: ${v.l_type}
-Building SF: ${v.l_sf}
-Asking Price / Rate: ${v.l_price}
-Key Specs: ${v.l_specs}
-Location Advantages: ${v.l_location}
-Additional Notes: ${v.l_notes}`
+  s02: () => {
+    const saleActive = document.querySelector('#loi-sale-fields').style.display !== 'none';
+    const notes = g('s02-notes');
+    if (saleActive) {
+      return `Draft a non-binding Letter of Intent for a SALE transaction using Georgia CRE conventions.\n\nTRANSACTION DETAILS:\nProperty: ${g('s02s-address')}\nBuyer: ${g('s02s-buyer')}\nSeller: ${g('s02s-seller')}\nPurchase Price: ${g('s02s-price')}\nEarnest Money: ${g('s02s-earnest')}\nDD Period: ${g('s02s-dd')} days\nClosing Date: ${g('s02s-closing')}\nFinancing: ${gv('s02s-financing')}\nSpecial Conditions: ${g('s02s-conditions')}\n\nJoe's Notes: ${notes}\n\nInclude a NOTES FOR JOE section flagging unusual terms.\nSignature block: Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com`;
+    } else {
+      return `Draft a non-binding Letter of Intent for a LEASE transaction using Georgia CRE conventions.\n\nTRANSACTION DETAILS:\nProperty: ${g('s02l-address')}\nTenant: ${g('s02l-tenant')}\nLandlord: ${g('s02l-landlord')}\nPremises SF: ${g('s02l-sf')}\nRate: ${g('s02l-rate')}\nLease Type: ${gv('s02l-ltype')}\nTerm: ${g('s02l-term')} months\nCommencement: ${g('s02l-commence')}\nFree Rent: ${g('s02l-freerent')} months\nTI: ${g('s02l-ti')}/SF\nRenewal Options: ${g('s02l-renewal')}\nSpecial Conditions: ${g('s02l-conditions')}\n\nJoe's Notes: ${notes}\n\nInclude a NOTES FOR JOE section flagging unusual terms.\nSignature block: Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com`;
+    }
   },
-  loi: {
-    num: 'Skill 02',
-    name: 'LOI Drafter',
-    sub: 'Sale and lease LOIs — draft-ready with a Notes for Joe section',
-    fields: [
-      {id:'loi_type',label:'Deal Type',type:'select',opts:['Sale','Lease']},
-      {id:'loi_address',label:'Property Address',type:'input',ph:'450 Tremont Rd, Savannah, GA',req:true},
-      {id:'loi_sf',label:'Building / Space SF',type:'input',ph:'24,000 SF',req:false},
-      {id:'loi_buyer',label:'Buyer / Tenant Name',type:'input',ph:'ABC Logistics LLC',req:false},
-      {id:'loi_seller',label:'Seller / Landlord Name',type:'input',ph:'XYZ Holdings LLC',req:false},
-      {id:'loi_price',label:'Purchase Price or Base Rent',type:'input',ph:"$2,850,000 or $7.25/SF/yr NNN",req:false},
-      {id:'loi_terms',label:'Key Deal Terms',type:'textarea',ph:'For Sale: earnest money, DD period, financing contingency, closing date\nFor Lease: term, escalations, free rent, TI allowance, permitted use, options',rows:5,req:false},
-      {id:'loi_special',label:'Special Conditions',type:'textarea',ph:'Seller to complete roof repair. Buyer assuming existing lease...',rows:2,req:false},
-      {id:'loi_expiry',label:'LOI Expiration Date',type:'input',ph:'March 28, 2026',req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate transaction assistant working with Joe Solana at The Commercial Group in Savannah, Georgia.
-
-Draft a professional Letter of Intent. Use clean, professional language. Include standard contingencies. Flag anything unusual in a separate "NOTES FOR JOE" section at the bottom. Format as a proper business letter from Joe Solana.
-
-DEAL TYPE: ${v.loi_type}
-PROPERTY: ${v.loi_address} | ${v.loi_sf}
-BUYER/TENANT: ${v.loi_buyer}
-SELLER/LANDLORD: ${v.loi_seller}
-PRICE / RENT: ${v.loi_price}
-KEY TERMS: ${v.loi_terms}
-SPECIAL CONDITIONS: ${v.loi_special}
-LOI EXPIRATION: ${v.loi_expiry}
-BROKER: Joe Solana | The Commercial Group | Savannah, GA | 912.663.9576 | Joe@solanacre.com`
+  s04: () => {
+    return `You are a commercial real estate analyst working for Joe Solana at The Commercial Group in Savannah, Georgia.\n\nAnalyze these comparable properties and produce:\n(1) Formatted comparison table\n(2) 2-paragraph client-facing market narrative in broker voice referencing Savannah MSA\n(3) 5 bullet points for pitch meetings\n\nSUBJECT PROPERTY: ${g('s04-address')}\nAsset Type: ${gv('s04-type')}\nAnalysis Focus: ${gv('s04-focus')}\nClient: ${g('s04-client') || 'N/A'}\n\nCOMP DATA:\n${g('s04-data')}`;
   },
-  deal: {
-    num: 'Skill 03',
-    name: 'Deal Analyzer',
-    sub: 'Cap rate, NOI, cash-on-cash, and Go / No-Go verdict vs. Savannah market',
-    fields: [
-      {id:'d_address',label:'Property Address',type:'input',ph:'800 Port Connector Blvd, Garden City, GA',req:true},
-      {id:'d_type',label:'Asset Type',type:'select',opts:['Warehouse / Distribution','Flex Industrial','Manufacturing','General Commercial','Office','Retail','Land']},
-      {id:'d_price',label:'Asking Price',type:'input',ph:'$3,750,000',req:false},
-      {id:'d_sf',label:'Building SF',type:'input',ph:'42,000 SF',req:false},
-      {id:'d_noi',label:'In-Place NOI (annual)',type:'input',ph:'$245,000',req:false},
-      {id:'d_rents',label:'Gross Annual Rents',type:'input',ph:'$315,000',req:false},
-      {id:'d_expenses',label:'Operating Expenses',type:'input',ph:'$70,000 or NNN — tenant pays all',req:false},
-      {id:'d_lease',label:'Lease Details',type:'textarea',ph:'Single tenant NNN. 4 yrs remaining. Rent $7.50/SF. 2% bumps. Regional tenant.',rows:3,req:false},
-      {id:'d_financing',label:'Financing Assumption',type:'input',ph:'35% down, 6.75% rate, 25yr amort — or blank for all-cash',req:false},
-      {id:'d_context',label:'Additional Context',type:'textarea',ph:'Why is seller selling? Known capex? Environmental flags?',rows:2,req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate financial analyst working with Joe Solana at The Commercial Group in Savannah, Georgia.
-
-Analyze this deal. Calculate all metrics possible. Flag missing data as [NEEDED]. Benchmark against Savannah market norms (Industrial cap rates ~6.0–7.5%, Flex ~7.0–8.5%, port-adjacent commands premium, industrial vacancy historically sub-5%). End with a clear VERDICT: Go / No-Go / Needs More Data with 2–3 bullet reasons. Be direct.
-
-DEAL:
-Address: ${v.d_address} | ${v.d_type}
-Asking Price: ${v.d_price} | SF: ${v.d_sf}
-In-Place NOI: ${v.d_noi} | Gross Rents: ${v.d_rents} | OpEx: ${v.d_expenses}
-Lease: ${v.d_lease}
-Financing: ${v.d_financing}
-Context: ${v.d_context}`
+  s05: () => {
+    const focuses = [];
+    document.querySelectorAll('#modal-05 .checkbox-group input:checked').forEach(cb => focuses.push(cb.value));
+    return `You are a lease abstraction specialist working for Joe Solana at The Commercial Group.\n\nExtract every key term from this lease. For anything not found, write "NOT FOUND."\n\nSections: Parties, Term, Rent Schedule, CAM/NNN, Options, TI, Assignment, Insurance, Default, Special Provisions, RISK FLAGS for Joe.\n\nLease Type: ${gv('s05-type')}\nFocus Areas: ${focuses.join(', ')}\n\nLEASE TEXT:\n${g('s05-text')}`;
   },
-  comps: {
-    num: 'Skill 04',
-    name: 'Comp Analyzer',
-    sub: 'CoStar comp data → clean table, client narrative, broker bullets',
-    fields: [
-      {id:'c_data',label:'Comp Data',type:'textarea',ph:'Paste CoStar export, typed comp list, or describe the comps.\n\nExample:\n123 Port Way | 38,000 SF | $6.75/SF NNN | Q4 2024\n456 Industry Blvd | 52,000 SF | $7.25/SF NNN | Q3 2024',rows:8,req:true},
-      {id:'c_subject',label:'Subject Property',type:'input',ph:'800 Logistics Dr, Pooler — 44,000 SF, asking $7.50/SF NNN',req:false},
-      {id:'c_submarket',label:'Submarket',type:'select',opts:['All Savannah MSA','Savannah Core','Pooler / West Chatham','Garden City / Port Corridor','I-16 Corridor','Savannah Southside','Bryan County']},
-      {id:'c_notes',label:'Context / Client Audience',type:'input',ph:'For investor comparing to asking price / For tenant renewal negotiation',req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate market analyst working with Joe Solana at The Commercial Group in Savannah, Georgia.
-
-Analyze this comp set and produce:
-1. COMP SUMMARY TABLE (clean markdown table)
-2. MARKET NARRATIVE — 2–3 paragraphs, client-facing, plain English
-3. BROKER SUMMARY — 4–6 sharp bullets for Joe
-4. SUBJECT PROPERTY POSITIONING — if provided, suggested price/rent range
-5. DATA GAPS & CAVEATS
-
-COMPS: ${v.c_data}
-SUBJECT: ${v.c_subject}
-SUBMARKET: ${v.c_submarket}
-CONTEXT: ${v.c_notes}`
+  s06: () => {
+    return `Create a client pitch for Joe Solana at The Commercial Group in Savannah, Georgia.\n\nInclude: Opening Hook, Savannah Market Opportunity (Port growth, Hyundai MetaPlant, I-16 development), Joe's Approach, Recommended Strategy, Next Steps.\nInclude [PHOTO], [MAP], [CHART] placeholders for Canva.\n\nClient: ${g('s06-client')}\nClient Type: ${gv('s06-type')}\nProperty/Requirement: ${g('s06-property')}\nJoe's Value Proposition: ${g('s06-value')}\nFormat: ${gv('s06-format')}`;
   },
-  lease: {
-    num: 'Skill 05',
-    name: 'Lease Abstractor',
-    sub: 'Key terms, rent schedule, options, and risk flags from any lease',
-    fields: [
-      {id:'la_property',label:'Property Address',type:'input',ph:'1200 Crossroads Pkwy, Savannah, GA',req:false},
-      {id:'la_tenant',label:'Tenant Name',type:'input',ph:'Acme Distribution LLC',req:false},
-      {id:'la_focus',label:'Review Focus',type:'input',ph:'Renewal options and rent bumps / Termination rights / Landlord obligations',req:false},
-      {id:'la_text',label:'Lease Text',type:'textarea',ph:'Paste the lease text or key sections here. The more you paste, the more complete the abstract.',rows:12,req:true}
-    ],
-    buildPrompt: v => `You are a commercial real estate lease analyst working with Joe Solana at The Commercial Group in Savannah, Georgia.
-
-Abstract this lease. Extract every material term. Flag unusual items with ⚠️. Mark missing items [NOT FOUND — verify in document]. End with RISK FLAGS: top 3–5 things Joe or his client should watch.
-
-Structure: PARTIES & PROPERTY → TERM & DATES → RENT SCHEDULE → ADDITIONAL RENT & EXPENSES → TI & DELIVERY → OPTIONS & RIGHTS → OTHER KEY TERMS → RISK FLAGS
-
-PROPERTY: ${v.la_property} | TENANT: ${v.la_tenant}
-FOCUS: ${v.la_focus}
-
-LEASE TEXT:
-${v.la_text}`
+  s07: () => {
+    const subs = [];
+    document.querySelectorAll('#modal-07 .checkbox-group input:checked').forEach(cb => subs.push(cb.value));
+    return `Produce a market intelligence brief for the Savannah MSA.\n\nSubmarkets: ${subs.join(', ')}\nAsset Class: ${gv('s07-class')}\nPurpose: ${gv('s07-purpose')}\n\nInclude vacancy, absorption, rental rate trends, notable transactions, port TEU volume context, and development pipeline.\nEnd with "DEAL IMPLICATIONS FOR JOE" section.\n\nPasted Data: ${g('s07-data') || 'None provided — use your knowledge of the Savannah market.'}`;
   },
-  pitch: {
-    num: 'Skill 06',
-    name: 'Client Pitch Builder',
-    sub: 'Slide-by-slide pitch content ready to drop into Canva',
-    fields: [
-      {id:'p_address',label:'Property Address',type:'input',ph:'3300 Port Connector Blvd, Garden City, GA',req:true},
-      {id:'p_type',label:'Asset Type',type:'select',opts:['Warehouse / Distribution','Flex Industrial','Manufacturing','Commercial / Office','Retail','Development Site']},
-      {id:'p_sf',label:'Size',type:'input',ph:'65,000 SF on 5.2 acres',req:false},
-      {id:'p_price',label:'Asking Price or Lease Rate',type:'input',ph:"$5,800,000 or $9.00/SF NNN",req:false},
-      {id:'p_highlights',label:'Property Highlights',type:'textarea',ph:"ESFR sprinklers, 30' clear, 8 dock doors, renovated office, 400A 3-phase power...",rows:4,req:false},
-      {id:'p_financials',label:'Financial Overview',type:'input',ph:'NOI: $385K | Cap: 6.6% | 100% occupied — or N/A for owner-user',req:false},
-      {id:'p_audience',label:'Audience',type:'select',opts:['Investor / Buyer','Owner-User Buyer','Tenant Prospect','General Marketing']},
-      {id:'p_notes',label:'Additional Context',type:'textarea',ph:'Buyer from Atlanta — emphasize port proximity. Client is price-sensitive...',rows:2,req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate marketing strategist working with Joe Solana at The Commercial Group in Savannah, Georgia. Joe uses Canva for presentations.
-
-Build slide-by-slide pitch content. Organize exactly as below — Joe copies each section into Canva. Lead with the opportunity. Include Savannah market context. Flag photo/map/chart placements with [INSERT: description].
-
-PROPERTY: ${v.p_address} | ${v.p_type} | ${v.p_sf}
-PRICE/RATE: ${v.p_price} | FINANCIALS: ${v.p_financials}
-HIGHLIGHTS: ${v.p_highlights}
-AUDIENCE: ${v.p_audience}
-CONTEXT: ${v.p_notes}
-
-Produce: SLIDE 1 (Cover) → SLIDE 2 (The Opportunity) → SLIDE 3 (Property Highlights) → SLIDE 4 (Location & Savannah Market) → SLIDE 5 (Financials or Space Details) → SLIDE 6 (Why Now) → SLIDE 7 (Contact: Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com)`
+  s09: () => {
+    return `Generate a one-page submarket snapshot with key metrics, trends, and competitive positioning. Format for quick scanning — use bullet points and bold key numbers.\n\nSubmarket: ${gv('s09-sub')}\nAsset Class: ${gv('s09-class')}\nTime Period: ${gv('s09-period')}\nPasted Data: ${g('s09-data') || 'None — use current Savannah MSA knowledge.'}`;
   },
-  market: {
-    num: 'Skill 07',
-    name: 'Savannah Market Pulse',
-    sub: 'Submarket benchmarks and deal implications across the Savannah MSA',
-    fields: [
-      {id:'m_sub',label:'Submarket Focus',type:'select',opts:['Full Savannah MSA','Pooler / West Chatham','Garden City / Port Corridor','Savannah Core / Midtown','I-16 Corridor','Bryan County / Richmond Hill','Savannah Southside']},
-      {id:'m_class',label:'Asset Class',type:'select',opts:['Industrial (all)','Flex Industrial','Office','Retail / Commercial','Investment Sales','All Asset Classes']},
-      {id:'m_type',label:'Report Type',type:'select',opts:['Full Market Report','Quick Brief — key takeaways only','Benchmark Update for Active Deal','Port of Savannah Intelligence']},
-      {id:'m_deal',label:'Active Deal Address',type:'input',ph:'450 Tremont Rd, Savannah — to benchmark a specific deal',req:false},
-      {id:'m_data',label:'Market Data',type:'textarea',ph:"Paste CoStar export, broker report, or news. Leave blank for Claude's training knowledge (estimates flagged).",rows:5,req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate market intelligence analyst specializing in Savannah, Georgia. Working with Joe Solana at The Commercial Group.
-
-Produce a market pulse report: ${v.m_sub} | ${v.m_class} | ${v.m_type}
-
-SECTIONS: HEADLINE (single most important takeaway) → INDUSTRIAL MARKET (vacancy, rents, absorption, supply, transactions, cap rates) → PORT OF SAVANNAH (volume, industrial demand impact) → INVESTMENT MARKET (cap rates, buyer appetite, sales) → MACRO FACTORS (rates, economic development, infrastructure) → IMPLICATIONS FOR JOE (4–5 bullets on listings, buyers, client conversations)
-
-Flag estimates from training data as [ESTIMATE — verify with CoStar].
-
-ACTIVE DEAL: ${v.m_deal}
-DATA: ${v.m_data}`
+  s10: () => {
+    return `Analyze Port of Savannah data and produce:\n(1) Key metrics summary\n(2) Impact on Savannah industrial real estate demand\n(3) Specific implications for Joe's listings and prospects in Pooler/Garden City/I-16 corridor\n\nFocus: ${gv('s10-focus')}\n\nPasted Data/News:\n${g('s10-data') || 'None — use current GPA knowledge.'}`;
   },
-  dd: {
-    num: 'Skill 08',
-    name: 'Due Diligence Checklist',
-    sub: 'Deal-specific DD by phase — ready for Dotloop or Google Drive',
-    fields: [
-      {id:'dd_type',label:'Deal Type',type:'select',opts:['Sale','Lease']},
-      {id:'dd_asset',label:'Asset Type',type:'select',opts:['Industrial / Warehouse','Flex Industrial','Manufacturing','Office','Retail','Land / Development Site']},
-      {id:'dd_address',label:'Property Address',type:'input',ph:'2200 Industrial Way, Savannah, GA 31408',req:true},
-      {id:'dd_price',label:'Purchase Price or Lease Value',type:'input',ph:'$4,100,000 or $180,000/yr',req:false},
-      {id:'dd_period',label:'Due Diligence Period',type:'input',ph:'30 days',req:false},
-      {id:'dd_close',label:'Target Closing / Occupancy Date',type:'input',ph:'May 30, 2026',req:false},
-      {id:'dd_fin',label:'Financing Type',type:'select',opts:['All Cash','Conventional / Bank','SBA 504 or 7(a)','CMBS','Construction / Value-Add','Owner Financing']},
-      {id:'dd_buyer',label:'Buyer / Tenant Type',type:'select',opts:['Investor','Owner-User','Tenant','Developer']},
-      {id:'dd_flags',label:'Known Issues / Flags',type:'textarea',ph:'Environmental concerns, prior industrial use, floodplain, deferred maintenance, title issues...',rows:3,req:false}
-    ],
-    buildPrompt: v => `You are a commercial real estate transaction manager working with Joe Solana at The Commercial Group in Savannah, Georgia. Joe uses Dotloop and Google Drive.
-
-Generate a complete DD checklist organized by phase: PRE-CONTRACT → DUE DILIGENCE → PRE-CLOSING → CLOSING. Each item: [Item] | [Responsible Party] | [Target: Day X of DD].
-
-🔴 = critical path (could kill deal). ⚠️ = Georgia/Savannah-specific.
-
-Include Georgia-specific items: title search standards, Chatham County permitting, coastal/wetland considerations, Georgia license law requirements.
-
-DEAL: ${v.dd_type} | ${v.dd_asset}
-PROPERTY: ${v.dd_address}
-VALUE: ${v.dd_price} | DD: ${v.dd_period} | CLOSE: ${v.dd_close}
-FINANCING: ${v.dd_fin} | BUYER/TENANT: ${v.dd_buyer}
-FLAGS: ${v.dd_flags}`
+  s11: () => {
+    return `Organize development data into a pipeline summary: Under Construction, Planned, Delivered (last 12 months). Note spec vs BTS, developer names, expected delivery dates, and how new supply affects Joe's existing listings and tenant prospects.\n\nSubmarket Focus: ${gv('s11-sub')}\nAsset Class: ${gv('s11-class')}\n\nPasted Data:\n${g('s11-data') || 'None — use current Savannah development knowledge.'}`;
+  },
+  s12: () => {
+    return `Summarize economic development activity in the Savannah MSA. Highlight job announcements, employer relocations, infrastructure projects (I-16 widening, port expansion), and SEDA incentive activity.\n\nEnd with "PROSPECTING OPPORTUNITIES FOR JOE" — specific companies or sectors Joe should be cold-calling based on this activity.\n\nFocus: ${gv('s12-focus')}\n\nPasted Data:\n${g('s12-data') || 'None — use current Savannah economic development knowledge.'}`;
+  },
+  s13: () => {
+    return `Draft a ${gv('s13-type')} email from Joe Solana at The Commercial Group. Keep it under 150 words — brokers don't read long emails. Professional but personable Savannah broker voice. Tone: ${gv('s13-tone')}.\n\nRecipient: ${g('s13-recipient')}\nProperty/Deal Reference: ${g('s13-ref')}\nKey Points: ${g('s13-points')}\n\nSign-off: Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com`;
+  },
+  s14: () => {
+    const musts = [], subs = [];
+    document.querySelectorAll('#modal-14 .checkbox-group')[0].querySelectorAll('input:checked').forEach(cb => musts.push(cb.value));
+    document.querySelectorAll('#modal-14 .checkbox-group')[1].querySelectorAll('input:checked').forEach(cb => subs.push(cb.value));
+    return `From these tenant requirements, produce:\n(1) CoStar search parameters formatted for easy entry\n(2) A blind tenant inquiry email Joe can send to Savannah landlords/brokers without revealing the tenant name\n(3) A ranked list of Savannah submarkets most likely to have matching space and why\n\nTenant: ${g('s14-tenant')}\nSF Range: ${g('s14-minsf')} - ${g('s14-maxsf')}\nAsset Type: ${gv('s14-type')}\nMax Budget: ${g('s14-budget')}\nMust-Haves: ${musts.join(', ') || 'None specified'}\nPreferred Submarkets: ${subs.join(', ') || 'All'}\nTimeline: ${g('s14-timeline')}\n\nJoe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com`;
+  },
+  s16: () => {
+    return `Provide a step-by-step owner research playbook for this Savannah-area property:\n(1) Chatham County Tax Assessor search steps (link: https://boa.chathamcounty.org/)\n(2) Georgia Secretary of State entity search steps (link: https://ecorp.sos.ga.gov/)\n(3) Skip-tracing approach for finding the decision-maker\n(4) Draft a cold outreach email and phone script tailored to this property\n\nProperty: ${g('s16-address')}\nOwner Name (if known): ${g('s16-owner') || 'Unknown'}\nParcel ID: ${g('s16-parcel') || 'Not provided'}\n\nJoe's info: Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com`;
+  },
+  s18: () => {
+    return `Generate Offering Memorandum copy for this property. Include:\n(1) Executive Summary\n(2) Investment Highlights (5-7 bullet points)\n(3) Property Overview\n(4) Location & Market Analysis (reference Port of Savannah, I-16/I-95, Hyundai MetaPlant where relevant)\n(5) Financial Summary\n(6) [PHOTO], [MAP], [AERIAL] placeholders for Canva/InDesign\n\nProperty: ${g('s18-address')}\nAsset Type: ${gv('s18-type')}\nAsking Price: ${g('s18-price')}\nBuilding SF: ${g('s18-sf')}\nCap Rate/NOI: ${g('s18-cap')}\nTarget Buyer: ${gv('s18-buyer')}\nDetails: ${g('s18-details')}\n\nBrokered by Joe Solana | The Commercial Group | 912.663.9576 | Joe@solanacre.com`;
+  },
+  s19: () => {
+    return `You are a CRE negotiation coach for Joe Solana at The Commercial Group in Savannah.\n\nProvide:\n(1) The objection reframed — what the person is really saying\n(2) Data-backed response with Savannah market specifics\n(3) Two alternative reframing scripts (confident, consultative)\n(4) A follow-up question to keep the conversation going\n(5) "WHEN TO WALK AWAY" — signs this objection is a dealbreaker vs. negotiation tactic\n\nObjection Type: ${gv('s19-type')}\nContext: ${g('s19-context')}\nJoe's Argument: ${g('s19-argument') || 'Not provided'}`;
   }
 };
 
-function openModal(id) {
-  const s = SKILLS[id];
-  if (!s) return;
+// Helper: get input value
+function g(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 
-  let fields = '';
-  (s.fields || []).forEach(f => {
-    const opt = f.req === false ? '<span class="opt">(optional)</span>' : '';
-    fields += `<div class="field"><label class="field-label" for="${f.id}">${f.label}${opt}</label>`;
-    if (f.type === 'input') {
-      fields += `<input class="f-input" id="${f.id}" type="text" placeholder="${f.ph||''}">`;
-    } else if (f.type === 'select') {
-      fields += `<select class="f-select" id="${f.id}">${f.opts.map(o=>`<option>${o}</option>`).join('')}</select>`;
-    } else if (f.type === 'textarea') {
-      fields += `<textarea class="f-textarea" id="${f.id}" rows="${f.rows||4}" placeholder="${f.ph||''}"></textarea>`;
-    }
-    fields += `</div>`;
+// ─── Open in Claude ───
+function openInClaude(skillId, e) {
+  e.preventDefault();
+  const builder = promptTemplates[skillId];
+  if (!builder) { showToast('Prompt builder not configured'); return; }
+  const prompt = builder();
+  const url = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+  window.open(url, '_blank');
+}
+
+// ─── Build Prompt (copy to clipboard) ───
+function buildPrompt(skillId) {
+  const builder = promptTemplates[skillId];
+  if (!builder) { showToast('Prompt builder not configured'); return; }
+  const prompt = builder();
+  navigator.clipboard.writeText(prompt).then(() => {
+    showToast('Prompt copied to clipboard');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = prompt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Prompt copied to clipboard');
   });
+}
 
-  const footer = s.isLaunch
-    ? `<a class="btn-primary" href="${s.claudeUrl}" target="_blank">↗ Launch HARBOR in Claude</a>`
-    : `<button class="btn-primary" onclick="runSkill('${id}')">↗ Open in Claude</button>
-       <button class="btn-gold" onclick="buildPrompt('${id}')">Build Prompt</button>`;
+// ─── Copy Output ───
+function copyOutput(panelId) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  const content = panel.querySelector('.output-content, #s08-results, #s15-results, #s17-results, #s20-results');
+  if (!content) return;
+  navigator.clipboard.writeText(content.textContent).then(() => {
+    showToast('Results copied to clipboard');
+  });
+}
 
-  document.getElementById('modal-box').innerHTML = `
-    <div class="modal-head">
-      <div>
-        <div class="modal-num">${s.num}</div>
-        <div class="modal-title">${s.name}</div>
-        <div class="modal-sub">${s.sub}</div>
-      </div>
-      <button class="modal-x" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">${fields}</div>
-    <div class="loading" id="loading"><div class="dots"><span></span><span></span><span></span></div> Building your prompt…</div>
-    <div class="results-area" id="results-area">
-      <div class="results-head">
-        <span class="results-label">Prompt Ready</span>
-        <button class="copy-btn" onclick="copyPrompt()">Copy</button>
-      </div>
-      <div class="results-body" id="results-body"></div>
-    </div>
-    <div class="modal-foot">
-      ${footer}
-      <button class="btn-outline" onclick="closeModal()">Close</button>
-    </div>
+// ─── DEAL ANALYZER (Skill 03) ───
+function runDealAnalyzer() {
+  const price = parseFloat(g('s03-price'));
+  const sf = parseFloat(g('s03-sf'));
+  const income = parseFloat(g('s03-income'));
+  const vacancy = parseFloat(g('s03-vacancy')) / 100;
+  const opex = parseFloat(g('s03-opex'));
+  const loan = parseFloat(g('s03-loan')) || 0;
+  const rate = parseFloat(g('s03-rate')) / 100 || 0;
+  const term = parseFloat(g('s03-term')) || 0;
+  const amort = parseFloat(g('s03-amort')) || 0;
+  const assetType = gv('s03-type');
+  const address = g('s03-address');
+
+  if (!price || !income) { showToast('Enter at least Asking Price and Gross Income'); return; }
+
+  const egi = income * (1 - vacancy);
+  const noi = egi - opex;
+  const capRate = (noi / price) * 100;
+  const pricePerSF = sf ? price / sf : 0;
+
+  let annualDS = 0, cashOnCash = 0, dscr = 0, debtYield = 0;
+  if (loan > 0 && rate > 0 && amort > 0) {
+    const monthlyRate = rate / 12;
+    const numPayments = amort * 12;
+    const monthlyPayment = loan * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+    annualDS = monthlyPayment * 12;
+    const equity = price - loan;
+    const cashFlow = noi - annualDS;
+    cashOnCash = equity > 0 ? (cashFlow / equity) * 100 : 0;
+    dscr = annualDS > 0 ? noi / annualDS : 0;
+    debtYield = loan > 0 ? (noi / loan) * 100 : 0;
+  }
+
+  // GO/NO-GO Benchmarks
+  let benchMin, benchMax, benchLabel;
+  switch(assetType) {
+    case 'Industrial': benchMin = 6.5; benchMax = 7.5; benchLabel = 'Industrial 6.5-7.5%'; break;
+    case 'Office': benchMin = 7.0; benchMax = 8.5; benchLabel = 'Office 7.0-8.5%'; break;
+    case 'Retail': benchMin = 7.0; benchMax = 8.0; benchLabel = 'Retail 7.0-8.0%'; break;
+    default: benchMin = 6.5; benchMax = 8.0; benchLabel = 'General 6.5-8.0%'; break;
+  }
+
+  let verdict, verdictClass;
+  if (capRate >= benchMin && capRate <= benchMax) { verdict = '✅ GO — Cap rate within Savannah norms'; verdictClass = 'color:#4ade80'; }
+  else if (capRate > benchMax) { verdict = '✅ GO — Cap rate above market (buyer advantage)'; verdictClass = 'color:#4ade80'; }
+  else if (capRate >= benchMin - 0.5) { verdict = '⚠️ MARGINAL — Below norm, negotiate'; verdictClass = 'color:#fbbf24'; }
+  else { verdict = '🛑 NO-GO — Cap rate significantly below Savannah norms'; verdictClass = 'color:#ef4444'; }
+
+  const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const pct = (n) => n.toFixed(2) + '%';
+
+  let output = `═══════════════════════════════════════
+  DEAL ANALYSIS — ${address || 'Subject Property'}
+  ${assetType} · Savannah MSA
+═══════════════════════════════════════
+
+  Asking Price         ${fmt(price)}
+  Building SF          ${sf ? sf.toLocaleString() : 'N/A'}
+  Price / SF           ${sf ? fmt(pricePerSF) : 'N/A'}
+
+  Gross Income         ${fmt(income)}
+  Less Vacancy (${(vacancy*100).toFixed(1)}%)   ${fmt(income * vacancy)}
+  EGI                  ${fmt(egi)}
+  Less OpEx            ${fmt(opex)}
+  ─────────────────────────────────────
+  NOI                  ${fmt(noi)}
+  CAP RATE             ${pct(capRate)}`;
+
+  if (loan > 0) {
+    output += `\n
+  ─── FINANCING ────────────────────────
+  Loan Amount          ${fmt(loan)}
+  Interest Rate        ${pct(rate * 100)}
+  Amortization         ${amort} years
+  Annual Debt Service  ${fmt(annualDS)}
+  Cash-on-Cash Return  ${pct(cashOnCash)}
+  DSCR                 ${dscr.toFixed(2)}x
+  Debt Yield           ${pct(debtYield)}`;
+  }
+
+  output += `\n
+  ─── VERDICT ────────────────────────────
+  Benchmark: ${benchLabel}
   `;
 
-  document.getElementById('overlay').classList.add('open');
+  const panel = document.getElementById('s03-output');
+  const results = document.getElementById('s03-results');
+  results.innerHTML = output + `\n  <span style="${verdictClass};font-weight:700">${verdict}</span>`;
+  panel.classList.add('active');
 }
 
-function getVals(id) {
-  const s = SKILLS[id];
-  const v = {};
-  (s.fields||[]).forEach(f => {
-    const el = document.getElementById(f.id);
-    v[f.id] = el ? el.value.trim() : '';
+// ─── DUE DILIGENCE CHECKLIST (Skill 08) ───
+function runDDChecklist() {
+  const address = g('s08-address');
+  const txnType = gv('s08-txn');
+  const ddEnd = g('s08-ddend');
+  const parties = g('s08-parties');
+  const special = g('s08-special');
+
+  if (!ddEnd) { showToast('Please set a DD Period End Date'); return; }
+
+  const endDate = new Date(ddEnd);
+  const today = new Date();
+  const daysBetween = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+
+  function addDays(date, days) {
+    const d = new Date(date);
+    d.setDate(d.getDate() + days);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  const isSale = txnType === 'Sale';
+
+  const phases = [
+    {
+      title: 'Pre-Contract',
+      items: [
+        { task: 'Execute Letter of Intent', party: 'Joe/Client', date: addDays(today, 0) },
+        { task: 'Engage attorney for contract review', party: 'Client', date: addDays(today, 2) },
+        { task: 'Order preliminary title search', party: 'Attorney', date: addDays(today, 3) },
+        { task: 'Verify zoning and permitted uses', party: 'Joe', date: addDays(today, 3) },
+        { task: 'Confirm earnest money requirements', party: 'Joe', date: addDays(today, 2) },
+      ]
+    },
+    {
+      title: 'Under Contract — Due Diligence',
+      items: [
+        { task: 'Deposit earnest money to escrow', party: 'Client', date: addDays(today, 5) },
+        { task: 'Order Phase I Environmental (if required)', party: 'Client', date: addDays(today, 7) },
+        { task: 'Order property survey / ALTA', party: 'Client', date: addDays(today, 7) },
+        { task: 'Review lease abstracts / rent roll', party: 'Joe', date: addDays(today, 10) },
+        { task: 'Inspect building — roof, HVAC, structure', party: 'Inspector', date: addDays(today, 10) },
+        { task: 'Review property tax history (Chatham Co)', party: 'Joe', date: addDays(today, 8) },
+        { task: 'Verify utility capacities and costs', party: 'Joe', date: addDays(today, 10) },
+        { task: 'Review existing service contracts', party: 'Joe', date: addDays(today, 12) },
+        { task: 'Obtain insurance quotes', party: 'Client', date: addDays(today, 14) },
+        { task: 'Review title commitment for exceptions', party: 'Attorney', date: addDays(today, 14) },
+        ...(special ? [{ task: `Special: ${special}`, party: 'TBD', date: addDays(today, Math.floor(daysBetween / 2)) }] : []),
+        { task: 'DD period expires — GO/NO-GO decision', party: 'Client/Joe', date: endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) },
+      ]
+    },
+    {
+      title: 'Pre-Closing',
+      items: [
+        ...(isSale ? [
+          { task: 'Order appraisal (if financed)', party: 'Lender', date: addDays(endDate, 3) },
+          { task: 'Complete loan application and underwriting', party: 'Client', date: addDays(endDate, 5) },
+          { task: 'Prepare Georgia PT-61 Real Estate Transfer Tax form', party: 'Attorney', date: addDays(endDate, 10) },
+          { task: 'Order final title policy', party: 'Attorney', date: addDays(endDate, 10) },
+          { task: 'Prepare closing statement / HUD-1', party: 'Attorney', date: addDays(endDate, 12) },
+          { task: 'Schedule closing and wire instructions', party: 'Attorney', date: addDays(endDate, 14) },
+          { task: 'Final walk-through inspection', party: 'Client/Joe', date: addDays(endDate, 14) },
+        ] : [
+          { task: 'Finalize lease execution document', party: 'Attorney', date: addDays(endDate, 5) },
+          { task: 'Confirm TI allowance and build-out scope', party: 'Landlord/Joe', date: addDays(endDate, 7) },
+          { task: 'Establish move-in timeline', party: 'Tenant/Joe', date: addDays(endDate, 10) },
+        ]),
+      ]
+    },
+    {
+      title: 'Post-Closing',
+      items: [
+        ...(isSale ? [
+          { task: 'Record deed at Chatham County Superior Court', party: 'Attorney', date: 'At closing' },
+          { task: 'Transfer utilities to new owner', party: 'Client', date: 'Post-close' },
+          { task: 'Notify tenants of ownership change (if applicable)', party: 'Client/Joe', date: 'Post-close' },
+          { task: 'Update property tax records', party: 'Attorney', date: 'Post-close' },
+          { task: 'Collect commission — verify GCI and splits', party: 'Joe/TCG', date: 'At closing' },
+        ] : [
+          { task: 'Confirm lease commencement and rent start', party: 'Joe', date: 'Per lease' },
+          { task: 'Coordinate TI build-out kick-off', party: 'Landlord', date: 'Per lease' },
+          { task: 'Collect commission — verify GCI and splits', party: 'Joe/TCG', date: 'Per lease' },
+        ]),
+        { task: 'Send closing thank-you to all parties', party: 'Joe', date: 'Post-close' },
+        { task: 'Update CRM and deal tracker', party: 'Joe', date: 'Post-close' },
+      ]
+    }
+  ];
+
+  let html = `<div class="progress-label">Progress: <span id="dd-progress-pct">0%</span></div>
+<div class="progress-bar-container"><div class="progress-bar-fill" id="dd-progress-bar"></div></div>
+<div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px;">
+  <strong>${address || 'Subject Property'}</strong> · ${txnType} · DD ends ${endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}${parties ? ' · ' + parties : ''}
+</div>`;
+
+  let totalItems = 0;
+  phases.forEach(phase => {
+    html += `<div class="checklist-phase"><div class="checklist-phase-title">${phase.title}</div>`;
+    phase.items.forEach(item => {
+      totalItems++;
+      html += `<div class="checklist-item" id="dd-item-${totalItems}">
+        <input type="checkbox" onchange="updateDDProgress()" id="dd-cb-${totalItems}">
+        <span style="flex:1">${item.task}</span>
+        <span style="font-size:10px;color:var(--text-muted);white-space:nowrap">${item.party} · ${item.date}</span>
+      </div>`;
+    });
+    html += '</div>';
   });
-  return v;
+
+  document.getElementById('s08-results').innerHTML = html;
+  document.getElementById('s08-output').classList.add('active');
+  window._ddTotalItems = totalItems;
 }
 
-function buildPrompt(id) {
-  const prompt = SKILLS[id].buildPrompt(getVals(id));
-  document.getElementById('results-area').classList.add('show');
-  document.getElementById('results-body').textContent = prompt;
+function updateDDProgress() {
+  const total = window._ddTotalItems || 1;
+  let checked = 0;
+  for (let i = 1; i <= total; i++) {
+    const cb = document.getElementById('dd-cb-' + i);
+    const item = document.getElementById('dd-item-' + i);
+    if (cb && cb.checked) {
+      checked++;
+      item.classList.add('checked');
+    } else if (item) {
+      item.classList.remove('checked');
+    }
+  }
+  const pct = Math.round((checked / total) * 100);
+  document.getElementById('dd-progress-pct').textContent = pct + '%';
+  document.getElementById('dd-progress-bar').style.width = pct + '%';
 }
 
-function runSkill(id) {
-  const prompt = SKILLS[id].buildPrompt(getVals(id));
-  window.open(`https://claude.ai/new?q=${encodeURIComponent(prompt)}`, '_blank');
-}
-
-function copyPrompt() {
-  const body = document.getElementById('results-body');
-  navigator.clipboard.writeText(body.textContent).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 1800);
+function copyDDChecklist() {
+  const results = document.getElementById('s08-results');
+  if (!results || !results.innerHTML) { showToast('Generate checklist first'); return; }
+  // Build markdown
+  let md = `# Due Diligence Checklist\n\n`;
+  results.querySelectorAll('.checklist-phase').forEach(phase => {
+    md += `## ${phase.querySelector('.checklist-phase-title').textContent}\n\n`;
+    phase.querySelectorAll('.checklist-item').forEach(item => {
+      const cb = item.querySelector('input[type="checkbox"]');
+      const check = cb && cb.checked ? 'x' : ' ';
+      const spans = item.querySelectorAll('span');
+      md += `- [${check}] ${spans[0].textContent} — ${spans[1].textContent}\n`;
+    });
+    md += '\n';
   });
+  navigator.clipboard.writeText(md).then(() => showToast('Checklist copied as Markdown'));
 }
 
-function closeModal() {
-  document.getElementById('overlay').classList.remove('open');
+// ─── COMMISSION CALCULATOR (Skill 15) ───
+function runCommCalc() {
+  const isSale = document.getElementById('comm-sale-fields').style.display !== 'none';
+  let totalConsideration;
+  
+  if (isSale) {
+    totalConsideration = parseFloat(g('s15s-price'));
+  } else {
+    const rate = parseFloat(g('s15l-rate'));
+    const sf = parseFloat(g('s15l-sf'));
+    const termYrs = parseFloat(g('s15l-term'));
+    totalConsideration = rate * sf * termYrs;
+  }
+
+  if (!totalConsideration || isNaN(totalConsideration)) { showToast('Enter transaction value'); return; }
+
+  const commRate = parseFloat(g('s15-commrate')) / 100;
+  const cobrokeRate = parseFloat(g('s15-cobroke')) / 100;
+  const joeSplit = parseFloat(g('s15-joesplit')) / 100;
+  const fees = parseFloat(g('s15-fees')) || 0;
+  const hours = parseFloat(g('s15-hours')) || 40;
+
+  const grossComm = totalConsideration * commRate;
+  const cobrokeAmt = grossComm * cobrokeRate;
+  const netToTCG = cobrokeAmt - fees;
+  const netToJoe = netToTCG * joeSplit;
+  const effectiveHourly = netToJoe / hours;
+  const annualized = netToJoe * (2080 / hours); // Annualized based on working hours
+
+  let tier, tierClass;
+  if (netToJoe >= 25000) { tier = 'A-TIER DEAL'; tierClass = 'tier-A'; }
+  else if (netToJoe >= 10000) { tier = 'B-TIER DEAL'; tierClass = 'tier-B'; }
+  else if (netToJoe >= 5000) { tier = 'C-TIER DEAL'; tierClass = 'tier-C'; }
+  else { tier = 'D-TIER DEAL'; tierClass = 'tier-D'; }
+
+  const fmt = (n) => '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  const html = `<div class="bloomberg-panel">
+    <div class="bloomberg-row"><span class="bloomberg-label">Total Consideration</span><span class="bloomberg-value white">${fmt(totalConsideration)}</span></div>
+    <div class="bloomberg-row"><span class="bloomberg-label">Gross Commission (${(commRate*100).toFixed(1)}%)</span><span class="bloomberg-value white">${fmt(grossComm)}</span></div>
+    <div class="bloomberg-row"><span class="bloomberg-label">Co-Broke (${(cobrokeRate*100)}%)</span><span class="bloomberg-value gold">${fmt(cobrokeAmt)}</span></div>
+    ${fees > 0 ? `<div class="bloomberg-row"><span class="bloomberg-label">Less Fees/Referral</span><span class="bloomberg-value" style="color:#ef4444">-${fmt(fees)}</span></div>` : ''}
+    <div class="bloomberg-row"><span class="bloomberg-label">Net to TCG</span><span class="bloomberg-value gold">${fmt(netToTCG)}</span></div>
+    <div class="bloomberg-row" style="border-bottom:2px solid #c8a45e;padding-bottom:12px"><span class="bloomberg-label">NET TO JOE (${(joeSplit*100)}%)</span><span class="bloomberg-value" style="font-size:22px">${fmt(netToJoe)}</span></div>
+    <div class="bloomberg-row"><span class="bloomberg-label">Effective $/Hour (${hours}h)</span><span class="bloomberg-value amber">${fmt(effectiveHourly)}/hr</span></div>
+    <div class="bloomberg-row"><span class="bloomberg-label">Annualized Value</span><span class="bloomberg-value gold">${fmt(annualized)}</span></div>
+    <div class="bloomberg-tier ${tierClass}">${tier}</div>
+  </div>`;
+
+  document.getElementById('s15-results').innerHTML = html;
+  document.getElementById('s15-output').classList.add('active');
 }
 
-function closeOutside(e) {
-  if (e.target === document.getElementById('overlay')) closeModal();
+// ─── MORNING BRIEFING (Skill 17) ───
+const savannahFacts = [
+  "The Port of Savannah is the largest single-terminal container port in North America, handling 5.8M+ TEUs annually.",
+  "Hyundai Motor Group's MetaPlant in Bryan County is a $7.6B investment — the largest in Georgia history.",
+  "Savannah's industrial vacancy rate has compressed to under 4% as port-driven demand outpaces new supply.",
+  "The I-16/I-95 interchange is the logistics crossroads of the Southeast, linking the port to Atlanta and beyond.",
+  "Garden City's industrial corridor has seen 15M+ SF of new development in the last 3 years.",
+  "Pooler has emerged as a major distribution hub with direct port access via Highway 307 and I-16.",
+  "Georgia's Right to Work status and business-friendly tax climate attract 3X more industrial projects than the national average.",
+  "The Savannah MSA population grew 15% over the last decade — one of the fastest-growing metros in the Southeast.",
+  "Port Wentworth's proximity to the Georgia Ports Authority makes it a prime target for last-mile distribution facilities.",
+  "Industrial lease rates in the Savannah MSA have increased 25%+ since 2020, driven by port volume growth.",
+  "Bryan County's I-16 corridor is positioned to become the next major industrial submarket as Hyundai suppliers locate nearby.",
+  "The Georgia Ports Authority is investing $5B+ in port expansion, including the Mason Mega Rail terminal.",
+  "Effingham County offers lower land costs and tax incentives, attracting cost-sensitive distribution and manufacturing tenants.",
+  "Savannah's industrial absorption exceeded 12M SF in 2024, a record for the MSA.",
+  "The I-16 widening project will add capacity and reduce transit times between Savannah and Macon/Atlanta.",
+  "Chatham County's GDP grew 4.2% YoY, outpacing the Georgia state average by 1.5 percentage points.",
+  "Cold storage demand in the Savannah MSA has surged, driven by food import/export growth through the port.",
+  "Savannah ranks among the top 5 U.S. ports for containerized cargo volume, competing with LA/Long Beach and NY/NJ.",
+  "SEDA (Savannah Economic Development Authority) has recruited 40+ companies and 8,000+ jobs in the last 5 years.",
+  "Spec industrial construction in the Savannah MSA exceeded 8M SF in 2024, signaling developer confidence in sustained demand."
+];
+
+function runBriefing() {
+  const deals = g('s17-deals');
+  const appts = g('s17-appts');
+  const prospects = g('s17-prospects');
+  const note = g('s17-note');
+
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  const fact = savannahFacts[Math.floor(Math.random() * savannahFacts.length)];
+
+  // Parse deals for priority matrix
+  const dealLines = deals.split('\n').filter(l => l.trim());
+  const apptLines = appts.split('\n').filter(l => l.trim());
+  const prospectLines = prospects.split('\n').filter(l => l.trim());
+
+  let html = `<div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:4px;">Morning Briefing</div>
+  <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">${dateStr} · Joe Solana · The Commercial Group</div>`;
+
+  if (dealLines.length > 0) {
+    html += `<div class="briefing-section"><h4>Active Deal Pipeline</h4><ul>`;
+    dealLines.forEach(d => { html += `<li>${d}</li>`; });
+    html += `</ul></div>`;
+  }
+
+  if (apptLines.length > 0) {
+    html += `<div class="briefing-section"><h4>Today's Schedule</h4><ul>`;
+    apptLines.forEach(a => { html += `<li>${a}</li>`; });
+    html += `</ul></div>`;
+  }
+
+  if (prospectLines.length > 0) {
+    html += `<div class="briefing-section"><h4>Prospecting Targets</h4><ul>`;
+    prospectLines.forEach(p => { html += `<li>${p}</li>`; });
+    html += `</ul></div>`;
+  }
+
+  if (note) {
+    html += `<div class="briefing-section"><h4>Market Note</h4><p>${note}</p></div>`;
+  }
+
+  html += `<div class="briefing-section"><h4>Savannah Market Fact of the Day</h4><p>${fact}</p></div>`;
+
+  html += `<div class="money-move"><h4>💰 MONEY MOVE OF THE DAY</h4><p>${getMoneyMove(dealLines, prospectLines)}</p></div>`;
+
+  document.getElementById('s17-results').innerHTML = html;
+  document.getElementById('s17-output').classList.add('active');
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function getMoneyMove(deals, prospects) {
+  const moves = [
+    "Follow up on your highest-value deal today. A 15-minute call now could save 2 weeks of delays.",
+    "Cold-call one owner in your target submarket. The best deals come from the calls nobody else makes.",
+    "Send a market update to your top 3 prospects. Staying top-of-mind wins when they're ready to move.",
+    "Review your pipeline and kill one dead deal. Free up mental bandwidth for opportunities with momentum.",
+    "Schedule a property tour with a prospect this week. Face-to-face converts 5X better than email.",
+    "Update your CoStar listings — accurate data gets more calls from qualified tenants.",
+    "Reach out to a co-broke partner on an active deal. A quick alignment call prevents closing surprises.",
+    "Send a congrats note to someone who just closed a deal. Goodwill compounds in this market.",
+  ];
+  return moves[Math.floor(Math.random() * moves.length)];
+}
+
+// ─── DEAL TRACKER (Skill 20) ───
+let dealEntryCount = 1;
+
+function addDealEntry() {
+  dealEntryCount++;
+  const container = document.getElementById('deal-tracker-list');
+  const div = document.createElement('div');
+  div.className = 'deal-entry';
+  div.setAttribute('data-index', dealEntryCount - 1);
+  div.innerHTML = `<div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--cg-gold);margin:16px 0 8px;padding-top:12px;border-top:1px solid var(--border);">Deal ${dealEntryCount}</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Deal Name</label><input class="form-input deal-name" placeholder="Property / Client"></div>
+      <div class="form-group"><label class="form-label">Deal Value ($)</label><input class="form-input deal-value" type="number" placeholder="3500000"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Status</label>
+        <select class="form-select deal-status"><option>Prospecting</option><option>LOI Submitted</option><option>Under Contract</option><option>Due Diligence</option><option>Pre-Closing</option><option>Closed</option><option>Dead</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Next Step</label><input class="form-input deal-next" placeholder="What's the next action?"></div>
+    </div>`;
+  container.appendChild(div);
+  lucide.createIcons();
+}
+
+function runDealTracker() {
+  const entries = document.querySelectorAll('.deal-entry');
+  const deals = [];
+  entries.forEach(entry => {
+    const name = entry.querySelector('.deal-name').value.trim();
+    const value = parseFloat(entry.querySelector('.deal-value').value) || 0;
+    const status = entry.querySelector('.deal-status').value;
+    const next = entry.querySelector('.deal-next').value.trim();
+    if (name) deals.push({ name, value, status, next });
+  });
+
+  if (deals.length === 0) { showToast('Add at least one deal'); return; }
+
+  const totalPipeline = deals.filter(d => d.status !== 'Dead' && d.status !== 'Closed').reduce((sum, d) => sum + d.value, 0);
+  const closedValue = deals.filter(d => d.status === 'Closed').reduce((sum, d) => sum + d.value, 0);
+  const activeCount = deals.filter(d => d.status !== 'Dead' && d.status !== 'Closed').length;
+
+  const fmt = (n) => '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  const statusOrder = ['Pre-Closing', 'Due Diligence', 'Under Contract', 'LOI Submitted', 'Prospecting', 'Closed', 'Dead'];
+  deals.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status) || b.value - a.value);
+
+  let html = `<div class="bloomberg-panel">
+    <div class="bloomberg-row"><span class="bloomberg-label">Active Pipeline Value</span><span class="bloomberg-value">${fmt(totalPipeline)}</span></div>
+    <div class="bloomberg-row"><span class="bloomberg-label">Active Deals</span><span class="bloomberg-value gold">${activeCount}</span></div>
+    <div class="bloomberg-row"><span class="bloomberg-label">Closed Value</span><span class="bloomberg-value amber">${fmt(closedValue)}</span></div>
+    <div style="margin-top:16px;border-top:1px solid #1a2636;padding-top:12px">`;
+
+  deals.forEach(d => {
+    let statusColor = '#6b7b8d';
+    if (d.status === 'Pre-Closing') statusColor = '#4ade80';
+    else if (d.status === 'Due Diligence' || d.status === 'Under Contract') statusColor = '#c8a45e';
+    else if (d.status === 'LOI Submitted') statusColor = '#60a5fa';
+    else if (d.status === 'Closed') statusColor = '#4ade80';
+    else if (d.status === 'Dead') statusColor = '#ef4444';
+
+    html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e0d4;font-weight:600">${d.name}</div>
+        <div style="font-size:10px;color:${statusColor};font-weight:600;letter-spacing:0.06em;text-transform:uppercase">${d.status}${d.next ? ' · ' + d.next : ''}</div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#c8a45e;font-weight:700">${d.value ? fmt(d.value) : '—'}</div>
+    </div>`;
+  });
+
+  html += `</div></div>`;
+
+  document.getElementById('s20-results').innerHTML = html;
+  document.getElementById('s20-output').classList.add('active');
+}
 </script>
 </body>
 </html>
