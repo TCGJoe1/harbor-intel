@@ -347,7 +347,7 @@ def score_parcel(row):
     # 5 â Inside zoning change area (+15)
     if near_zc:
         score += 15
-        tags.append*"zoning-change-area")
+        tags.append("zoning-change-area")
 
     # 6 â Out-of-state owner (+10)
     if state and state not in {"GA", ""}:
