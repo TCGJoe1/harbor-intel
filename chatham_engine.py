@@ -74,7 +74,7 @@ def fetch_all_records(url, params_base, layer_name="layer"):
 
         for attempt in range(MAX_RETRIES):
             try:
-                resp = requests.get(url, params=params, timeout=30)
+                resp = requests.get(url, params=params, timeout=60, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"})
                 resp.raise_for_status()
                 data = resp.json()
                 break
@@ -470,6 +470,9 @@ def main():
     print("\n[1/5] Fetching parcels from SAGIS BOA layer...")
     df_parcels = fetch_parcels()
     print(f"  â {len(df_parcels):,} parcels loaded")
+    if df_parcels.empty:
+        print("  ABORT: 0 parcels from SAGIS. API may be blocking this IP.")
+        raise SystemExit(1)
 
     # ââ 2. Zoning layers âââââââââââââââââââââââââââââ
     print("\n[2/5] Fetching zoning data from SAGIS...")
