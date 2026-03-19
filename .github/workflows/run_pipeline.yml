@@ -1,0 +1,33 @@
+name: Update Parcel Data — ChathamEngine v2
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'  # Every Monday at noon UTC (8am ET)
+  workflow_dispatch:       # Manual trigger from GitHub Actions tab
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run ChathamEngine pipeline
+        run: python chatham_engine.py
+
+      - name: Commit updated parcel data
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/parcels.json data/parcel_master_chatham.csv
+          git diff --staged --quiet || git commit -m "Auto-update parcel data $(date +'%Y-%m-%d')"
+          git push
