@@ -28,9 +28,13 @@ from datetime import datetime
 # CONFIGURATION â edit these if needed
 # âââââââââââââââââââââââââââââââââââââââââââââ
 
+# Primary parcel source: SAGIS CitizenServe BOA layer
 SAGIS_PARCEL_URL        = "https://pub.sagis.org/arcgis/rest/services/Savannah/CitizenServe/MapServer/1/query"
-SAGIS_ZONING_URL        = "https://pub.sagis.org/arcgis/rest/services/OpenData/Boundaries/FeatureServer/4/query"
-SAGIS_ZONING_CHANGES_URL = "https://pub.sagis.org/arcgis/rest/services/OpenData/Boundaries/FeatureServer/13/query"
+# Fallback parcel source: SAGIS OpenData Parcels (different field names â see fetch_parcels)
+SAGIS_PARCEL_URL_ALT    = "https://pub.sagis.org/arcgis/rest/services/OpenData/Parcels/MapServer/0/query"
+# Zoning: use MapServer (NOT FeatureServer â FeatureServer returns empty on this server)
+SAGIS_ZONING_URL        = "https://pub.sagis.org/arcgis/rest/services/OpenData/Boundaries/MapServer/4/query"
+SAGIS_ZONING_CHANGES_URL = "https://pub.sagis.org/arcgis/rest/services/OpenData/Boundaries/MapServer/13/query"
 
 OUTPUT_DIR        = "data"          # folder where output files are written
 OUTPUT_JSON       = os.path.join(OUTPUT_DIR, "parcels.json")
@@ -74,7 +78,7 @@ def fetch_all_records(url, params_base, layer_name="layer"):
 
         for attempt in range(MAX_RETRIES):
             try:
-                resp = requests.get(url, params=params, timeout=60, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"})
+                resp = requests.get(url, params=params, timeout=30)
                 resp.raise_for_status()
                 data = resp.json()
                 break
@@ -85,8 +89,21 @@ def fetch_all_records(url, params_base, layer_name="layer"):
                 else:
                     raise RuntimeError(f"Failed to fetch {layer_name} after {MAX_RETRIES} attempts: {e}")
 
+        # Detect API-level errors before checking features
+        if "error" in data:
+            err = data["error"]
+            print(f"    API ERROR from {layer_name}: code={err.get('code')} msg={err.get('message')}")
+            print(f"    Full error: {err}")
+            break
+
         features = data.get("features", [])
         if not features:
+            # Print diagnostic info so we know what the server actually returned
+            if offset == 0:
+                snippet = str(data)[:600]
+                print(f"    WARNING: 0 features returned for {layer_name}")
+                print(f"    Response keys: {list(data.keys())}")
+                print(f"    Response snippet: {snippet}")
             break
 
         all_records.extend(features)
@@ -106,19 +123,8 @@ def fetch_all_records(url, params_base, layer_name="layer"):
 # STEP 1: FETCH PARCELS
 # âââââââââââââââââââââââââââââââââââââââââââââ
 
-def fetch_parcels():
-    """Pull all parcel records from the SAGIS BOA Parcel layer."""
-    params = {
-        "where":          "1=1",
-        "outFields":      ("PARCEL_ID,OWNNAME1,OWNADDR1,OWNCITY,OWNSTATE,OWNZIP,"
-                           "LND_VAL,BLDG_VAL,TOTAL_VAL,ACREAGE,USE_CODE,USE_DESC,"
-                           "SITUS_ADDR,SITUS_CITY,LAST_PERMIT_YR,NBHD_CODE"),
-        "returnGeometry": "true",
-        "outSR":          "4326",
-    }
-
-    features = fetch_all_records(SAGIS_PARCEL_URL, params, "parcels")
-
+def _parse_parcel_features_primary(features):
+    """Parse features from the CitizenServe BOA layer (primary field names)."""
     rows = []
     for f in features:
         attr = f.get("attributes", {})
@@ -151,13 +157,93 @@ def fetch_parcels():
             "acreage":       float(attr.get("ACREAGE") or 0),
             "use_code":      str(attr.get("USE_CODE") or "").strip(),
             "use_desc":      str(attr.get("USE_DESC") or "").strip(),
-            "last_permit_yr": attr.get("LAST_PERMIT_YR"),   # int or None
+            "last_permit_yr": attr.get("LAST_PERMIT_YR"),
             "nbhd_code":     str(attr.get("NBHD_CODE") or "").strip(),
             "lat":           lat,
             "lon":           lon,
         })
+    return rows
 
-    return pd.DataFrame(rows)
+
+def _parse_parcel_features_alt(features):
+    """Parse features from the OpenData/Parcels layer (alternate field names)."""
+    rows = []
+    for f in features:
+        attr = f.get("attributes", {})
+        geom = f.get("geometry")
+
+        lat, lon = None, None
+        if geom:
+            try:
+                if "rings" in geom:
+                    poly = shape({"type": "Polygon", "coordinates": geom["rings"]})
+                    c = poly.centroid
+                    lat, lon = round(c.y, 6), round(c.x, 6)
+                elif "x" in geom:
+                    lat, lon = round(geom["y"], 6), round(geom["x"], 6)
+            except Exception:
+                pass
+
+        # OpenData/Parcels uses different field names than CitizenServe
+        rows.append({
+            "parcel_id":     str(attr.get("PIN") or attr.get("PIN_NUMBER") or "").strip(),
+            "owner_name":    str(attr.get("NAME") or "").strip(),
+            "owner_addr":    str(attr.get("ADDRESS_1") or "").strip(),
+            "owner_city":    str(attr.get("CITY") or "").strip(),
+            "owner_state":   str(attr.get("STATE") or "").strip().upper(),
+            "owner_zip":     str(attr.get("ZIP_CODE") or "").strip(),
+            "address":       str(attr.get("PROP_ADDRESS") or attr.get("ADDRESS_1") or "").strip(),
+            "situs_city":    "Savannah",
+            "land_value":    float(attr.get("LAND_VALUE") or 0),
+            "bldg_value":    float(attr.get("BUILDING_VALUE") or 0),
+            "total_value":   float(attr.get("REAL_ESTATE_VALUE") or attr.get("TOTAL_ASSESSMENT") or 0),
+            "acreage":       float(attr.get("LAND_UNITS") or attr.get("ACREAGE") or 0),
+            "use_code":      str(attr.get("LAND_USE_CODE") or attr.get("PROP_CLASS_CODE") or "").strip(),
+            "use_desc":      str(attr.get("USE_DESCRIPTION") or "").strip(),
+            "last_permit_yr": None,   # not available in this layer
+            "nbhd_code":     "",
+            "lat":           lat,
+            "lon":           lon,
+        })
+    return rows
+
+
+def fetch_parcels():
+    """Pull all parcel records from SAGIS. Tries primary endpoint first, falls back to alt."""
+    params_primary = {
+        "where":          "1=1",
+        "outFields":      ("PARCEL_ID,OWNNAME1,OWNADDR1,OWNCITY,OWNSTATE,OWNZIP,"
+                           "LND_VAL,BLDG_VAL,TOTAL_VAL,ACREAGE,USE_CODE,USE_DESC,"
+                           "SITUS_ADDR,SITUS_CITY,LAST_PERMIT_YR,NBHD_CODE"),
+        "returnGeometry": "true",
+        "outSR":          "4326",
+    }
+
+    features = fetch_all_records(SAGIS_PARCEL_URL, params_primary, "parcels")
+
+    if not features:
+        print("  Primary parcel URL returned 0 records â trying fallback URL...")
+        params_alt = {
+            "where":          "1=1",
+            "outFields":      ("PIN,PIN_NUMBER,NAME,ADDRESS_1,CITY,STATE,ZIP_CODE,"
+                               "PROP_ADDRESS,LAND_VALUE,BUILDING_VALUE,REAL_ESTATE_VALUE,"
+                               "TOTAL_ASSESSMENT,LAND_UNITS,ACREAGE,LAND_USE_CODE,PROP_CLASS_CODE"),
+            "returnGeometry": "true",
+            "outSR":          "4326",
+        }
+        features = fetch_all_records(SAGIS_PARCEL_URL_ALT, params_alt, "parcels (alt)")
+        if features:
+            print("  Fallback parcel URL succeeded!")
+            return pd.DataFrame(_parse_parcel_features_alt(features))
+
+    # Parse using primary field names (CitizenServe BOA layer)
+    rows = _parse_parcel_features_primary(features)
+    return pd.DataFrame(rows) if rows else pd.DataFrame(columns=[
+        "parcel_id", "owner_name", "owner_addr", "owner_city", "owner_state",
+        "owner_zip", "address", "situs_city", "land_value", "bldg_value",
+        "total_value", "acreage", "use_code", "use_desc", "last_permit_yr",
+        "nbhd_code", "lat", "lon",
+    ])
 
 
 # âââââââââââââââââââââââââââââââââââââââââââââ
@@ -471,7 +557,8 @@ def main():
     df_parcels = fetch_parcels()
     print(f"  â {len(df_parcels):,} parcels loaded")
     if df_parcels.empty:
-        print("  ABORT: 0 parcels from SAGIS. API may be blocking this IP.")
+        print("  ABORT: 0 parcels from SAGIS (both primary and fallback URLs).")
+        print("  See diagnostic output above. API may be blocking this IP or URLs have changed.")
         raise SystemExit(1)
 
     # ââ 2. Zoning layers âââââââââââââââââââââââââââââ
