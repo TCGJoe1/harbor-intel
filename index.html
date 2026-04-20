@@ -6,6 +6,7 @@
 <title>HARBOR v2.0 — The Commercial Group</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 /* ═══════════════════════════════════════════════════
    HARBOR v2.0 — The Commercial Group
@@ -792,6 +793,14 @@ main {
 }
 
 .output-panel.active { display: block; }
+
+.prompt-launch-bar {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
 
 .output-panel h4 {
   font-family: 'JetBrains Mono', monospace;
@@ -1726,6 +1735,9 @@ footer {
       <div class="output-panel" id="s03-output">
         <h4>Deal Analysis Results</h4>
         <div class="output-content" id="s03-results"></div>
+        <div id="s03-chart-wrap" style="display:none;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);position:relative;height:130px">
+          <canvas id="s03-chart"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -2635,14 +2647,43 @@ const promptTemplates = {
 function g(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
 function gv(id) { const el = document.getElementById(id); return el ? el.value : ''; }
 
-// ─── Open in Claude ───
+// ─── Open in Claude — shows prompt in-panel first ───
 function openInClaude(skillId, e) {
   e.preventDefault();
   const builder = promptTemplates[skillId];
   if (!builder) { showToast('Prompt builder not configured'); return; }
   const prompt = builder();
-  const url = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
-  window.open(url, '_blank');
+
+  const modal = e.target.closest('.modal');
+  const body = modal.querySelector('.modal-body');
+  let panel = body.querySelector('.prompt-preview-panel');
+  if (!panel) {
+    panel = document.createElement('div');
+    panel.className = 'output-panel prompt-preview-panel';
+    panel.innerHTML = `
+      <h4>Prompt Ready</h4>
+      <pre class="output-content" id="pp-text-${skillId}" style="max-height:240px;overflow-y:auto;font-size:12px;line-height:1.6"></pre>
+      <div class="prompt-launch-bar">
+        <a id="pp-launch-${skillId}" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+          <i data-lucide="external-link"></i> Launch in Claude
+        </a>
+        <button class="btn btn-secondary" onclick="copyRawPrompt(this)">
+          <i data-lucide="clipboard"></i> Copy
+        </button>
+      </div>`;
+    body.appendChild(panel);
+  }
+
+  panel.querySelector('#pp-text-' + skillId).textContent = prompt;
+  panel.querySelector('#pp-launch-' + skillId).href = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+  panel.classList.add('active');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  lucide.createIcons();
+}
+
+function copyRawPrompt(btn) {
+  const pre = btn.closest('.prompt-preview-panel').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => showToast('Prompt copied'));
 }
 
 // ─── Build Prompt (copy to clipboard) ───
@@ -2765,6 +2806,49 @@ function runDealAnalyzer() {
   const results = document.getElementById('s03-results');
   results.innerHTML = output + `\n  <span style="${verdictClass};font-weight:700">${verdict}</span>`;
   panel.classList.add('active');
+  renderDealChart({ capRate, benchMin, benchMax, cashOnCash, debtYield });
+}
+
+// ─── DEAL ANALYZER CHART ───
+function renderDealChart({ capRate, benchMin, benchMax, cashOnCash, debtYield }) {
+  const wrap = document.getElementById('s03-chart-wrap');
+  const canvas = document.getElementById('s03-chart');
+  if (window._dealChart) { window._dealChart.destroy(); window._dealChart = null; }
+
+  const rows = [
+    { label: 'Cap Rate %', val: capRate, min: benchMin, max: benchMax,
+      color: capRate >= benchMin ? '#4ade80' : capRate >= benchMin - 0.5 ? '#fbbf24' : '#ef4444' }
+  ];
+  if (cashOnCash > 0) rows.push({ label: 'Cash-on-Cash %', val: cashOnCash, min: 7, max: 12,
+    color: cashOnCash >= 7 ? '#4ade80' : cashOnCash >= 5 ? '#fbbf24' : '#ef4444' });
+  if (debtYield > 0) rows.push({ label: 'Debt Yield %', val: debtYield, min: 8, max: 12,
+    color: debtYield >= 8 ? '#4ade80' : '#ef4444' });
+
+  wrap.style.height = (rows.length * 46 + 20) + 'px';
+  wrap.style.display = 'block';
+
+  window._dealChart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.label),
+      datasets: [
+        { label: 'Actual', data: rows.map(r => parseFloat(r.val.toFixed(2))), backgroundColor: rows.map(r => r.color), borderRadius: 4, barThickness: 16, order: 1 },
+        { label: 'Target Min', data: rows.map(r => r.min), backgroundColor: 'rgba(255,255,255,0.12)', borderRadius: 4, barThickness: 8, order: 2 },
+        { label: 'Target Max', data: rows.map(r => r.max), backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 4, barThickness: 8, order: 3 },
+      ]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '%' } }
+      },
+      scales: {
+        x: { min: 0, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#7a7a74', font: { size: 10 }, callback: v => v + '%' } },
+        y: { grid: { display: false }, ticks: { color: '#c8a45e', font: { family: 'JetBrains Mono', size: 10, weight: '600' } } }
+      }
+    }
+  });
 }
 
 // ─── DUE DILIGENCE CHECKLIST (Skill 08) ───
