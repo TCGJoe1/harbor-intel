@@ -518,6 +518,7 @@ main {
 .deal-card .run-btn:hover   { background: var(--cg-gold); border-color: var(--cg-gold); }
 .market-card .run-btn:hover { background: var(--teal); border-color: var(--teal); }
 .growth-card .run-btn:hover { background: var(--amber); border-color: var(--amber); }
+#modal-21 .form-label { font-weight: 600; }
 
 /* ─── MODAL ─── */
 .modal-overlay {
@@ -1185,11 +1186,11 @@ footer {
   <div>
     <div class="hero-eyebrow">The Commercial Group Intelligence Platform</div>
     <h1 class="hero-title">Deal Intelligence · Savannah's Logistics Market</h1>
-    <p class="hero-subtitle">20 AI-powered skills for industrial and commercial real estate — listing, analysis, underwriting, market intelligence, and growth across the Savannah MSA.</p>
+    <p class="hero-subtitle">21 AI-powered skills for industrial and commercial real estate — listing, analysis, underwriting, market intelligence, off-market acquisition, and growth across the Savannah MSA.</p>
   </div>
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
-    <span class="hero-badge-text">20 SKILLS ACTIVE</span>
+    <span class="hero-badge-text">21 SKILLS ACTIVE</span>
   </div>
 </div>
 
@@ -1213,7 +1214,7 @@ footer {
 <div class="section-header">
   <div class="section-icon deal"><i data-lucide="briefcase"></i></div>
   <h2 class="section-title">Deal Tools</h2>
-  <span class="section-count">8 ACTIVE</span>
+  <span class="section-count">9 ACTIVE</span>
 </div>
 
 <div class="card-grid">
@@ -1280,6 +1281,14 @@ footer {
     <div class="card-desc">Interactive Georgia-specific DD checklist with phases, dates, and progress tracking.</div>
     <div class="card-tags"><span class="tag">DD</span><span class="tag">DOTLOOP</span><span class="tag">GEORGIA</span></div>
     <button class="run-btn" onclick="openModal('modal-08')">↗ RUN ↗</button>
+  </div>
+  <!-- 21 -->
+  <div class="skill-card deal-card" style="border-left-color: #7c3aed;">
+    <div class="card-num" style="color: #7c3aed;">SKILL 21</div>
+    <div class="card-title">Off-Market Acquisition Search</div>
+    <div class="card-desc">Generate a 30–50 target list with filter logic, distress overlay, enrichment plan, and 90-day outreach sequence for Savannah MSA off-market buys.</div>
+    <div class="card-tags"><span class="tag">OFF-MARKET</span><span class="tag">VALUE-ADD</span><span class="tag">REONOMY</span></div>
+    <button class="run-btn" onclick="openModal('modal-21')" style="border-color: #7c3aed; color: #7c3aed;">↗ RUN ↗</button>
   </div>
 </div>
 
@@ -1412,6 +1421,7 @@ footer {
       </tr>
     </thead>
     <tbody>
+      <tr><td class="doc-type">Acquisition Target List</td><td>Skill 21</td><td>Reonomy / CoStar / Direct Mail</td><td><span class="doc-tag">MD</span></td></tr>
       <tr><td class="doc-type">Listing Description</td><td>Skill 01</td><td>CoStar / Marketing Flyer</td><td><span class="doc-tag">TXT</span></td></tr>
       <tr><td class="doc-type">Letter of Intent</td><td>Skill 02</td><td>Dotloop / Email</td><td><span class="doc-tag">PDF</span></td></tr>
       <tr><td class="doc-type">Deal Analysis</td><td>Skill 03</td><td>Client Report / Internal</td><td><span class="doc-tag">XLS</span></td></tr>
@@ -1462,7 +1472,7 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    <span>HARBOR v2.0 · 20 Skills Active · The Commercial Group</span>
+    <span>HARBOR v2.0 · 21 Skills Active · The Commercial Group</span>
     <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
   </div>
 </footer>
@@ -2475,6 +2485,145 @@ footer {
   </div>
 </div>
 
+<!-- MODAL 21: Off-Market Acquisition Search -->
+<div class="modal-overlay" id="modal-21">
+  <div class="modal" style="max-width:820px;">
+    <div class="modal-header" style="background: linear-gradient(135deg,#1a1030,#2e1065); border-radius: 12px 12px 0 0;">
+      <div class="modal-title-group">
+        <span class="modal-num" style="color:rgba(167,139,250,0.8);">SKILL 21</span>
+        <h3 class="modal-title" style="color:#fff;">Off-Market Acquisition Search</h3>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-21')" style="color:#fff;"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-body">
+
+      <div style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.25); border-radius:8px; padding:12px 16px; margin-bottom:20px; font-size:12px; color:var(--text-secondary); line-height:1.6;">
+        <strong style="color:#7c3aed;">Principal Buyer Mode — TCG</strong> &nbsp;·&nbsp; Generates a complete off-market search package: 30–50 ranked targets, Reonomy/CoStar filter logic, owner enrichment plan, distress overlay, and 90-day outreach sequence. Paste output directly into Claude for a full run.
+      </div>
+
+      <!-- Price Band -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Min Price</label>
+          <input class="form-input" id="s21-minprice" placeholder="$750,000" value="$750,000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Max All-In Basis</label>
+          <input class="form-input" id="s21-maxprice" placeholder="$1,500,000" value="$1,500,000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Count</label>
+          <select class="form-select" id="s21-count">
+            <option value="30">30 targets</option>
+            <option value="40" selected>40 targets</option>
+            <option value="50">50 targets</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Archetypes -->
+      <div class="form-group">
+        <label class="form-label">Target Archetypes (priority order)</label>
+        <div class="checkbox-group" style="display:flex; flex-direction:column; gap:8px;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" id="s21-arch1" value="Infill Small-Bay Industrial / Flex" checked style="accent-color:#7c3aed;">
+            <span><strong>A1 — Infill Small-Bay Industrial / Flex</strong> &nbsp;5K–15K SF · 0.5–2 acres · 1960s–80s · M2M tenants · Inside I-516 or Sallie Mood / Chatham Pkwy / Bull / Liberty Pkwy corridors</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" id="s21-arch2" value="Single-Tenant Retail Short-Term Hard Corner" checked style="accent-color:#7c3aed;">
+            <span><strong>A2 — Single-Tenant Retail, Short-Term, Hard Corner</strong> &nbsp;Skidaway / Waters / Abercorn south of Oglethorpe / Montgomery Crossroad / Whitemarsh · tenant rolling ≤24 mo · below-market rent</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+            <input type="checkbox" id="s21-arch3" value="Historic District Small Mixed-Use" checked style="accent-color:#7c3aed;">
+            <span><strong>A3 — Historic District Small Mixed-Use</strong> &nbsp;Ground-floor commercial + 2–4 upper units · edge of Landmark District · vacant / under-rented uppers · no STVR underwriting</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Owner Filters -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Min Hold Period (years)</label>
+          <select class="form-select" id="s21-hold">
+            <option value="10">10+ years</option>
+            <option value="12" selected>12+ years</option>
+            <option value="15">15+ years</option>
+            <option value="20">20+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Owner Type</label>
+          <select class="form-select" id="s21-ownertype">
+            <option value="Individual or single-asset LLC only">Individual / Single-Asset LLC</option>
+            <option value="Individual, single-asset LLC, or small family trust">Individual / LLC / Family Trust</option>
+            <option value="Any non-institutional">Any Non-Institutional</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Owner Age Signal</label>
+          <select class="form-select" id="s21-ownerage">
+            <option value="60+" selected>60+ where determinable</option>
+            <option value="55+">55+ where determinable</option>
+            <option value="Any">Any age</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Disqualifiers note -->
+      <div class="form-group">
+        <label class="form-label">Active Listing Lookback</label>
+        <select class="form-select" id="s21-listing">
+          <option value="18 months">No active listing in 18 months (default)</option>
+          <option value="12 months">No active listing in 12 months</option>
+          <option value="24 months">No active listing in 24 months</option>
+          <option value="36 months">No active listing in 36 months (cold owners only)</option>
+        </select>
+      </div>
+
+      <!-- Distress Overlays -->
+      <div class="form-group">
+        <label class="form-label">Distress Overlays to Flag</label>
+        <div class="checkbox-group" style="display:flex; flex-wrap:wrap; gap:10px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="s21-d1" value="Chatham County Lis Pendens" checked style="accent-color:#7c3aed;"> Lis Pendens</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="s21-d2" value="Tax Delinquency" checked style="accent-color:#7c3aed;"> Tax Delinquency</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="s21-d3" value="Debt Maturity within 18 months" checked style="accent-color:#7c3aed;"> Debt Maturity ≤18 mo</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="s21-d4" value="Estate / Probate" checked style="accent-color:#7c3aed;"> Estate / Probate</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="checkbox" id="s21-d5" value="Out-of-State Owner" checked style="accent-color:#7c3aed;"> Out-of-State Owner</label>
+        </div>
+      </div>
+
+      <!-- Cost of Capital -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Equity Cost of Capital (%)</label>
+          <input class="form-input" id="s21-coc" placeholder="e.g. 12" value="12">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Stabilized Cap Rate (%)</label>
+          <input class="form-input" id="s21-caprate" placeholder="e.g. 7.5" value="7.5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hold Period (years)</label>
+          <input class="form-input" id="s21-holdyrs" placeholder="e.g. 5" value="5">
+        </div>
+      </div>
+
+      <!-- Additional notes -->
+      <div class="form-group">
+        <label class="form-label">Additional Intelligence / Context</label>
+        <textarea class="form-textarea" id="s21-notes" placeholder="Paste any Reonomy / CoStar / Chatham County data you've already pulled. Or add special exclusions, known owners to avoid, specific corridors to emphasize, etc."></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <a class="btn btn-primary" href="#" onclick="openInClaude('s21', event)" style="background:#7c3aed;border-color:#7c3aed;"><i data-lucide="external-link"></i> Open in Claude</a>
+        <button class="btn btn-secondary" onclick="buildPrompt('s21')"><i data-lucide="clipboard"></i> Build Prompt</button>
+        <button class="btn btn-close-modal" onclick="closeModal('modal-21')">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════ TOAST ═══════════ -->
 <div class="toast" id="toast"></div>
 
@@ -2575,7 +2724,7 @@ function toggleComm(type, btn) {
 // ─── LAUNCH HARBOR ───
 function launchHarbor(e) {
   e.preventDefault();
-  const prompt = `Begin HARBOR session. I am Joe Solana at The Commercial Group in Savannah, Georgia. I specialize in industrial and commercial property sales and leasing in the Savannah MSA. Available skills: Listing Writer, LOI Drafter, Deal Analyzer, Comp Analyzer, Lease Abstractor, Client Pitch Builder, Market Pulse, DD Checklist, Email Suite, Tenant Matcher, Commission Calculator, Owner Researcher, Morning Briefing, OM Copywriter, Objection Handler, Deal Tracker, Cold Call Script, Stacking Plan, Rent Escalation Modeler, Property Tax Estimator. Ask me what I need help with.`;
+  const prompt = `Begin HARBOR session. I am Joe Solana at The Commercial Group in Savannah, Georgia. I specialize in industrial and commercial property sales and leasing in the Savannah MSA — and I operate as a principal buyer on off-market acquisitions. Available skills: Listing Writer, LOI Drafter, Deal Analyzer, Comp Analyzer, Lease Abstractor, Client Pitch Builder, Market Pulse, DD Checklist, Email Suite, Tenant Matcher, Commission Calculator, Owner Researcher, Morning Briefing, OM Copywriter, Objection Handler, Deal Tracker, Cold Call Script, Stacking Plan, Rent Escalation Modeler, Property Tax Estimator, Off-Market Acquisition Search. Ask me what I need help with.`;
   const url = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
   window.open(url, '_blank');
 }
@@ -2640,6 +2789,193 @@ const promptTemplates = {
   },
   s19: () => {
     return `You are a CRE negotiation coach for Joe Solana at The Commercial Group in Savannah.\n\nProvide:\n(1) The objection reframed — what the person is really saying\n(2) Data-backed response with Savannah market specifics\n(3) Two alternative reframing scripts (confident, consultative)\n(4) A follow-up question to keep the conversation going\n(5) "WHEN TO WALK AWAY" — signs this objection is a dealbreaker vs. negotiation tactic\n\nObjection Type: ${gv('s19-type')}\nContext: ${g('s19-context')}\nJoe's Argument: ${g('s19-argument') || 'Not provided'}`;
+  },
+
+  s21: () => {
+    const archs = [];
+    ['s21-arch1','s21-arch2','s21-arch3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.checked) archs.push(el.value);
+    });
+    const distress = [];
+    ['s21-d1','s21-d2','s21-d3','s21-d4','s21-d5'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.checked) distress.push(el.value);
+    });
+    const minP = g('s21-minprice') || '$750,000';
+    const maxP = g('s21-maxprice') || '$1,500,000';
+    const count = gv('s21-count') || '40';
+    const hold = gv('s21-hold') || '12';
+    const ownerType = gv('s21-ownertype') || 'Individual or single-asset LLC only';
+    const ownerAge = gv('s21-ownerage') || '60+';
+    const listingLookback = gv('s21-listing') || '18 months';
+    const coc = g('s21-coc') || '12';
+    const capRate = g('s21-caprate') || '7.5';
+    const holdYrs = g('s21-holdyrs') || '5';
+    const notes = g('s21-notes');
+
+    return `You are HARBOR — the deal intelligence engine for Joe Solana at The Commercial Group in Savannah, Georgia. Joe is operating as a PRINCIPAL BUYER (not a broker for a buyer) hunting off-market, value-add acquisitions in the Savannah MSA. He can broker the buy side at no fee, so your underwriting should assume his cost of capital with zero buy-side commission drag.
+
+ACQUISITION PARAMETERS
+Price band: ${minP} – ${maxP} all-in basis (acquisition + immediate capex to stabilize)
+Target property count: ${count} ranked targets
+Equity cost of capital: ${coc}%
+Target stabilized cap rate at exit: ${capRate}%
+Projected hold: ${holdYrs} years
+
+TARGET ARCHETYPES (in priority order):
+${archs.map((a, i) => `${i+1}. ${a}`).join('\n')}
+
+ARCHETYPE SPECS — use these precisely when building filter logic:
+
+A1 — INFILL SMALL-BAY INDUSTRIAL / FLEX
+- Building SF: 5,000–15,000 SF
+- Lot size: 0.5–2.0 acres
+- Year built: 1960–1989 (metal building or tilt-up concrete preferred)
+- Tenancy: 1–2 tenants, month-to-month or <12 months remaining
+- In-place rents: $4–$6/SF gross (demonstrably below current market of $8–$10/SF gross)
+- Geography: Inside I-516 loop; OR along Sallie Mood Drive; OR Chatham Pkwy south of DeRenne; OR Bull Street south of Victory Drive; OR Liberty Pkwy corridor
+- EXCLUDE: West Chatham, Pooler, Garden City (new spec competition suppresses exit cap)
+- Value-add thesis: lease-up to market rent → stabilized yield on cost 200–350 bps above going-in cap
+
+A2 — SINGLE-TENANT RETAIL, SHORT REMAINING TERM, HARD CORNER
+- Configuration: single-tenant pad or inline, hard corner location required
+- Corridors: Skidaway Road; Waters Avenue; Abercorn Street south of Oglethorpe Mall; Montgomery Crossroad; Whitemarsh Island Road
+- Lease status: tenant rolling within 24 months OR already month-to-month
+- Rent gap: in-place rent demonstrably below market (show delta in thesis)
+- Owner type: owner-operator landlord only — EXCLUDE institutional or REIT ownership
+- Value-add thesis: re-lease at market → mark-to-market NOI lift → cap rate compression on exit
+
+A3 — HISTORIC DISTRICT SMALL MIXED-USE
+- Configuration: ground-floor commercial + 2–4 residential upper units
+- Geography: edges of Landmark Historic District — Liberty Street east of Drayton; State Street west of MLK; lower Habersham Street; MLK Blvd south of Anderson; Henry/Gwinnett east of MLK
+- Preferred condition: vacant uppers OR gross-rented well below market
+- STVR (short-term vacation rental) is NOT part of the underwriting — assume LTR only
+- Value-add thesis: renovate uppers to LTR market, stabilize ground-floor commercial at market, reposition as mixed-use income property
+
+OWNER FILTERS (apply to ALL archetypes — these are firm screens, not preferences):
+- Minimum hold period: ${hold}+ years (acquired ≤ ${new Date().getFullYear() - parseInt(hold)} or earlier)
+- Owner entity type: ${ownerType} — EXCLUDE REITs, institutional funds, syndications, named investment vehicles
+- Owner age signal: ${ownerAge} where determinable from public record
+- No active listing on Crexi, LoopNet, or Georgia MLS within the last ${listingLookback}
+
+HARD DISQUALIFIERS (exclude any property with these characteristics):
+- Environmental contamination requiring active VRP remediation (Brownfield-eligible is OK; active VRP is not at this price band)
+- Ground lease fee positions
+- Building SF under 3,000 or lot size under 0.25 acres
+- Currently listed on Crexi, LoopNet, or MLS
+- Multifamily 5–20 units (over-picked in this market)
+- Raw or unimproved land
+
+DISTRESS OVERLAYS TO FLAG: ${distress.join(', ') || 'None selected'}
+For any target also showing a distress signal, add a 🔴 flag and note the signal type in the table.
+
+PASTED DATA / ADDITIONAL CONTEXT:
+${notes || 'None provided — use your knowledge of the Savannah MSA, Chatham County public records conventions, and current market conditions for 2025–2026.'}
+
+---
+
+YOUR OUTPUT — produce all five sections in order:
+
+## SECTION 1 — RANKED TARGET LIST
+
+Produce a ranked markdown table of ${count} properties across the three archetypes, prioritized by fit score (owner profile × distress signal × rent gap × location quality). Include one row per property with these exact columns:
+
+| Rank | Archetype | Address / Corridor | Parcel ID (format: XX-XXXX-XX-XXX) | Owner Name | Owner Mailing Address | Year Acquired | Last Sale Price | Bldg SF | Lot Acres | Current Use | Distress Flag | Value-Add Thesis |
+
+For the Value-Add Thesis column: one sentence maximum, quantified where possible (e.g., "M2M tenant at $4.50/SF; re-lease at $9.00/SF grosses $54K additional NOI annually at stabilization").
+
+Note on data sourcing: For any field you cannot populate from available knowledge, insert [REONOMY] or [CHATHAM-ASSESSOR] as a placeholder to indicate which database populates that field. Do not invent specific owner names, addresses, or parcel IDs — use realistic Savannah MSA addresses/corridors and flag placeholders clearly.
+
+---
+
+## SECTION 2 — FILTER LOGIC BY ARCHETYPE
+
+Three collapsible sub-sections (use ### headers), each spelling out the exact search parameters to run in Reonomy and CoStar:
+
+### A1 Reonomy Filter String
+- Property type codes
+- SF range
+- Year built range
+- Last sale date range (to enforce hold period)
+- Owner type exclusions
+- Geographic boundary (parcel centroids within X miles of anchor intersections, or specific zip codes: 31401, 31404, 31405, 31406, 31415 — exclude 31407, 31408, 31419 for A1)
+
+### A2 Reonomy / CoStar Filter String
+- Property type codes
+- Lease expiry range
+- Rent range (flag below-market)
+- Hard corner flag
+- Ownership type filter
+
+### A3 Reonomy / CoStar Filter String
+- Property type: mixed-use + specific zip codes for Landmark District edges
+- Unit count range
+- Year built range
+- Owner type
+
+---
+
+## SECTION 3 — OWNER CONTACT ENRICHMENT PLAN
+
+For each owner category below, specify the enrichment path and recommended tool:
+
+| Owner Category | Enrichment Path | Recommended Tool | Priority |
+|---|---|---|---|
+| Out-of-state individual, clean mailing address | Direct mail only | USPS-validated address from Chatham Assessor | HIGH |
+| In-state individual, no phone on file | Skip trace for cell + direct mail | BatchSkipTracing / TLO | HIGH |
+| Single-asset LLC, registered agent on file | GA SOS entity search → registered agent → principal | GA SOS ecorp.sos.ga.gov | MEDIUM |
+| Single-asset LLC, no clean contact | Skip trace + broker referral | BatchSkipTracing + local broker network | MEDIUM |
+| Owner with active business at property address | Walk-in or broker intro | No skip trace needed | LOW (warm intro preferred) |
+| Distress-flagged owner | Direct call — do not mail first | Phone enrichment priority | URGENT |
+
+Append: which of the ${count} targets (by rank band, e.g., "top 15") need immediate phone enrichment before any outreach, and which can go to direct mail first.
+
+---
+
+## SECTION 4 — DISTRESS OVERLAY
+
+For each distress signal type, provide:
+1. Where to check it in Chatham County public records (exact URL or search path)
+2. How to interpret the signal for acquisition purposes
+3. The offer positioning language that works with this owner type
+
+Distress signals to cover: ${distress.length > 0 ? distress.join('; ') : 'Lis Pendens, Tax Delinquency, Debt Maturity, Estate/Probate, Out-of-State Owner'}
+
+Close Section 4 with a DISTRESS PRIORITY SUB-LIST: extract from the main table any properties with ≥2 distress signals and rank them separately as "Highest Urgency Contacts."
+
+---
+
+## SECTION 5 — OUTREACH SEQUENCING (30/60/90-DAY ACTION PLAN)
+
+Format as a timeline with specific actions per week. Assign each target an outreach path based on owner profile:
+
+- Out-of-state individual = MAILER FIRST → follow-up call at day 21
+- Local LLC with active business at property = BROKER INTRO (engage 1–2 local Savannah brokers who have relationships with that corridor)
+- Distress signal present = DIRECT CALL FIRST (do not mail; call within 5 days of list completion)
+- Estate / probate = ATTORNEY CONTACT (identify estate attorney from probate court filing, make direct contact)
+
+### Day 1–30: Foundation
+- Week 1: Finalize target list in Reonomy; pull Chatham Assessor data; enrich top 20 owners
+- Week 2: Phone enrich distress targets; pull Lis Pendens and tax delinquency current lists
+- Week 3: Send Mailer Batch 1 (out-of-state owners, top 15 by rank)
+- Week 4: Direct calls to distress targets; broker outreach to local LLC corridor owners
+
+### Day 31–60: Engagement
+- Week 5–6: Follow-up calls on Mailer Batch 1 (21-day rule)
+- Week 7: Send Mailer Batch 2 (remaining ranked targets)
+- Week 8: Broker meetings — engage 2–3 Savannah brokers active in A1/A2/A3 corridors for referral pipeline
+
+### Day 61–90: Conversion
+- Week 9–10: Second-touch calls on all non-responsive Mailer Batch 1 contacts
+- Week 11: LOI-ready review — identify any property where owner has expressed soft interest; run deal analysis (Skill 03)
+- Week 12: Pipeline review — retire non-responsive, refresh list with next tier from Reonomy, restart cycle
+
+End with: OUTREACH MATERIALS CHECKLIST — specify what Joe needs to prepare before Day 1 (mailer copy template, phone script, envelope design, return address LLC vs. personal name, offer range positioning).
+
+---
+
+Format all tables in clean GitHub-flavored markdown. Use collapsible \`<details>\` blocks for the three filter-logic sub-sections. Flag every data placeholder clearly. Write in the voice of a principal buyer's analyst, not a broker.`;
   }
 };
 
